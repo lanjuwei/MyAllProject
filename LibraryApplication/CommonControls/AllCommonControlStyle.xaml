@@ -1,0 +1,264 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:commonControls="clr-namespace:CommonControls"
+                    xmlns:converter1="clr-namespace:CommonControls.Converter">
+    <converter1:CommonButtonPropertyConverter x:Key="CommonButtonPropertyConverter"></converter1:CommonButtonPropertyConverter>
+    <!--通用Button-->
+    <Style x:Key="CommonButtonStyle" TargetType="{x:Type commonControls:CommonButton}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="#FFDDDDDD"/>
+        <Setter Property="BorderBrush" Value="#FF707070"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type commonControls:CommonButton}">
+                    <Grid>
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Opacity="{TemplateBinding Opacity}"
+                                SnapsToDevicePixels="true">
+                        </Border>
+                        <StackPanel Orientation="{TemplateBinding StackPanelOrientation}" Margin="{TemplateBinding  Padding}" 
+                                    VerticalAlignment="{TemplateBinding StackPanelVerticalAlignment}"
+                                    HorizontalAlignment="{TemplateBinding StackPanelHorizontalAlignment}">
+                            <Grid>
+                                <Image x:Name="NormalImage" Source="{TemplateBinding  NormalImageSource}" Stretch="Uniform" 
+                                       Width="{TemplateBinding ImageWidth}" Height="{TemplateBinding ImageHeight}" >
+                                </Image>
+                                <Image x:Name="SelectImage"  Stretch="Uniform" Visibility="Collapsed"
+                                       Width="{TemplateBinding ImageWidth}" Height="{TemplateBinding ImageHeight}" Source="{TemplateBinding SelectImageSource}">
+                                </Image>
+                            </Grid>
+                            <ContentPresenter x:Name="contentPresenter" 
+                                              Focusable="False"  
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              RecognizesAccessKey="True" 
+                                              Margin="{TemplateBinding StackPanelMargin}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=MouseOverBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=MouseOverBorderBrush}"/>
+                            <Setter  Property="TextElement.Foreground" TargetName="contentPresenter"  Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=MouseOverForeground}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=MouseOverThickness}"/>
+                            <Setter TargetName="SelectImage" Property="Visibility" Value="Visible"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=PressedBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=PressedBorderBrush}"/>
+                            <Setter  Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=PressedForeground}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=PressedThickness}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=DisabledBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=DisabledBorderBrush}"/>
+                            <Setter  Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=DisabledForeground}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=DisabledThickness}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--通用CheckBox-->
+    <converter1:CommonCheckBoxPropertyConverter x:Key="CommonCheckBoxPropertyConverter"></converter1:CommonCheckBoxPropertyConverter>
+    <Style   TargetType="{x:Type commonControls:CommonCheckBox}">
+        <Setter Property="Background" Value="#FFDDDDDD"/>
+        <Setter Property="BorderBrush" Value="#FF707070"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type commonControls:CommonCheckBox}">
+                    <Grid>
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Opacity="{TemplateBinding Opacity}"
+                                SnapsToDevicePixels="true">
+                        </Border>
+                        <StackPanel Orientation="{TemplateBinding StackPanelOrientation}" Margin="{TemplateBinding StackPanelMargin}" 
+                                    VerticalAlignment="{TemplateBinding StackPanelVerticalAlignment}"
+                                    HorizontalAlignment="{TemplateBinding StackPanelHorizontalAlignment}">
+                            <Grid>
+                                <Image x:Name="NormalImage" Source="{TemplateBinding  NormalImageSource}" Stretch="UniformToFill" 
+                                       Width="{TemplateBinding ImageWidth}" Height="{TemplateBinding ImageHeight}" >
+                                </Image>
+                                <Image x:Name="SelectImage"  Stretch="UniformToFill" Visibility="Collapsed"
+                                       Width="{TemplateBinding ImageWidth}" Height="{TemplateBinding ImageHeight}" Source="{TemplateBinding SelectImageSource}">
+                                </Image>
+                                <Image x:Name="CheckImage"  Stretch="UniformToFill" Visibility="Collapsed"
+                                       Width="{TemplateBinding ImageWidth}" Height="{TemplateBinding ImageHeight}" Source="{TemplateBinding CheckImageSource}">
+                                </Image>
+                            </Grid>
+                            <ContentPresenter x:Name="contentPresenter" 
+                                              Focusable="False"  
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              RecognizesAccessKey="True" 
+                                              Margin="{TemplateBinding Padding}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=MouseOverBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=MouseOverBorderBrush}"/>
+                            <Setter  Property="TextElement.Foreground" TargetName="contentPresenter"  Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=MouseOverForeground}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=MouseOverThickness}"/>
+                            <Setter TargetName="SelectImage" Property="Visibility" Value="Visible"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=PressedBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=PressedBorderBrush}"/>
+                            <Setter  Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=PressedForeground}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=PressedThickness}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=DisabledBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=DisabledBorderBrush}"/>
+                            <Setter  Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=DisabledForeground}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=DisabledThickness}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=CheckBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=CheckBorderBrush}"/>
+                            <Setter  Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=CheckForeground}"/>
+                            <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=CheckThickness}"/>
+                            <Setter TargetName="CheckImage" Property="Visibility" Value="Visible"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <converter1:CommonListBoxPropertyConverter x:Key="CommonListBoxPropertyConverter"></converter1:CommonListBoxPropertyConverter>
+    <Style  TargetType="{x:Type commonControls:CommonListBox}">
+        <Setter Property="Background" Value="#FFFFFFFF"/>
+        <Setter Property="BorderBrush" Value="#FFABADB3"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource CommonListBoxItemStyle}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                        <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#1F26A0DA"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA"/>
+    <Style x:Key="CommonListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=ItemPadding,Converter={StaticResource CommonListBoxPropertyConverter}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=NormalItemBackground,Converter={StaticResource CommonListBoxPropertyConverter}}"/>
+        <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},Path=NormalItemBorderBrush,Converter={StaticResource CommonListBoxPropertyConverter}}"/>
+        <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=NormalItemThickness,Converter={StaticResource CommonListBoxPropertyConverter}}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=ItemMargin,Converter={StaticResource CommonListBoxPropertyConverter}}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid>
+                        <Border x:Name="Bd" 
+                                    CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=ItemCornerRadius,Converter={StaticResource CommonListBoxPropertyConverter}}"
+                                    Opacity="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=NormalItemOpacity,Converter={StaticResource CommonListBoxPropertyConverter}}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    Background="{TemplateBinding Background}"  
+                                    SnapsToDevicePixels="true">
+                        </Border>
+                        <Border Padding="{TemplateBinding Padding}" CornerRadius="{Binding ElementName=Bd,Path=CornerRadius}">
+                            <ContentPresenter 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Converter={StaticResource CommonListBoxPropertyConverter},ConverterParameter=MouseOverItemBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Converter={StaticResource CommonListBoxPropertyConverter},ConverterParameter=MouseOverItemBorderBrush}"/>
+                            <Setter Property="BorderThickness" TargetName="Bd" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Converter={StaticResource CommonListBoxPropertyConverter},ConverterParameter=MouseOverItemThickness}"/>
+                            <Setter Property="Opacity" TargetName="Bd" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Converter={StaticResource CommonListBoxPropertyConverter},ConverterParameter=MouseOverItemOpacity}"></Setter>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource Item.SelectedInactive.Border}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Bd" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Converter={StaticResource CommonListBoxPropertyConverter},ConverterParameter=PressedItemBackground}"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Converter={StaticResource CommonListBoxPropertyConverter},ConverterParameter=PressedItemBorderBrush}"/>
+                            <Setter Property="BorderThickness" TargetName="Bd" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Converter={StaticResource CommonListBoxPropertyConverter},ConverterParameter=PressedItemThickness}"/>
+                            <Setter Property="Opacity" TargetName="Bd" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Converter={StaticResource CommonListBoxPropertyConverter},ConverterParameter=PressedItemOpacity}"></Setter>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

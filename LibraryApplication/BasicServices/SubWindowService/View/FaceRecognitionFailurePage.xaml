@@ -1,0 +1,34 @@
+﻿<Page x:Class="BasicServices.SubWindowService.View.FaceRecognitionFailurePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:commonControls="clr-namespace:CommonControls;assembly=CommonControls"
+             mc:Ignorable="d" 
+             >
+    <Viewbox>
+    <Grid x:Name="RootGrid">
+        <Rectangle Fill="#23282d " Opacity="0.5"></Rectangle>
+        <Grid x:Name="CurrentGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Width="600" Height="498">
+            <Border Background="White" CornerRadius="16"></Border>
+            <commonControls:CommonButton HorizontalAlignment="Right" VerticalAlignment="Top" Padding="8" Width="40" Height="40" Background="Transparent" BorderThickness="0" Margin="0,10,20,0"
+                                        NormalImageSource="../Images/弹窗关闭图标.png" Click="ButtonBase_OnClick"></commonControls:CommonButton>
+            <StackPanel>
+                <Image Width="124" Height="128" Margin="0,24,0,0" Source="Images/人脸识别失败.png"></Image>
+                <TextBlock HorizontalAlignment="Center" FontSize="40" Opacity="0.9" Margin="0,27,0,0">人脸识别失败</TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontSize="24" Opacity="0.7" Margin="0,23,0,5" >您还未上次照片或已上传照片质量不高</TextBlock>
+                <TextBlock HorizontalAlignment="Center" FontSize="24" Opacity="0.7" Margin="0,0,0,24">请登陆到个人中心去上传照片</TextBlock>
+                <commonControls:CommonButton HorizontalAlignment="Center" Click="ButtonBase_OnClick3" Background="Transparent" BorderThickness="0" Padding="0">
+                    <commonControls:CommonButton.Content>
+                        <TextBlock  Foreground="#259fff" FontSize="24" TextDecorations="UnderLine" >去登录></TextBlock>
+                    </commonControls:CommonButton.Content>
+                </commonControls:CommonButton>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0,30,0,0">
+                    <commonControls:CommonButton Click="ButtonBase_OnClick" Width="248" Height="72" Foreground="#46ACFF"  FontSize="28" Background="Transparent" BorderThickness="1" CornerRadius="36" BorderBrush="#46ACFF" Margin="0,0,24,0">退出</commonControls:CommonButton>
+                    <commonControls:CommonButton Click="ButtonBase_OnClick2" Width="248" Height="72" Foreground="White"  FontSize="28" Background="#46ACFF" BorderThickness="1" CornerRadius="36" BorderBrush="Transparent">重新识别</commonControls:CommonButton>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    </Viewbox>
+</Page>

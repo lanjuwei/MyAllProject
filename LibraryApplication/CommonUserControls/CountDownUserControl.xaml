@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="CommonUserControls.CountDownUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CommonUserControls"
+             mc:Ignorable="d" x:Name="UserControl1"
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Grid>
+        <Ellipse Stroke="#FF7F27" StrokeThickness="3"></Ellipse>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#00A2E8" Text="{Binding ElementName=UserControl1,Path=Count}"></TextBlock>
+    </Grid>
+</UserControl>
