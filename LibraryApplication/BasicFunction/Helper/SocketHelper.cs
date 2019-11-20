@@ -45,7 +45,7 @@ namespace BasicFunction.Helper
         public void GetRespone(string key,string json) 
         {
             var data = new List<byte>();
-            var terminator = (byte)'#';
+            var terminator =new byte[2] { (byte)'#', (byte)'#' };//可为字节数组
             while (true)
             {
                 var buffer = new byte[1024];
@@ -54,26 +54,23 @@ namespace BasicFunction.Helper
                 {
                     break;
                 }
-                if (!buffer.Contains(terminator))
+                var index = Array.IndexOf(buffer, terminator);
+                if (index<0)
                 {
                     data.AddRange(buffer);
                     continue;
                 }
                 else
                 {
-                    
-                    
-                    foreach (var item in buffer)
+                    var data1= new byte[index-1];
+                    var data2 = new byte[buffer.Length - index + 1];
+                    Array.Copy(buffer,0, data1,0, data1.Length);
+                    data.AddRange(data1);
+                    var str = _encoder.GetString(data.ToArray());
+                    if (str.Contains("key"))
                     {
-                        if (item== terminator)
-                        {
-                            var str=_encoder.GetString(data.ToArray());
-                            continue;
-                        }
-                        data.Add(item);
+
                     }
-                   
-                    
                 }
                 
             }
