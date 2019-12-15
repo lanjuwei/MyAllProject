@@ -40,14 +40,13 @@ namespace ViewModels.Home
             }
             catch (Exception ex)
             {
-
                 //Logger.Error("Could not initialize db: " + ex);
             }
         }
 
         public ICommand LoadCommand => new RelayCommand(()=> 
         {
-            NavigationService.Instance.NavigateTo(PageName.MainPage);
+            NaviService.Instance.NavigateTo(PageKey.MainPage);
             //SoundHelper.Instance.TransformTextToVideo("welcome");
             var s=DbService.GetDbService();
         });

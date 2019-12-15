@@ -6,8 +6,8 @@
     <!--通用Button-->
     <Style x:Key="CommonButtonStyle" TargetType="{x:Type commonControls:CommonButton}">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Background" Value="#FFDDDDDD"/>
-        <Setter Property="BorderBrush" Value="#FF707070"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -16,7 +16,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type commonControls:CommonButton}">
-                    <Grid>
+                    <Grid x:Name="RootGrid" RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <ScaleTransform></ScaleTransform>
+                        </Grid.RenderTransform>
                         <Border x:Name="border" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
@@ -61,12 +64,18 @@
                             <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=PressedBorderBrush}"/>
                             <Setter  Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=PressedForeground}"/>
                             <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=PressedThickness}"/>
+                            <Setter TargetName="RootGrid" Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform  ScaleX="0.9" ScaleY="0.9"></ScaleTransform>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=DisabledBackground}"/>
                             <Setter Property="BorderBrush" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=DisabledBorderBrush}"/>
                             <Setter  Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=DisabledForeground}"/>
                             <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonButtonPropertyConverter},ConverterParameter=DisabledThickness}"/>
+                            <Setter  Property="Opacity" Value="0.5"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

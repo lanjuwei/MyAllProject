@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using BasicServices.Navigation;
+using BasicServices.SocketService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -16,10 +17,11 @@ namespace ViewModels.Home
     /// </summary>
     public abstract class LibraryViewModelBase : ViewModelBase
     {
-        protected DispatcherTimer dispatcherTimer;
+        
         public LibraryViewModelBase()
         {
-
+            dispatcherTimer.Tick -= DispatcherTimer_Tick;
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
@@ -36,35 +38,21 @@ namespace ViewModels.Home
 
         public ICommand LoadCommand => new RelayCommand(Load);
         public ICommand UnLoadCommand => new RelayCommand(UnLoad);
-        public ICommand GoBackCommand => new RelayCommand(()=>{ NavigationService.Instance.GoBack(); });
+        public ICommand GoBackCommand => new RelayCommand(()=>{ NaviService.Instance.GoBack(); });
         public ICommand CloseCommand => new RelayCommand(() => { MoveToNextPage(); });
-        public  int Time
-        {
-            get => time; set
-            {
-                time = value;
-                RaisePropertyChanged(()=> Time);
-            }
-        }
-
+        protected static ISocektInterface SocektInterface { get; set; }= new SocketService();
+        protected static DispatcherTimer dispatcherTimer=new DispatcherTimer() { Interval= TimeSpan.FromSeconds(1)};
+        private int time;
+        public  int Time{get => time; set{Set(()=> Time,ref time,value);}}
 
         protected virtual void Load()
         {
-            Time = 60;//默认是60
-            dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
-            //dispatcherTimer.Start();
+            Time = 60;
+            dispatcherTimer?.Start();
         }
         protected virtual void UnLoad()
         {
-            if (dispatcherTimer!=null)
-            {
-                dispatcherTimer.Stop();
-                dispatcherTimer.Tick -= DispatcherTimer_Tick;
-                dispatcherTimer = null;
-                Time = 0;
-            }
+            dispatcherTimer?.Stop();
         }
 
         /// <summary>
@@ -72,12 +60,7 @@ namespace ViewModels.Home
         /// </summary>
         protected virtual void MoveToNextPage()
         {
-            NavigationService.Instance.NavigateTo(PageName.MainPage);
+            NaviService.Instance.NavigateTo(PageKey.MainPage);
         }
-
-
-
-        private int time ;
-    
     }
 }

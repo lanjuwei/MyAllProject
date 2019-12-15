@@ -18,3 +18,13 @@ F:\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.GenerateResource.
 F:\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.CoreCompileInputs.cache
 F:\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.dll
 F:\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.pdb
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BaseSetting.dll.config
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BaseSetting.dll
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BaseSetting.pdb
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csprojAssemblyReference.cache
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.g.resources
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.Properties.Resources.resources
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.GenerateResource.cache
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.CoreCompileInputs.cache
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.dll
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.pdb

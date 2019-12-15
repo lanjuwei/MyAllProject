@@ -8,7 +8,7 @@
       xmlns:local="clr-namespace:Views.Pages"
       xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
       xmlns:commonusercontrols="clr-namespace:CommonUserControls;assembly=CommonUserControls"
-      mc:Ignorable="d" DataContext="{Binding Source={x:Static viewModels:ViewModelLocator.Instance},Path=LoginViewModel}"
+      mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator},Path=LoginViewModel}"
       d:DesignHeight="1080" d:DesignWidth="1920" 
       Title="LoginPage">
     <i:Interaction.Triggers>

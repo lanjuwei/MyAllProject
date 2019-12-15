@@ -18,3 +18,13 @@ D:\LibraryApplication\Model\obj\Debug\Model.csproj.CopyComplete
 F:\LibraryApplication\Model\bin\Debug\SqlSugar.dll
 F:\LibraryApplication\Model\obj\Debug\Model.csproj.CopyComplete
 F:\LibraryApplication\Model\obj\Debug\Model.csprojAssemblyReference.cache
+D:\MyGit\MyAllProject\LibraryApplication\Model\bin\Debug\Model.dll
+D:\MyGit\MyAllProject\LibraryApplication\Model\bin\Debug\Model.pdb
+D:\MyGit\MyAllProject\LibraryApplication\Model\bin\Debug\SqlSugar.dll
+D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csprojAssemblyReference.cache
+D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.Properties.Resources.resources
+D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csproj.GenerateResource.cache
+D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csproj.CopyComplete
+D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.dll
+D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.pdb

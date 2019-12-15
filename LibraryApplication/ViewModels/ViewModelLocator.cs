@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BasicFunction.Helper;
 using BasicServices.Navigation;
 using BasicServices.SubWindowService.ViewService;
 using BasicServices.TipService;
@@ -15,26 +16,20 @@ namespace ViewModels
 {
     public class ViewModelLocator
     {
-        private static ViewModelLocator _viewModelLocator;
-        public static ViewModelLocator Instance => _viewModelLocator ?? (_viewModelLocator = new ViewModelLocator());
 
         public ViewModelLocator()
         {
-            //主窗口
-            MainViewModel = new MainViewModel();
-            //主页
-            HomeViewModel = new HomeViewModel();
-            //登录
-            LoginViewModel = new LoginViewModel();
-
-
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<HomeViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+            NaviService.Instance.Init();
+            SocketHelper.Instance.InitLongSocketAsync();
         }
 
-        //主窗口
-        public MainViewModel MainViewModel { get; set; }
-        //主页
-        public HomeViewModel HomeViewModel { get; set; }
-        //登录
-        public LoginViewModel LoginViewModel { get; set; }
+        public MainViewModel MainViewModel => SimpleIoc.Default.GetInstance<MainViewModel>();
+        public HomeViewModel HomeViewModel => ServiceLocator.Current.GetInstance<HomeViewModel>();
+        public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
+
     }
 }

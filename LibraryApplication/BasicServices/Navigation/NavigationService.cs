@@ -9,77 +9,92 @@ using System.Windows.Controls;
 
 namespace BasicServices.Navigation
 {
-    public class NavigationService
+    public class NaviService
     {
-        private static NavigationService _navigationService;
-        public static NavigationService Instance => _navigationService ?? (_navigationService = new NavigationService());
+        private static NaviService _navigationService;
+        public static NaviService Instance => _navigationService ?? (_navigationService = new NaviService());
 
-        private  readonly Dictionary<string,Frame> _frameDic=new Dictionary<string, Frame>();
-        private  readonly Dictionary<string, Page> _pageDic = new Dictionary<string, Page>();
-        private  readonly Dictionary<string, Uri> _urlDic = new Dictionary<string, Uri>();
-        private string _currentKey  ;
-        private readonly Dictionary<string, Page> _lastPageDic= new Dictionary<string, Page>();
-
-        public NavigationService()
+        public void Init()
         {
-            Configure(FrameName.MainFrame,PageName.MainPage, "Views;component/Pages/MainPage.xaml");//注册frame与frame所拥有的page
-            Configure(FrameName.MainFrame, PageName.LoginPage, "Views;component/Pages/LoginPage.xaml");
+            Configure(FrameKey.MainFrame, PageKey.MainPage, "Views;component/Pages/MainPage.xaml");//注册frame与frame所拥有的page
+            Configure(FrameKey.MainFrame, PageKey.LoginPage, "Views;component/Pages/LoginPage.xaml");
         }
 
+        #region
+        
         public object Parameter { get; set; }
 
-        public void NavigateTo(string pageKey, object parameter=null, string frameKey = FrameName.MainFrame)
+        public void NavigateTo(PageKey pageKey, object parameter=null, FrameKey frameKey = FrameKey.MainFrame)
         {
-            Frame frame = null;
-            lock (_frameDic)
+            lock (navigateObject)
             {
-                if (!_frameDic.ContainsKey(frameKey))
+                var item=naviModels.FirstOrDefault(x=>x.FrameKey== frameKey);
+                if (item != null)//能找到item 并且item里面发frame为null 才去寻找frame控件
                 {
-                    throw new ArgumentException($"No such frame: {pageKey} ", "frameKey");
-                }
-                frame = _frameDic[frameKey];
-                frame.Navigated -= Frame_Navigated;
-                frame.Navigated += Frame_Navigated;
-            }
-            lock (_urlDic)
-            {
-                if (!_urlDic.ContainsKey(pageKey))
-                {
-                    throw new ArgumentException($"No such page: {pageKey} ", "pageKey");
-                }
-                _currentKey = pageKey;
-                if (frame.Content!=null)
-                {
-                    _lastPageDic[frameKey] = frame.Content as Page;
-                }
-                Parameter = parameter;
-                if (_pageDic.ContainsKey(pageKey))
-                {
-                    frame.Content = _pageDic[pageKey];
+                    if (item.MyFrame == null)
+                    {
+                        var frame = FindControlHelper.Instance.GetChildObject<Frame>(Application.Current.MainWindow, item.FrameKey.ToString());
+                        if (frame != null)
+                        {
+                            frame.Navigated -= Frame_Navigated;
+                            frame.Navigated += Frame_Navigated;
+                            item.MyFrame = frame;
+                        }
+                        else
+                        {
+                            throw new ArgumentException("can not find frame");
+                        }
+                    }
                 }
                 else
                 {
-                    frame.Navigate(_urlDic[pageKey]);
+                    throw new ArgumentException("can not find frame key");
                 }
-    
+                if (!item.UrlDic.ContainsKey(pageKey))
+                {
+                    throw new ArgumentException($"No such page: {pageKey} At {frameKey}", "pageKey");
+                }              
+                Parameter = parameter;
+                if (item.MyFrame.Content!=null)
+                {
+                    item.LastPage = item.MyFrame.Content as Page;//记录上一个界面
+                }
+                if (item.PageDic.ContainsKey(pageKey))
+                {
+                    item.MyFrame.Content = item.PageDic[pageKey];
+                }
+                else
+                {
+                    item.MyFrame.Navigate(item.UrlDic[pageKey]);
+                }  
             }
-
         }
 
-        public void GoBack(string frameKey = FrameName.MainFrame)
-        {
-            if (_lastPageDic.ContainsKey(frameKey))
+        public void GoBack(FrameKey frameKey = FrameKey.MainFrame)
+        {           
+            var item = naviModels.FirstOrDefault(x => x.FrameKey == frameKey);
+            if (item!=null)
             {
-                _frameDic[frameKey].Content = _lastPageDic[frameKey];
+                if (item.LastPage!=null)
+                {
+                    item.MyFrame.Content = item.LastPage;
+                }
+            }
+            else
+            {
+                throw new ArgumentException("can not find frame");
             }
         }
 
         private void Frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             var page = e.Content as Page;
-            if (!_pageDic.ContainsValue(page))
+            var frame = sender as Frame;
+            var item =naviModels.FirstOrDefault(x=>x.MyFrame== frame);
+            if (!item.PageDic.ContainsValue(page))
             {
-                _pageDic.Add(_currentKey, page);
+                var d=item.UrlDic.FirstOrDefault(x=>x.Value==e.Uri);
+                item.PageDic.Add(d.Key, page);
             }
         }
 
@@ -88,32 +103,76 @@ namespace BasicServices.Navigation
         /// </summary>
         /// <param name="key"></param>
         /// <param name="pageUrl"></param>
-        private void Configure(string frameKey,string key, string pageUrl)
+        private void Configure(FrameKey frameKey, PageKey key, string pageUrl)
         {
-            lock (_frameDic)
+            var item =naviModels.FirstOrDefault(x=>x.FrameKey== frameKey);
+            if (item==null)
             {
-                if (!_frameDic.ContainsKey(frameKey))
+                var m = new NaviModel
                 {
-                    var frame = FindControlHelper.Instance.GetChildObject<Frame>(Application.Current.MainWindow, frameKey);
-                    if (frame!=null)
-                    {
-                        _frameDic.Add(frameKey, frame);
-                        _lastPageDic.Add(frameKey,null);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("can not find frame");
-                    }
-                }
+                    FrameKey = frameKey
+                };
+                m.UrlDic.Add(key, new Uri(pageUrl, UriKind.RelativeOrAbsolute));
+                item = m;
+                naviModels.Add(item);
             }
-            var url=new Uri(pageUrl,UriKind.RelativeOrAbsolute);
-            lock (_urlDic)
+            else
             {
-                if (!_urlDic.ContainsKey(key))
+                if (!item.UrlDic.ContainsKey(key))
                 {
-                    _urlDic.Add(key, url);
+                    item.UrlDic.Add(key, new Uri(pageUrl, UriKind.RelativeOrAbsolute));
                 }
             }
         }
+
+        private class NaviModel
+        {
+            /// <summary>
+            /// 当前key
+            /// </summary>
+            public FrameKey FrameKey { get; set; }
+            /// <summary>
+            /// //存储导航过的页面
+            /// </summary>
+            public Dictionary<PageKey, Page> PageDic { get; set; } = new Dictionary<PageKey, Page>();
+            /// <summary>
+            /// //为存储过的页面需要url
+            /// </summary>
+            public Dictionary<PageKey, Uri> UrlDic { get; set; } = new Dictionary<PageKey, Uri>();
+            /// <summary>
+            /// 当前的frmae
+            /// </summary>
+            public Frame MyFrame { get; set; }
+            /// <summary>
+            /// 上一个页面的key
+            /// </summary>
+            public Page LastPage { get; set; }
+        }
+
+        private List<NaviModel> naviModels = new List<NaviModel>();
+
+
+        private object navigateObject = new object();//导航锁
+
+        public NaviService()
+        {
+
+        }
+        #endregion
+    }
+    /// <summary>
+    /// Frame容器的key key必须为你当前frame的x:name
+    /// </summary>
+    public enum FrameKey
+    {
+        MainFrame
+    }
+    /// <summary>
+    /// 页面的key
+    /// </summary>
+    public enum PageKey
+    {
+        MainPage,
+        LoginPage
     }
 }

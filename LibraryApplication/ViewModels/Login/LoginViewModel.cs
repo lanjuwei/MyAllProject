@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasicFunction.Helper;
+using System;
 using ViewModels.Home;
 
 namespace ViewModels.Login
@@ -14,8 +15,9 @@ namespace ViewModels.Login
             base.MoveToNextPage();
         }
 
-        protected override void Load()
-        {          
+        protected override async void Load()
+        {
+            var sss=await SocektInterface.GetUserInfoAsync("441522199504231013","12345678l");
             base.Load();
         }
 

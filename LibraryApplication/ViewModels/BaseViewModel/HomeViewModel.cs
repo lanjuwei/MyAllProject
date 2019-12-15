@@ -20,8 +20,8 @@ namespace ViewModels.Home
             {
                 new Data() {BtnName= "借书",BtnNameEn = "Borrow Book",ImagePath = "/Views;component/Images/icon1.png",Tag= ButtonType.BorrowBook.ToString() },
                 new Data() {BtnName= "还书",BtnNameEn = "Return Book",ImagePath = "/Views;component/Images/icon2.png",Tag= ButtonType.ReturnBook.ToString() },
+                new Data(){ BtnName="续借",BtnNameEn="Renew Book",ImagePath = "/Views;component/Images/icon3.png",Tag= ButtonType.RenewBook.ToString()},
                 new Data() {BtnName= "个人中心",BtnNameEn= "Personal Center",ImagePath = "/Views;component/Images/icon4.png",Tag= ButtonType.PersonalCenter.ToString() },
-                new Data(){ BtnName="文件管理",BtnNameEn="File Management",ImagePath = "/Views;component/Images/icon3.png",Tag= ButtonType.FileManagement.ToString()}
             };
         }
 
@@ -41,7 +41,7 @@ namespace ViewModels.Home
 
         public ICommand SelectCommand => new RelayCommand<Data>(t =>
         {
-            NavigationService.Instance.NavigateTo(PageName.LoginPage,t.Tag);
+            NaviService.Instance.NavigateTo(PageKey.LoginPage,t.Tag);
         });
 
         private enum ButtonType
@@ -49,7 +49,7 @@ namespace ViewModels.Home
             BorrowBook,
             ReturnBook,
             PersonalCenter,
-            FileManagement
+            RenewBook
         }
 
         public  class Data
