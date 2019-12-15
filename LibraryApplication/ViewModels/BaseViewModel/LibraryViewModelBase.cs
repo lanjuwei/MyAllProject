@@ -16,7 +16,7 @@ namespace ViewModels.Home
     /// </summary>
     public abstract class LibraryViewModelBase : ViewModelBase
     {
-        private  DispatcherTimer dispatcherTimer;
+        protected DispatcherTimer dispatcherTimer;
         public LibraryViewModelBase()
         {
 
@@ -37,7 +37,7 @@ namespace ViewModels.Home
         public ICommand LoadCommand => new RelayCommand(Load);
         public ICommand UnLoadCommand => new RelayCommand(UnLoad);
         public ICommand GoBackCommand => new RelayCommand(()=>{ NavigationService.Instance.GoBack(); });
-        public ICommand CloseCommand => new RelayCommand(() => { NavigationService.Instance.NavigateTo(PageName.MainPage); });
+        public ICommand CloseCommand => new RelayCommand(() => { MoveToNextPage(); });
         public  int Time
         {
             get => time; set
