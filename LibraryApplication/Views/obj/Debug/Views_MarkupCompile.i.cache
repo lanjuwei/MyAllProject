@@ -4,17 +4,17 @@
 library
 C#
 .cs
-F:\LibraryApplication\Views\obj\Debug\
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\
 Views
 none
 false
 DEBUG;TRACE
 
-2-2102515922
+3528246322
 
-6-816196266
-18-851800590
-Pages\LoginPage.xaml;Pages\MainPage.xaml;
+7-698925489
+18-1004608869
+Pages\HandwordLoginPage.xaml;Pages\LoginPage.xaml;Pages\MainPage.xaml;
 
-False
+True
 

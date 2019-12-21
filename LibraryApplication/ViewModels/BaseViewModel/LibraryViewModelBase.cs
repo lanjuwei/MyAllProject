@@ -38,9 +38,10 @@ namespace ViewModels.Home
 
         public ICommand LoadCommand => new RelayCommand(Load);
         public ICommand UnLoadCommand => new RelayCommand(UnLoad);
-        public ICommand GoBackCommand => new RelayCommand(()=>{ NaviService.Instance.GoBack(); });
+        public ICommand GoBackCommand => new RelayCommand(()=>{ NavigateInterface.GoBack(); });
         public ICommand CloseCommand => new RelayCommand(() => { MoveToNextPage(); });
         protected static ISocektInterface SocektInterface { get; set; }= new SocketService();
+        protected static INaviServiceInterface NavigateInterface { get; set; } = NaviService.Instance;
         protected static DispatcherTimer dispatcherTimer=new DispatcherTimer() { Interval= TimeSpan.FromSeconds(1)};
         private int time;
         public  int Time{get => time; set{Set(()=> Time,ref time,value);}}
@@ -58,9 +59,9 @@ namespace ViewModels.Home
         /// <summary>
         /// 倒计时的时间到了 需要移动到下一个界面 默认为是退出到主界面 可重写移动到你需要的地方
         /// </summary>
-        protected virtual void MoveToNextPage()
+        protected virtual void MoveToNextPage(object parameter =null)
         {
-            NaviService.Instance.NavigateTo(PageKey.MainPage);
+            NavigateInterface.NavigateTo(PageKey.MainPage, parameter);
         }
     }
 }

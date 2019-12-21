@@ -20,10 +20,10 @@
         <DataTemplate x:Key="DataTemplate1">
             <Grid>
                 <commonControls:CommonButton Command="{Binding ElementName=Page1,Path=DataContext.SelectCommand}"
-                                             CommandParameter="{Binding}" 
+                                             CommandParameter="{Binding}" PressedBackground="#e7e7e7"
                                              Margin="10"  BorderThickness="0" Background="White" Padding="0" CornerRadius="32" Width="450" Height="300">
                     <commonControls:CommonButton.Effect>
-                        <DropShadowEffect Color="#A8A8A8" Opacity="0.2" BlurRadius="8" Direction="-90"  ShadowDepth="4"></DropShadowEffect>
+                        <DropShadowEffect Color="Black" Opacity="0.3"  BlurRadius="15" ></DropShadowEffect>
                     </commonControls:CommonButton.Effect>
                     <commonControls:CommonButton.Content>
                         <Grid>

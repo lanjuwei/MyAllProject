@@ -61,6 +61,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\HandwordLoginPage.xaml.cs">
+      <DependentUpon>HandwordLoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
     <Resource Include="Images\光明图书馆logo-绿.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Pages\HandwordLoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +139,19 @@
     <Resource Include="Images\icon1.png" />
     <Resource Include="Images\icon2.png" />
     <Resource Include="Images\icon3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LoginImages\人脸识别.png" />
+    <Resource Include="Images\LoginImages\手动输入.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LoginImages\一维码.png" />
+    <Resource Include="Images\LoginImages\二维码.png" />
+    <Resource Include="Images\LoginImages\扫一扫.png" />
+    <Resource Include="Images\LoginImages\指纹识别.png" />
+    <Resource Include="Images\LoginImages\芝麻.png" />
+    <Resource Include="Images\LoginImages\读者证.png" />
+    <Resource Include="Images\LoginImages\身份证.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

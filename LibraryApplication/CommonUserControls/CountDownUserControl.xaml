@@ -6,8 +6,20 @@
              xmlns:local="clr-namespace:CommonUserControls"
              mc:Ignorable="d" x:Name="UserControl1"
              d:DesignHeight="100" d:DesignWidth="100">
-    <Grid>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1.3*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.RowSpan="2" Stretch="Uniform" x:Name="Image1"  Source="Images/timer.png"></Image>
+        <TextBlock Grid.Row="0"  FontSize="34" Foreground="#FF7256" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Run Text="{Binding ElementName=UserControl1,Path=Count}"/>
+            <Run Text="s"/>
+        </TextBlock>
+        <TextBlock Text="后退出"  FontSize="16" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>
+    </Grid>
+    <!--<Grid>
         <Ellipse Stroke="#FF7F27" StrokeThickness="3"></Ellipse>
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Foreground="#00A2E8" Text="{Binding ElementName=UserControl1,Path=Count}"></TextBlock>
-    </Grid>
+    </Grid>-->
 </UserControl>

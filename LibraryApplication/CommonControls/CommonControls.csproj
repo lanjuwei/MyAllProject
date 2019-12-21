@@ -55,6 +55,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attach\MyPasswordBoxHelper.cs" />
     <Compile Include="CommonButton.cs" />
     <Compile Include="CommonCheckBox.cs" />
     <Compile Include="CommonListBox.cs" />
@@ -75,6 +76,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="VirtualizingWrapPanel.cs" />
+    <Compile Include="WatermarkTextBox.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

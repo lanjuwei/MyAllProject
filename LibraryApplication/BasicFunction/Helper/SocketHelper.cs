@@ -1,4 +1,5 @@
-﻿using Model.Request;
+﻿using BasicFunction.Log;
+using Model.Request;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace BasicFunction.Helper
         private Socket _client;
         private Encoding _encoder = Encoding.UTF8;
         private List<byte> _dataContainer = new List<byte>();
-        private byte[] terminator =new byte[2] { (byte)'#', (byte)'#' };
+        private byte terminator =(byte)'#';
         private object sendLock = new object();
         private bool isRuning = true;
         private Task backgroundTask;
@@ -37,7 +38,7 @@ namespace BasicFunction.Helper
         /// <summary>
         /// 短连接获取响应
         /// </summary>
-        public  ResponseModel<string> GeResponseAsyncByShortConnect(RequestKey key, string json) 
+        public  string GeResponseAsyncByShortConnect(RequestKey key, string json) 
         {           
             using (_client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
@@ -62,7 +63,7 @@ namespace BasicFunction.Helper
         /// <param name="key"></param>
         /// <param name="json"></param>
         /// <returns></returns>
-        public  ResponseModel<string> GeResponseAsync(RequestKey key, string json) 
+        public  string GeResponseAsync(RequestKey key, string json) 
         {
             return  GetRespone(key.ToString(), json);
         }
@@ -72,7 +73,8 @@ namespace BasicFunction.Helper
             try
             {
                 _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                _client.ReceiveTimeout = 5;
+                _client.ReceiveTimeout = 30000;//30秒超时便结束         
+                _client.SendTimeout =30000;
                 _client.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2012));//连接    
             }
             catch (Exception ex)
@@ -93,7 +95,7 @@ namespace BasicFunction.Helper
                 {
                     if (_client.Connected)
                     {
-                        var data=GetRespone("CheckConnect");
+                        //var data=GetRespone("CheckConnect");
                         Thread.Sleep(5000);
                     }
                     else
@@ -111,71 +113,71 @@ namespace BasicFunction.Helper
         /// </summary>
         /// <param name="key">方法的key</param>
         /// <param name="json">参数</param>
-        private ResponseModel<string> GetRespone(string key, string json=" ")
+        private string GetRespone(string key, string json=" ")
         {
-
             lock (sendLock)//多个地方会调用这个异步线程 得锁住维护一个线程列表 保证每次只有一个线程能进来
             {
-                var model = new ResponseModel<string>();
-                var isComplete = false;
+                var responseData = string.Empty;
                 try
                 {
                     if (!_client.Connected)
                     {
-                        model.Message = "没有连接到Socket服务器";
-                        return model;
-                    }                    
+                        Logger.Info("没有连接到Socket服务器");
+                        return responseData;
+                    }
                     var requestInfo = $"{key}--{json}##";
                     _client.Send(_encoder.GetBytes(requestInfo));//send request
-                    while (!isComplete)
+                    while (true)
                     {
-                        var buffer = new byte[1024];
+                        var buffer = new byte[10];
                         var count = _client.Receive(buffer);
                         if (count == 0)
                         {
                             continue;
                         }
-                        int index = buffer.Select((x, i) => new { i, x = buffer.Skip(i).Take(2) }).FirstOrDefault(x => x.x.SequenceEqual(terminator)).i;
+                        _dataContainer.AddRange(buffer);
+                        var index = _dataContainer.IndexOf(terminator);
                         if (index < 0)//未找到结束符
                         {
-                            _dataContainer.AddRange(buffer);
                             continue;
                         }
                         else
                         {
-                            var data1 = new byte[index];
-                            Array.Copy(buffer, 0, data1, 0, data1.Length);
-                            _dataContainer.AddRange(data1);
-                            var str = _encoder.GetString(_dataContainer.ToArray());
-                            if (str.Contains(key))
+                            var data1 = _dataContainer.GetRange(0, index);
+                            responseData = _encoder.GetString(data1.ToArray());//数据源
+                            if (responseData.Contains(key))
                             {
                                 _dataContainer.Clear();
-                                model.IsSuccess = true;
-                                model.Data = str;
-                                return model;
+                                return responseData;
                             }
                             else
                             {
-                                //_dataContainer.Clear();
-                                //Array.Copy(buffer, buffer.Length - index + 1, data2, 0, data2.Length);
-                                //_dataContainer.AddRange(data2);
+                                if (_dataContainer.Count > index + 1)
+                                {
+                                    var data2 = _dataContainer.GetRange(index + 1, _dataContainer.Count - 1 - index);//截取后半部分
+                                    _dataContainer.Clear();//清空
+                                    _dataContainer.AddRange(data2);//再度添加
+                                }
+                                else
+                                {
+                                    continue;
+                                }
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    model.Message = ex.Message;
+                    Logger.Info(ex.Message);
                     _dataContainer.Clear();
                 }
-                finally
-                {
-                    isComplete = true;
-                }
-                return model;
+                return responseData;
             }
         }
     }
+    /// <summary>
+    /// 方法key
+    /// </summary>
     public enum RequestKey
     {
         UserInfo,

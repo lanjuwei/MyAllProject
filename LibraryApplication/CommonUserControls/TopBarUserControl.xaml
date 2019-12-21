@@ -7,12 +7,12 @@
              xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
              mc:Ignorable="d" x:Name="UserControl1"
              d:DesignHeight="100" d:DesignWidth="800">
-    <Grid>
-        <Border Background="#38B8F0"></Border>
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="40">登录</TextBlock>
-        <commoncontrols:CommonButton HorizontalAlignment="Left" BorderThickness="0" VerticalAlignment="Center" Background="White" Width="100" Height="50"
-                                     Foreground="#38B8F0" CornerRadius="4" Margin="40,0,0,0" FontSize="20" Padding="0" Command="{Binding ElementName=UserControl1,Path=GoBackCommand}">回退</commoncontrols:CommonButton>
-        <commoncontrols:CommonButton HorizontalAlignment="Right" BorderThickness="0" VerticalAlignment="Center" Background="White" Width="100" Height="50"
-                                     Foreground="#38B8F0" CornerRadius="4" Margin="0,0,40,0" FontSize="20" Padding="0" Command="{Binding ElementName=UserControl1,Path=CloseCommand}">退出</commoncontrols:CommonButton>
+    <Grid Background="#23b8ff">
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="48" Text="{Binding ElementName=UserControl1,Path=Title}"></TextBlock>
+        <commoncontrols:CommonButton HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="60" Margin="40,0,0,0" 
+                                         Background="Transparent"  BorderThickness="1"  BorderBrush="Transparent" Command="{Binding ElementName=UserControl1,Path=GoBackCommand}"></commoncontrols:CommonButton>
+        <!--<Image Source="/Images/jiantou.png" HorizontalAlignment="Left"></Image>-->
+        <commoncontrols:CommonButton HorizontalAlignment="Right" BorderThickness="0" VerticalAlignment="Center" Background="White" Width="126" Height="60"
+                                     Foreground="#38B8F0" CornerRadius="8" Margin="0,0,40,0" FontSize="30" Padding="0" Command="{Binding ElementName=UserControl1,Path=CloseCommand}">退出</commoncontrols:CommonButton>
     </Grid>
 </UserControl>

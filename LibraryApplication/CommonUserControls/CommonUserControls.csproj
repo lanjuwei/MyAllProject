@@ -130,5 +130,9 @@
   <ItemGroup>
     <Resource Include="haarcascade_frontalface_alt.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\jiantou.png" />
+    <Resource Include="Images\timer.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

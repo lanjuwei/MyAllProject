@@ -28,3 +28,14 @@ D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csproj.CoreCompil
 D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csproj.CopyComplete
 D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.dll
 D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\bin\Debug\Model.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\bin\Debug\Model.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\bin\Debug\GalaSoft.MvvmLight.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\bin\Debug\SqlSugar.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\bin\Debug\GalaSoft.MvvmLight.xml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Model.Properties.Resources.resources
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csproj.GenerateResource.cache
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csproj.CopyComplete
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Model.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Model.pdb

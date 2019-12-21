@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BasicFunction.Helper;
+using BasicFunction.Log;
 using BasicServices.Navigation;
 using BasicServices.SugarDbService;
 using GalaSoft.MvvmLight.Command;

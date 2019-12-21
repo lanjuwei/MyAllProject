@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace BasicServices.Navigation
 {
-    public class NaviService
+    public class NaviService: INaviServiceInterface
     {
         private static NaviService _navigationService;
         public static NaviService Instance => _navigationService ?? (_navigationService = new NaviService());
@@ -18,6 +18,7 @@ namespace BasicServices.Navigation
         {
             Configure(FrameKey.MainFrame, PageKey.MainPage, "Views;component/Pages/MainPage.xaml");//注册frame与frame所拥有的page
             Configure(FrameKey.MainFrame, PageKey.LoginPage, "Views;component/Pages/LoginPage.xaml");
+            Configure(FrameKey.MainFrame, PageKey.HandwordLoginPage, "Views;component/Pages/HandwordLoginPage.xaml");
         }
 
         #region
@@ -85,6 +86,8 @@ namespace BasicServices.Navigation
                 throw new ArgumentException("can not find frame");
             }
         }
+
+        #region 不需要的内部细节
 
         private void Frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -159,6 +162,7 @@ namespace BasicServices.Navigation
 
         }
         #endregion
+        #endregion
     }
     /// <summary>
     /// Frame容器的key key必须为你当前frame的x:name
@@ -173,6 +177,7 @@ namespace BasicServices.Navigation
     public enum PageKey
     {
         MainPage,
-        LoginPage
+        LoginPage,
+        HandwordLoginPage
     }
 }

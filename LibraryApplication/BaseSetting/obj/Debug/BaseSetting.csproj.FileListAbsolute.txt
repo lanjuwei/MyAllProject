@@ -28,3 +28,11 @@ D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.cspro
 D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.CoreCompileInputs.cache
 D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.dll
 D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BaseSetting.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BaseSetting.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BaseSetting.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.g.resources
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.Properties.Resources.resources
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.GenerateResource.cache
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.pdb

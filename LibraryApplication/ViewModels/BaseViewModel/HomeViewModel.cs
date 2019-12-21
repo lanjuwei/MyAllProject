@@ -8,6 +8,7 @@ using System.Windows.Input;
 using BasicServices.Navigation;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Model;
 
 namespace ViewModels.Home
 {
@@ -18,10 +19,10 @@ namespace ViewModels.Home
         {
             BtnContentList = new ObservableCollection<Data>()
             {
-                new Data() {BtnName= "借书",BtnNameEn = "Borrow Book",ImagePath = "/Views;component/Images/icon1.png",Tag= ButtonType.BorrowBook.ToString() },
-                new Data() {BtnName= "还书",BtnNameEn = "Return Book",ImagePath = "/Views;component/Images/icon2.png",Tag= ButtonType.ReturnBook.ToString() },
-                new Data(){ BtnName="续借",BtnNameEn="Renew Book",ImagePath = "/Views;component/Images/icon3.png",Tag= ButtonType.RenewBook.ToString()},
-                new Data() {BtnName= "个人中心",BtnNameEn= "Personal Center",ImagePath = "/Views;component/Images/icon4.png",Tag= ButtonType.PersonalCenter.ToString() },
+                new Data() {BtnName= "借书",BtnNameEn = "Borrow Book",ImagePath = "/Views;component/Images/icon1.png",Tag= ButtonType.BorrowBook },
+                new Data() {BtnName= "还书",BtnNameEn = "Return Book",ImagePath = "/Views;component/Images/icon2.png",Tag= ButtonType.ReturnBook },
+                new Data(){ BtnName="续借",BtnNameEn="Renew Book",ImagePath = "/Views;component/Images/icon3.png",Tag= ButtonType.RenewBook},
+                new Data() {BtnName= "个人中心",BtnNameEn= "Personal Center",ImagePath = "/Views;component/Images/icon4.png",Tag= ButtonType.PersonalCenter },
             };
         }
 
@@ -41,23 +42,17 @@ namespace ViewModels.Home
 
         public ICommand SelectCommand => new RelayCommand<Data>(t =>
         {
-            NaviService.Instance.NavigateTo(PageKey.LoginPage,t.Tag);
+            NaviService.Instance.NavigateTo(PageKey.LoginPage, t.Tag);
         });
 
-        private enum ButtonType
-        {
-            BorrowBook,
-            ReturnBook,
-            PersonalCenter,
-            RenewBook
-        }
+      
 
         public  class Data
         {
             public string BtnName { get; set; }
             public string BtnNameEn { get; set; }
             public string ImagePath { get; set; }
-            public string Tag { get; set; }
+            public ButtonType Tag { get; set; }
         }
     }
 
