@@ -13,6 +13,6 @@
                                          Background="Transparent"  BorderThickness="1"  BorderBrush="Transparent" Command="{Binding ElementName=UserControl1,Path=GoBackCommand}"></commoncontrols:CommonButton>
         <!--<Image Source="/Images/jiantou.png" HorizontalAlignment="Left"></Image>-->
         <commoncontrols:CommonButton HorizontalAlignment="Right" BorderThickness="0" VerticalAlignment="Center" Background="White" Width="126" Height="60"
-                                     Foreground="#38B8F0" CornerRadius="8" Margin="0,0,40,0" FontSize="30" Padding="0" Command="{Binding ElementName=UserControl1,Path=CloseCommand}">退出</commoncontrols:CommonButton>
+                                     Foreground="#38B8F0" CornerRadius="4" Margin="0,0,40,0" FontSize="30" Padding="0" Command="{Binding ElementName=UserControl1,Path=CloseCommand}">退出</commoncontrols:CommonButton>
     </Grid>
 </UserControl>

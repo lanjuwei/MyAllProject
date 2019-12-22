@@ -9,6 +9,7 @@ using BasicServices.Navigation;
 using BasicServices.SocketService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Model.Login;
 
 namespace ViewModels.Home
 {
@@ -20,8 +21,7 @@ namespace ViewModels.Home
         
         public LibraryViewModelBase()
         {
-            dispatcherTimer.Tick -= DispatcherTimer_Tick;
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
+                    
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace ViewModels.Home
             }
             else
             {
-                MoveToNextPage();
+                MoveToNextPage();//时间一到不停的调用
             }
         }
 
@@ -45,23 +45,45 @@ namespace ViewModels.Home
         protected static DispatcherTimer dispatcherTimer=new DispatcherTimer() { Interval= TimeSpan.FromSeconds(1)};
         private int time;
         public  int Time{get => time; set{Set(()=> Time,ref time,value);}}
+        /// <summary>
+        /// 当前用户 登录的时候赋予值 用来保存用户信息 以及用唯一主键id来调用其他的接口
+        /// </summary>
+        protected static UserModel CurrentUer { get; set; }
+        /// <summary>
+        /// 能否回到主界面
+        /// </summary>
+        protected static bool isCanClose = true;
 
         protected virtual void Load()
         {
             Time = 60;
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer?.Start();
         }
         protected virtual void UnLoad()
-        {
+        {           
             dispatcherTimer?.Stop();
+            dispatcherTimer.Tick -= DispatcherTimer_Tick;
+            isCanClose = true;
         }
 
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        protected void LoginOut()
+        {
+            CurrentUer = null;
+        }
         /// <summary>
         /// 倒计时的时间到了 需要移动到下一个界面 默认为是退出到主界面 可重写移动到你需要的地方
         /// </summary>
         protected virtual void MoveToNextPage(object parameter =null)
         {
-            NavigateInterface.NavigateTo(PageKey.MainPage, parameter);
+            if (isCanClose)
+            {
+                NavigateInterface.NavigateTo(PageKey.MainPage, parameter);
+                LoginOut();
+            }
         }
     }
 }

@@ -15,6 +15,9 @@
         <i:EventTrigger EventName="Loaded">
             <command:EventToCommand Command="{Binding LoadCommand}"></command:EventToCommand>
         </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <command:EventToCommand Command="{Binding UnLoadCommand}"></command:EventToCommand>
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Page.Resources>
         <DataTemplate x:Key="DataTemplate1">

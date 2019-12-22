@@ -45,11 +45,11 @@ namespace BasicFunction.Log
             _log4NetDebugLogger.Debug(message);
         }
 
-        public static void Error(string message)
+       
+        public static void Error(Exception ex)
         {
-            _log4NetErrorLogger.Error(message);
+            _log4NetErrorLogger.Error(ex.Message, ex);
         }
-
         public static void Fatal(string message)
         {
             _log4NetfatalLogger.Fatal(message);

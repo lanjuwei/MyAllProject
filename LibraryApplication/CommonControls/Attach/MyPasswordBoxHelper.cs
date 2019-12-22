@@ -70,7 +70,7 @@ local:PasswordBoxHelper.IsFocus="{Binding ElementName=window, Path=MyFocus}">
         private static void PasswordPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PasswordBox passwordBox = d as PasswordBox;
-            if (e.NewValue.ToString() == "")
+            if (e.NewValue==null||string.IsNullOrWhiteSpace(e.NewValue.ToString()))
             {
                 passwordBox.Password = "";
             }

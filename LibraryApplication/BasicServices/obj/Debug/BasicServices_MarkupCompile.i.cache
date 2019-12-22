@@ -4,7 +4,7 @@
 library
 C#
 .cs
-D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\obj\Debug\
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\obj\Debug\
 BasicServices
 none
 false
@@ -12,8 +12,8 @@ DEBUG;TRACE
 
 6819674404
 
-202032152159
-127487995790
+231880834481
+127-1336018461
 TipService\Views\ToolTipUserControl.xaml;TipService\Views\TopUserControl.xaml;SubWindowService\ViewService\SubWindow.xaml;SubWindowService\View\FaceRecognitionFailurePage.xaml;SubWindowService\View\Page1.xaml;SubWindowService\View\Page2.xaml;
 
 False

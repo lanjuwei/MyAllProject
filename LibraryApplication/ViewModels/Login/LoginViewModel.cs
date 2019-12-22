@@ -67,7 +67,7 @@ namespace ViewModels.Login
                 case LoginWay.ScanQrCode:
                     break;
                 case LoginWay.Veriface:
-                    NavigateInterface.NavigateTo(BasicServices.Navigation.PageKey.LoginPage);
+                    NavigateInterface.NavigateTo(BasicServices.Navigation.PageKey.FaceLoginPage);
                     break;
                 case LoginWay.Fingerprint:
                     break;

@@ -57,12 +57,13 @@ namespace BasicServices.SocketService
                 catch (Exception ex)
                 {
                     model.Message = ex.Message;
+                    Logger.Error(ex);
                 }
                 finally 
                 {
                     if (!model.IsSuccess)
                     {
-                        Logger.Error(model.Message);
+                        Logger.Info(model.Message);
                     }
                 }
                 return model;
