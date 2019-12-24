@@ -19,6 +19,11 @@ namespace BasicServices.Navigation
             Configure(FrameKey.MainFrame, PageKey.MainPage, "Views;component/Pages/MainPage.xaml");//注册frame与frame所拥有的page
             Configure(FrameKey.MainFrame, PageKey.LoginPage, "Views;component/Pages/LoginPage.xaml");
             Configure(FrameKey.MainFrame, PageKey.HandwordLoginPage, "Views;component/Pages/HandwordLoginPage.xaml");
+            Configure(FrameKey.MainFrame, PageKey.FaceLoginPage, "Views;component/Pages/FaceLoginPage.xaml");
+            Configure(FrameKey.MainFrame, PageKey.PersonalCenterPage, "Views;component/Pages/PersonalCenterPage.xaml");
+            Configure(FrameKey.MainFrame, PageKey.OperateBooksPage, "Views;component/Pages/OperateBooksPage.xaml");
+            Configure(FrameKey.MainFrame, PageKey.ChangePasswordPage, "Views;component/Pages/ChangePasswordPage.xaml");
+            Configure(FrameKey.MainFrame, PageKey.RegistrateFacePage, "Views;component/Pages/RegistrateFacePage.xaml");
         }
 
         #region
@@ -178,6 +183,11 @@ namespace BasicServices.Navigation
     {
         MainPage,
         LoginPage,
-        HandwordLoginPage
+        HandwordLoginPage,
+        FaceLoginPage,
+        PersonalCenterPage,
+        OperateBooksPage,
+        ChangePasswordPage,
+        RegistrateFacePage
     }
 }

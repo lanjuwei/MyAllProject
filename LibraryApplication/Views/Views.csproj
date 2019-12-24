@@ -61,6 +61,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\ChangePasswordPage.xaml.cs">
+      <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FaceLoginPage.xaml.cs">
+      <DependentUpon>FaceLoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HandwordLoginPage.xaml.cs">
       <DependentUpon>HandwordLoginPage.xaml</DependentUpon>
     </Compile>
@@ -69,6 +75,15 @@
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\OperateBooksPage.xaml.cs">
+      <DependentUpon>OperateBooksPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PersonalCenterPage.xaml.cs">
+      <DependentUpon>PersonalCenterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegistrateFacePage.xaml.cs">
+      <DependentUpon>RegistrateFacePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -96,6 +111,14 @@
     <Resource Include="Images\光明图书馆logo-绿.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Pages\ChangePasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FaceLoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HandwordLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +128,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\OperateBooksPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PersonalCenterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegistrateFacePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +155,10 @@
     <ProjectReference Include="..\CommonUserControls\CommonUserControls.csproj">
       <Project>{44e182f5-3ff0-47a4-ac52-27fcbd5ac8c6}</Project>
       <Name>CommonUserControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{0C696793-6FE7-492E-975A-63B839F42898}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
       <Project>{5fe1ee97-8620-4461-84a3-0110ba9ef228}</Project>
@@ -152,6 +191,9 @@
     <Resource Include="Images\LoginImages\芝麻.png" />
     <Resource Include="Images\LoginImages\读者证.png" />
     <Resource Include="Images\LoginImages\身份证.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converter\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,7 +12,7 @@ using Model;
 
 namespace ViewModels.Home
 {
-    public class HomeViewModel :ViewModelBase
+    public class HomeViewModel : LibraryViewModelBase
     {
 
         public HomeViewModel()
@@ -26,10 +26,7 @@ namespace ViewModels.Home
             };
         }
 
-        public ICommand LoadCommand => new RelayCommand(() =>
-        {
-            
-        });
+      
 
         private ObservableCollection<Data> _btnContentList;
         public ObservableCollection<Data> BtnContentList
@@ -38,6 +35,11 @@ namespace ViewModels.Home
             {
                 Set(() => BtnContentList, ref _btnContentList, value);
             }
+        }
+
+        protected override void Load()
+        {
+            
         }
 
         public ICommand SelectCommand => new RelayCommand<Data>(t =>

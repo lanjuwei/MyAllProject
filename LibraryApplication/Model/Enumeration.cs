@@ -29,4 +29,10 @@ namespace Model
         PersonalCenter,
         RenewBook
     }
+
+    public enum BookDataTemplateType
+    {
+        Title,
+        Row
+    }
 }
