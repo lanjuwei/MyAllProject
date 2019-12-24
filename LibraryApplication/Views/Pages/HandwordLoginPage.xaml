@@ -51,7 +51,7 @@
                 <PasswordBox Grid.Row="3"  Width="470" Height="78" PasswordChar="●"
                              FontSize="24"
                              Tag="请输入您的读者证密码"
-                             helpers:MyPasswordBoxHelper.Attach="True"                           
+                             helpers:MyPasswordBoxHelper.Attach="True"
                              helpers:MyPasswordBoxHelper.Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                              helpers:MyPasswordBoxHelper.IsFocus="{Binding IsFocus,Mode=TwoWay}" ></PasswordBox>
                 <commoncontrols:CommonButton Grid.Row="4" Width="360"  Height="80" FontSize="30" CornerRadius="40" Background="#23b8ff" Foreground="White" Margin="0,40,0,0">确定</commoncontrols:CommonButton>
