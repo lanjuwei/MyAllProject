@@ -36,3 +36,11 @@ D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.cspro
 D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.dll
 D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.pdb
 D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csprojAssemblyReference.cache
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csprojAssemblyReference.cache
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\Model.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\SqlSugar.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\Model.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.xml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.CopyComplete

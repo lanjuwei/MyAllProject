@@ -103,7 +103,6 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\Basi
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\CommonServiceLocator.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\Model.dll
-D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\SqlSugar.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.Extras.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\System.Data.SQLite.dll
@@ -121,8 +120,6 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\Basi
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.xml
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\Model.pdb
-D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.pdb
-D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.xml
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.Extras.xml
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\System.Data.SQLite.xml
@@ -211,3 +208,17 @@ D:\MyGit\MyAllProject\LibraryApplication\Views\obj\Debug\Views.csproj.CoreCompil
 D:\MyGit\MyAllProject\LibraryApplication\Views\obj\Debug\Views.csproj.CopyComplete
 D:\MyGit\MyAllProject\LibraryApplication\Views\obj\Debug\Views.dll
 D:\MyGit\MyAllProject\LibraryApplication\Views\obj\Debug\Views.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\ChangePasswordPage.g.cs
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\FaceLoginPage.g.cs
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\OperateBooksPage.g.cs
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\PersonalCenterPage.g.cs
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\RegistrateFacePage.g.cs
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\ChangePasswordPage.baml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\FaceLoginPage.baml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\OperateBooksPage.baml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\PersonalCenterPage.baml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Pages\RegistrateFacePage.baml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.dll.config

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseSetting.Needs;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ namespace BasicServices.TipService
         /// <param name="key"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        private static System.Windows.Controls.UserControl AddControl(string key, object p)
+        private static UserControl AddControl(string key, object p)
         {
             UserControl uiElement;
             switch (key)
@@ -114,18 +115,25 @@ namespace BasicServices.TipService
             {
                 return;
             }
-            Application.Current.Dispatcher?.BeginInvoke(new Action(async () => 
+            Application.Current?.Dispatcher?.BeginInvoke(new Action(async () => 
             {           
             _isCompele = false;
-           
+
                 _currentPopup = new Popup
-                {
-                    Width = SystemParameters.PrimaryScreenWidth,
-                    Height = SystemParameters.PrimaryScreenHeight,
+                {                 
                     AllowsTransparency = true,
-                    Child = null
+                    Child = new Viewbox() { Child=new Grid() { Width= IndividualNeeds.Instance.PageVariables.RootGridWidth, Height= IndividualNeeds.Instance.PageVariables.RootGridHeight } },
+                    PlacementTarget = Application.Current.MainWindow,
+                    Placement= PlacementMode.Center,
                 };
-                _currentPopup.Child = AddControl(key, p);
+                _currentPopup.Width = Application.Current.MainWindow.Width;
+                _currentPopup.Height = Application.Current.MainWindow.Height;
+                if (_currentPopup.Child is Viewbox viewbox&& viewbox.Child is Grid grid)
+                {
+                    grid.Children.Clear();
+                    grid.Children.Add(AddControl(key, p));
+                }
+
                 _currentPopup.IsOpen = true;
            
 

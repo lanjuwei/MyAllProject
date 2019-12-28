@@ -4,29 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" ShowInTaskbar="False" WindowStyle="None" Background="Transparent" ResizeMode="NoResize" AllowsTransparency="True"
-             WindowStartupLocation="Manual" WindowState="Maximized"
-             Title="SubWindow"
+             WindowStartupLocation="CenterOwner" 
+             xmlns:individualNeeds="clr-namespace:BaseSetting.Needs;assembly=BaseSetting" 
+             Title="SubWindow" Width="800" Height="450"
              d:DesignHeight="450" d:DesignWidth="800">
     <Window.Resources>
         <Storyboard x:Key="ShowStoryboard" >
-            <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" Duration="0:0:0.2" Storyboard.TargetName="RootGrid">
+            <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" Duration="0:0:0.2" Storyboard.TargetName="Frame">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" Duration="0:0:0.2" Storyboard.TargetName="RootGrid">
+            <DoubleAnimation From="0" To="1" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" Duration="0:0:0.2" Storyboard.TargetName="Frame">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Key="CloseStoryboard" >
-            <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" Duration="0:0:0.2" Storyboard.TargetName="RootGrid">
+            <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" Duration="0:0:0.2" Storyboard.TargetName="Frame">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" Duration="0:0:0.2" Storyboard.TargetName="RootGrid">
+            <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" Duration="0:0:0.2" Storyboard.TargetName="Frame">
                 <DoubleAnimation.EasingFunction>
                     <CubicEase/>
                 </DoubleAnimation.EasingFunction>
@@ -39,17 +40,18 @@
         </EventTrigger>
     </Window.Triggers>
     <Viewbox>
-    <Grid x:Name="RootGrid" RenderTransformOrigin="0.5,0.5" Width="1920" Height="1080">
-        <Grid.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform/>
-            </TransformGroup>
-        </Grid.RenderTransform>
-        <Grid>
-            <Border >
-                <Frame x:Name="Frame" HorizontalAlignment="Center" VerticalAlignment="Center" NavigationUIVisibility="Hidden"></Frame>
-            </Border>
-        </Grid>
+        <Grid x:Name="RootGrid" Width="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=PageVariables.RootGridWidth}"
+              Height="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=PageVariables.RootGridHeight}" >
+            <Grid>
+                <Border x:Name="bd" Background="#2a2e36" Opacity="0.6"  />
+                <Frame x:Name="Frame" HorizontalAlignment="Center" VerticalAlignment="Center" NavigationUIVisibility="Hidden" RenderTransformOrigin="0.5,0.5">
+                    <Frame.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                        </TransformGroup>
+                    </Frame.RenderTransform>
+                </Frame>
+            </Grid>
     </Grid>
     </Viewbox>
 </Window>

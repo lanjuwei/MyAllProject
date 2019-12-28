@@ -61,11 +61,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Book\BookColumnModel.cs" />
+    <Compile Include="Book\StepModel.cs" />
+    <Compile Include="CommonVariables.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="FaceUserModel.cs" />
     <Compile Include="Login\BookModel.cs" />
     <Compile Include="Login\LoginItem.cs" />
     <Compile Include="Login\UserModel.cs" />
+    <Compile Include="PageVariables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +84,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Request\ResponseModel.cs" />
+    <Compile Include="VisualStates.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

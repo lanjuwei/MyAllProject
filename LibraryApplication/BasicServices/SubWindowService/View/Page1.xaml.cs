@@ -27,8 +27,8 @@ namespace BasicServices.SubWindowService.View
         }
         private void ButtonBase_OnClick1(object sender, RoutedEventArgs e)
         {
-            var vm = this.DataContext as SubWindowBase;
-            if (vm != null) SubWindowsService.Instance.Navigate(vm.Id, SubWindowsService.Loginview1);
+            //var vm = this.DataContext as SubWindowBase;
+            //if (vm != null) SubWindowsService.Instance.Navigate(vm.Id, SubWindowsService.Loginview1);
         }
     }
 }

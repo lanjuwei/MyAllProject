@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BasicServices.Navigation;
+using BasicServices.SubWindowService.ViewService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Model;
@@ -43,7 +44,7 @@ namespace ViewModels.Home
         }
 
         public ICommand SelectCommand => new RelayCommand<Data>(t =>
-        {
+        {           
             NaviService.Instance.NavigateTo(PageKey.LoginPage, t.Tag);
         });
 

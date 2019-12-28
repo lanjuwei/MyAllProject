@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasicFunction.Log;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -35,11 +36,14 @@ namespace LibraryApplication
         /// <param name="e"></param>
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            //Logger.Log("程序发生意外错误！！");
-            //Logger.LogError(e.Exception);
+            Logger.Info("程序发生意外错误！！");
+            Logger.Error(e.Exception);
             e.Handled = true;//使得程序不能崩溃
         }
-     
 
+        private void ScrollViewer_ManipulationBoundaryFeedback(object sender, System.Windows.Input.ManipulationBoundaryFeedbackEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

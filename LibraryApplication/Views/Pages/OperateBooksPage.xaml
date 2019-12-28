@@ -8,12 +8,127 @@
       xmlns:helpers="clr-namespace:CommonControls.Attach;assembly=CommonControls"
       xmlns:commonusercontrols="clr-namespace:CommonUserControls;assembly=CommonUserControls"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
-      mc:Ignorable="d" 
+      xmlns:converters="clr-namespace:Views.Converters"
+      xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
+      mc:Ignorable="d"  x:Name="OperateBooksPage1"
       DataContext="{Binding Source={StaticResource Locator},Path=OperateBooksViewModel}"
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="OperateBooksPage">
     <Page.Resources>
-
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
+        <converters:LengthToVisibilityConverter x:Key="LengthToVisibilityConverter"></converters:LengthToVisibilityConverter>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+            <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="DataTemplate1">
+            <Grid Margin="60,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid HorizontalAlignment="Center">
+                    <Rectangle x:Name="Rect" Height="2"  Fill="#c1c1c1" Margin="-180,0,-0,0" Visibility="{Binding IsRectVisible,Converter={StaticResource BoolToVisibilityConverter}}"></Rectangle>
+                    <Border x:Name="bd" Width="36" Height="36" Background="#c1c1c1" CornerRadius="100" >
+                    </Border>
+                    <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Text="{Binding StepIndex}"></TextBlock>
+                </Grid>
+                <TextBlock x:Name="tb" FontSize="24" Grid.Row="1" Foreground="#c1c1c1" Margin="0,10,0,0" Text="{Binding StepContent}"></TextBlock>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsNextStep}" Value="true">
+                    <Setter TargetName="Rect" Property="Fill" Value="#239aff"></Setter>
+                    <Setter TargetName="bd" Property="Background" Value="#239aff"></Setter>
+                    <Setter TargetName="tb" Property="Foreground" Value="#239aff"></Setter>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <Style x:Key="ItemsControlStyle1" TargetType="{x:Type ItemsControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                        <Border Grid.ColumnSpan="2" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ItemsPresenter x:Name="ItemsPresenter1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="BlackTextDataTemplate" >
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Border Background="Black" Opacity="0.8" CornerRadius="4"></Border>
+                <TextBlock x:Name="Tb" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Center" TextWrapping="Wrap"
+                           Text="{Binding Title}" Margin="10"  FontSize="28" MaxWidth="400"></TextBlock>
+            </Grid>
+        </DataTemplate>
+        <!--ListView样式-->
+        <!--<converters:ItemToIndexConverter x:Key="ItemToIndexConverter1"></converters:ItemToIndexConverter>-->
+        <Style x:Key="BookWhileHeader" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Padding" Value="0,16,0,16" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <ContentPresenter Opacity="0.9" Margin="{TemplateBinding Padding}"  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle Fill="#ecf6ff" Height="5" Grid.Row="1"></Rectangle>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HorBookWhileHeader" TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource BookWhileHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="BookGridViewTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="0,18,0,18" />
+            <Setter Property="Opacity" Value="0.8" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="TextTrimming" Value="WordEllipsis"></Setter>
+        </Style>
+        <Style x:Key="BookListViewItemStyle2" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <GridViewRowPresenter  VerticalAlignment="Center" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Rectangle Grid.Row="1" Fill="#f3f3f3" Height="2" Margin="36,0"></Rectangle>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+       
+        <Style x:Key="BookListViewStyle1" TargetType="{x:Type ListView}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListView}">
+                        <Grid>
+                            <ScrollViewer Padding="{TemplateBinding Padding}" PanningMode="Both"
+                                          Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}"
+                                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--ListView样式-->
     </Page.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -31,9 +146,137 @@
         <commonusercontrols:TopBarUserControl GoBackButtonVisibility="Visible" CloseCommand="{Binding CloseCommand}" Title="{Binding Title}" GoBackCommand="{Binding GoBackCommand}"/>
         <Border Grid.Row="1" Background="#f2f2f2"></Border>
         <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <commonusercontrols:CountDownUserControl Count="{Binding Time}" Width="100" Height="100" HorizontalAlignment="Right" 
                                                      VerticalAlignment="Top" Margin="0,40,40,0" />
-            
+            <ItemsControl HorizontalAlignment="Center" VerticalAlignment="Center"
+                          ItemsPanel="{DynamicResource ItemsPanelTemplate1}" ItemTemplate="{DynamicResource DataTemplate1}" 
+                          Style="{DynamicResource ItemsControlStyle1}" ItemsSource="{Binding StepList}"/>
+            <Grid Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition Width="0.9*"/>
+                    <ColumnDefinition Width="0.05*"/>
+                </Grid.ColumnDefinitions>
+                <Border CornerRadius="6"  Background="White" HorizontalAlignment="Center" Grid.Column="1" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <ListView x:Name="list1"  ItemsSource="{Binding BookModelList}" 
+                          HorizontalAlignment="Center" ItemContainerStyle="{StaticResource BookListViewItemStyle2}"   
+                          Style="{DynamicResource BookListViewStyle1}" 
+                          >
+                            <ListView.View >
+                                <GridView AllowsColumnReorder="False" >
+                                    <!--空白行 只为了增加间距-->
+                                    <GridViewColumn   HeaderContainerStyle="{StaticResource BookWhileHeader}"  Width="{Binding BookColumn.BlankLineWidth}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="" ></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="编号"   HeaderContainerStyle="{StaticResource BookWhileHeader}" 
+                                                Width="{Binding BookColumn.NumberColumnWidth}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Style="{StaticResource BookGridViewTextStyle}" 
+                                                   Text="{Binding Index}" ></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="条码号"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
+                                                Width="{Binding BookColumn.BarcodeColumnWidth}"  >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <TextBlock Style="{StaticResource BookGridViewTextStyle}" Text="{Binding BarCode}" ></TextBlock>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="书名"  HeaderContainerStyle="{StaticResource BookWhileHeader}" 
+                                                Width="{Binding BookColumn.TitleColumnWidth}" >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                                                    <TextBlock Style="{StaticResource BookGridViewTextStyle}" >
+                                                        <Run Text="《"></Run>
+                                                        <Run Text="{Binding Title,Converter={StaticResource LengthToVisibilityConverter},ConverterParameter=Length}"></Run>
+                                                        <Run Text="》"></Run>
+                                                    </TextBlock>
+                                                    <TextBlock TextDecorations="Underline" Margin="0,0,0,0"  VerticalAlignment="Center"  FontSize="24" Foreground="#23C0FF" 
+                                                               commoncontrols:AttachBubble.ShowBubbleType="Press"
+                                                               Text="详细信息" Visibility="{Binding Title,Converter={StaticResource LengthToVisibilityConverter},ConverterParameter=Visibility}"
+                                                               commoncontrols:AttachBubble.BubbleContent="{StaticResource BlackTextDataTemplate}">
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="状态"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
+                                            Width="{Binding BookColumn.StatusColumnWidth}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <TextBlock Style="{StaticResource BookGridViewTextStyle}" Text="{Binding Status}" 
+                                                            Foreground="{Binding ForgroundColor}"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="移出"  HeaderContainerStyle="{StaticResource HorBookWhileHeader}"  
+                                            Width="{Binding BookColumn.RomoveColumnWidth}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <commoncontrols:CommonButton  Width="40" Height="40"  HorizontalAlignment="Center" 
+                                                                             NormalImageSource="../Images/removeBtn.png" Background="Transparent" BorderThickness="0"
+                                                                             ImageHeight="32" ImageWidth="32" Padding="0" 
+                                                                             Command="{Binding ElementName=OperateBooksPage1,Path=DataContext.ReCommand}"
+                                                                             CommandParameter="{Binding}">
+                                                    </commoncontrols:CommonButton>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <!--空白行 只为了增加间距-->
+                                    <GridViewColumn   HeaderContainerStyle="{StaticResource BookWhileHeader}"  Width="{Binding BookColumn.BlankLineWidth}" >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="" ></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Rectangle Fill="#ecf6ff" Height="5" Grid.Row="1" ></Rectangle>
+                        <StackPanel Grid.Row="2"   Orientation="Horizontal"  Margin="60,16" VerticalAlignment="Center">
+                            <Rectangle Height="26" Width="4" Fill="#239aff" VerticalAlignment="Center"></Rectangle>
+                            <TextBlock  FontSize="28" Foreground="#239AFF" VerticalAlignment="Top" Margin="12 0 0 0">
+                                <Run Text="共检测到 "/>
+                                <Run Text="{Binding BookModelList.Count, Mode=OneWay}"  Foreground="#ff9934" />
+                                <Run Text=" 本图书"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+            <commoncontrols:CommonButton Grid.Row="2"  Width="360" Height="80" Foreground="White" FontSize="30" CornerRadius="40" Margin="0,16">
+                <commoncontrols:CommonButton.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#239aff" Offset="1"/>
+                        <GradientStop Color="#23c0ff" Offset="0"/>
+                    </LinearGradientBrush>
+                </commoncontrols:CommonButton.Background> 确定</commoncontrols:CommonButton>
         </Grid>
     </Grid>
 </Page>

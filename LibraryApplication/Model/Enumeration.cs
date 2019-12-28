@@ -30,9 +30,65 @@ namespace Model
         RenewBook
     }
 
-    public enum BookDataTemplateType
+
+
+    public enum BookStatus 
     {
-        Title,
-        Row
+        /// <summary>
+        /// 未知
+        /// </summary>
+        None,
+        /// <summary>
+        /// 借出
+        /// </summary>
+        Lended,
+        /// <summary>
+        /// 在馆
+        /// </summary>
+        Returned,
+        /// <summary>
+        /// 已预借
+        /// </summary>
+        Reserved,
     }
+    ///// <summary>
+    ///// 人脸识别流程控制
+    ///// </summary>
+    //public enum FaceRecognitionProcess
+    //{
+    //    /// <summary>
+    //    /// 结束
+    //    /// </summary>
+    //    Over,
+    //    /// <summary>
+    //    /// 重新开始
+    //    /// </summary>
+    //    Continue,
+    //}
+    public enum ResultType
+    {
+        RecogineAgian,
+        ToLogin,
+        Close,
+        Success
+    }
+    //public enum VideoFaceOperation 
+    //{
+    //    /// <summary>
+    //    /// 检测人脸
+    //    /// </summary>
+    //    DetectFace,
+    //    /// <summary>
+    //    /// 识别人脸
+    //    /// </summary>
+    //    RecognitionFace,
+    //    /// <summary>
+    //    /// 截取人脸
+    //    /// </summary>
+    //    ShotFace,
+    //    /// <summary>
+    //    /// 无操作
+    //    /// </summary>
+    //    None
+    //}
 }

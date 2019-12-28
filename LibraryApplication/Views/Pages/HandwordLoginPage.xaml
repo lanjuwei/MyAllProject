@@ -37,38 +37,48 @@
         <Grid Grid.Row="1">
             <commonusercontrols:CountDownUserControl Count="{Binding Time}" Width="100" Height="100" HorizontalAlignment="Right" 
                                                      VerticalAlignment="Top" Margin="0,40,40,0" />
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Style="{StaticResource TextBlock1}"  >账号：</TextBlock>
-                <commoncontrols:WatermarkTextBox Grid.Row="1" WaterMark="请输入您的读者证号" 
-                                                 Width="470" Height="78" 
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource TextBlock1}"  >账号：</TextBlock>
+                    <commoncontrols:WatermarkTextBox Grid.Row="1" WaterMark="请输入您的读者证号" 
+                                                 Width="470" Height="78" InputMethod.IsInputMethodEnabled="False"
                                                  FontSize="24"  Background="White" 
                                                  Text="{Binding ReadCardId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                  IsFocus="{Binding IsFocusReadCardId,Mode=TwoWay}">
-                    <commoncontrols:WatermarkTextBox.InputBindings>
-                        <KeyBinding Key="Enter" Command="{Binding SureCommand}"></KeyBinding>
-                    </commoncontrols:WatermarkTextBox.InputBindings>
-                </commoncontrols:WatermarkTextBox>
-                <TextBlock Style="{StaticResource TextBlock1}" Grid.Row="2">密码：</TextBlock>
-                <PasswordBox Grid.Row="3"  Width="470" Height="78" PasswordChar="●"
-                             FontSize="24"
+                        <commoncontrols:WatermarkTextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding SureCommand}"></KeyBinding>
+                        </commoncontrols:WatermarkTextBox.InputBindings>
+                    </commoncontrols:WatermarkTextBox>
+                    <TextBlock Style="{StaticResource TextBlock1}" Grid.Row="2">密码：</TextBlock>
+                    <PasswordBox Grid.Row="3"  Width="470" Height="78" PasswordChar="●"
+                             FontSize="24" InputMethod.IsInputMethodEnabled="False"
                              Tag="请输入您的读者证密码"
                              helpers:MyPasswordBoxHelper.Attach="True" 
                              helpers:MyPasswordBoxHelper.Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                              helpers:MyPasswordBoxHelper.IsFocus="{Binding IsFocusPassword,Mode=TwoWay}" >
-                    <PasswordBox.InputBindings>
-                        <KeyBinding Key="Enter" Command="{Binding SureCommand}"></KeyBinding>
-                    </PasswordBox.InputBindings>
-                </PasswordBox>
-                <commoncontrols:CommonButton Grid.Row="4" Width="360"  Height="80" FontSize="30" CornerRadius="40" Background="#23b8ff" 
+                        <PasswordBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding SureCommand}"></KeyBinding>
+                        </PasswordBox.InputBindings>
+                    </PasswordBox>
+                    <commoncontrols:CommonButton Grid.Row="4" Width="360"  Height="80" FontSize="30" CornerRadius="40" Background="#23b8ff" 
                                              Foreground="White" Margin="0,40,0,0" Command="{Binding SureCommand}" IsEnabled="{Binding IsSureButtonEnable}">确定</commoncontrols:CommonButton>
+                </Grid>
+                <commonusercontrols:BigSoftKeyboardUserControl Grid.Row="1" Width="1300" Height="500" VerticalAlignment="Center"></commonusercontrols:BigSoftKeyboardUserControl>
             </Grid>
+            
+           
         </Grid>
     </Grid>
 </Page>

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using BasicServices.SubWindowService.ViewService;
+using Model;
 
 namespace BasicServices.SubWindowService.View
 {
@@ -12,16 +13,8 @@ namespace BasicServices.SubWindowService.View
         public FaceRecognitionFailurePage()
         {
             InitializeComponent();
-            AddProportion();
         }
 
-        private void AddProportion()
-        {
-            RootGrid.Width = SystemParameters.PrimaryScreenWidth;
-            RootGrid.Height = SystemParameters.PrimaryScreenHeight;
-            CurrentGrid.Width = 600 / 1920 * SystemParameters.PrimaryScreenWidth;//按比例赋值
-            CurrentGrid.Height = 498 / 1080 * SystemParameters.PrimaryScreenHeight;
-        }
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var vm = this.DataContext as SubWindowBase;
@@ -38,14 +31,5 @@ namespace BasicServices.SubWindowService.View
             var vm = this.DataContext as SubWindowBase;
             vm?.CloseWithParameter(ResultType.ToLogin);
         }
-
-        public enum ResultType
-        {
-            RecogineAgian,
-            ToLogin,
-            Close
-        }
-
-
     }
 }

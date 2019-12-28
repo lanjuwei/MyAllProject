@@ -92,20 +92,10 @@ namespace ViewModels.Login
             isCanClose = false;
             try
             {
-                if (NavigateInterface.Parameter is ButtonType buttonType)
+                Task.Run(()=>
                 {
-                    switch (buttonType)
-                    {
-                        case ButtonType.PersonalCenter:
-                            NavigateInterface.NavigateTo(BasicServices.Navigation.PageKey.PersonalCenterPage);
-                            break;
-                        case ButtonType.RenewBook:
-                        case ButtonType.BorrowBook:
-                        case ButtonType.ReturnBook:
-                            NavigateInterface.NavigateTo(BasicServices.Navigation.PageKey.OperateBooksPage);
-                            break;
-                    }
-                }
+                    LoginIn(ReadCardId, Password);
+                });             
             }
             catch (Exception ex)
             {

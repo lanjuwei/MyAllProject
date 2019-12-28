@@ -52,6 +52,13 @@ namespace BasicFunction.Helper
                 return bitmap;
             }
         }
-
+        //public  WriteableBitmap BytesToImage(byte[] src, int lw, int lh)
+        //{
+        //    WriteableBitmap wbbitmap = new WriteableBitmap(lw, lh);
+        //    Stream s = wbbitmap.PixelBuffer.AsStream();
+        //    s.Seek(0, SeekOrigin.Begin);
+        //    s.Write(src, 0, lw * lh * 3);
+        //    return wbbitmap;
+        //}
     }
 }

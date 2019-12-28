@@ -4,10 +4,15 @@ namespace BasicServices.SubWindowService.ViewService
 {
     public interface ISubWindowsService
     {
+
         /// <summary>
         /// 窗口关闭 返回结果
         /// </summary>
         object Result { get; set; }
+        /// <summary>
+        /// 当前窗口的id
+        /// </summary>
+        string WindowId { get; set; }
 
         /// <summary>
         /// 打开窗口 除非你要在外界通过窗口返回的id控制窗口 否则请用viewmodel里的窗口id（可用来导航）

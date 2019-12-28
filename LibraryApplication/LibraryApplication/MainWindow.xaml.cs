@@ -1,4 +1,5 @@
-﻿using BasicFunction.Helper;
+﻿using BaseSetting.Needs;
+using BasicFunction.Helper;
 using LibraryApplication.Properties;
 using OpenCvSharp;
 using System;
@@ -28,8 +29,8 @@ namespace LibraryApplication
         public MainWindow()
         {
             InitializeComponent();
-            RootGrid.Width = SystemParameters.PrimaryScreenWidth;
-            RootGrid.Height = SystemParameters.PrimaryScreenHeight;
+            //RootGrid.Width = IndividualNeeds.Instance.PageVariables.RootGridWidth;//可配置 比例 viewbox会以一定的比例缩放
+            //RootGrid.Height = IndividualNeeds.Instance.PageVariables.RootGridHeight;
             TestImage();
         }
 

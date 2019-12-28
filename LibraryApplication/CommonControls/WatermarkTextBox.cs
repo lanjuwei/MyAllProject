@@ -27,6 +27,7 @@ namespace CommonControls
 
         public WatermarkTextBox()
         {
+            
             var dic = new ResourceDictionary { Source = new Uri("/CommonControls;component/AllCommonControlStyle.xaml", UriKind.RelativeOrAbsolute) };
             Style = dic["CommonTextBoxStyle"] as Style;
         }

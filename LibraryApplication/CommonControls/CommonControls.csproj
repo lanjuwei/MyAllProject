@@ -41,6 +41,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,13 +56,18 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttachBubble.cs" />
     <Compile Include="Attach\MyPasswordBoxHelper.cs" />
+    <Compile Include="BusyIndicator.cs" />
     <Compile Include="CommonButton.cs" />
     <Compile Include="CommonCheckBox.cs" />
     <Compile Include="CommonListBox.cs" />
     <Compile Include="Converter\CommonButtonPropertyConverter.cs" />
     <Compile Include="Converter\CommonCheckBoxPropertyConverter.cs" />
     <Compile Include="Converter\CommonListBoxPropertyConverter.cs" />
+    <Compile Include="GifImagePlayerUserControl.xaml.cs">
+      <DependentUpon>GifImagePlayerUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -88,6 +94,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="AllCommonControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GifImagePlayerUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

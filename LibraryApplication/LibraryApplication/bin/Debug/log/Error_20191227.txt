@@ -1,0 +1,46 @@
+2019-12-27 13:15:57,086 [1] ERROR errorLogger [(null)] - 未能加载文件或程序集“LanjuweiCompleteWpfApplication, Culture=neutral”或它的某一个依赖项。系统找不到指定的文件。
+System.IO.FileNotFoundException: 未能加载文件或程序集“LanjuweiCompleteWpfApplication, Culture=neutral”或它的某一个依赖项。系统找不到指定的文件。
+文件名:“LanjuweiCompleteWpfApplication, Culture=neutral”
+   在 System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.Assembly.Load(AssemblyName assemblyRef)
+   在 System.Windows.Navigation.BaseUriHelper.GetLoadedAssembly(String assemblyName, String assemblyVersion, String assemblyKey)
+   在 MS.Internal.AppModel.ResourceContainer.GetResourceManagerWrapper(Uri uri, String& partName, Boolean& isContentFile)
+   在 MS.Internal.AppModel.ResourceContainer.GetPartCore(Uri uri)
+   在 System.IO.Packaging.Package.GetPartHelper(Uri partUri)
+   在 System.IO.Packaging.Package.GetPart(Uri partUri)
+   在 System.IO.Packaging.PackWebResponse.CachedResponse.GetResponseStream()
+   在 System.IO.Packaging.PackWebResponse.GetResponseStream()
+   在 System.IO.Packaging.PackWebResponse.get_ContentType()
+   在 MS.Internal.WpfWebRequestHelper.GetContentType(WebResponse response)
+   在 System.Windows.Navigation.NavigationService.GetObjectFromResponse(WebRequest request, WebResponse response, Uri destinationUri, Object navState)
+   在 System.Windows.Navigation.NavigationService.DoNavigate(Uri source, NavigationMode f, Object navState)
+   在 System.Windows.Navigation.NavigateQueueItem.Dispatch(Object obj)
+   在 System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   在 System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+
+=== 预绑定状态信息 ===
+日志: DisplayName = LanjuweiCompleteWpfApplication, Culture=neutral
+ (Partial)
+警告: 为程序集提供了部分绑定信息:
+警告: 程序集名称: LanjuweiCompleteWpfApplication, Culture=neutral | 域 ID: 1
+警告: 当仅提供程序集显示名称的一部分时，将发生部分绑定。
+警告: 这可能导致联编程序加载错误的程序集。
+警告: 建议为程序集提供完全指定的文字标识，
+警告: 并由简单名称、版本、区域性和公钥标记组成。
+警告: 有关此问题的详细信息和常见解决方案，请参见白皮书 http://go.microsoft.com/fwlink/?LinkId=109270。
+日志: Appbase = file:///D:/新建文件夹/AProject/MyAllProject/LibraryApplication/LibraryApplication/bin/Debug/
+日志: 初始 PrivatePath = NULL
+调用程序集: PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35。
+===
+日志: 此绑定从 default 加载上下文开始。
+日志: 正在使用应用程序配置文件: D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\LibraryApplication.exe.Config
+日志: 使用主机配置文件: 
+日志: 使用 C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config 的计算机配置文件。
+日志: 此时没有为引用应用策略(私有、自定义、分部或基于位置的程序集绑定)。
+日志: 尝试下载新的 URL file:///D:/新建文件夹/AProject/MyAllProject/LibraryApplication/LibraryApplication/bin/Debug/LanjuweiCompleteWpfApplication.DLL。
+日志: 尝试下载新的 URL file:///D:/新建文件夹/AProject/MyAllProject/LibraryApplication/LibraryApplication/bin/Debug/LanjuweiCompleteWpfApplication/LanjuweiCompleteWpfApplication.DLL。
+日志: 尝试下载新的 URL file:///D:/新建文件夹/AProject/MyAllProject/LibraryApplication/LibraryApplication/bin/Debug/LanjuweiCompleteWpfApplication.EXE。
+日志: 尝试下载新的 URL file:///D:/新建文件夹/AProject/MyAllProject/LibraryApplication/LibraryApplication/bin/Debug/LanjuweiCompleteWpfApplication/LanjuweiCompleteWpfApplication.EXE。
+

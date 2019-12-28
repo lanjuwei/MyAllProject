@@ -23,7 +23,7 @@
         <DataTemplate x:Key="DataTemplate1">
             <Grid>
                 <commonControls:CommonButton Command="{Binding ElementName=Page1,Path=DataContext.SelectCommand}"
-                                             CommandParameter="{Binding}" PressedBackground="#e7e7e7"
+                                             CommandParameter="{Binding}" 
                                              Margin="10"  BorderThickness="0" Background="White" Padding="0" CornerRadius="32" Width="450" Height="300">
                     <commonControls:CommonButton.Effect>
                         <DropShadowEffect Color="Black" Opacity="0.3"  BlurRadius="15" ></DropShadowEffect>

@@ -13,14 +13,18 @@ namespace BasicServices.SubWindowService.ViewService
 
         #region Page注册
 
-        public const string Loginview = "Page1";//界面的key
-        public const string Loginview1 = "Page2";
+        //public const string Loginview = "Page1";//界面的key
+        //public const string Loginview1 = "Page2";
         public const string FaceRecognitionFailurePage = "FaceRecognitionFailurePage";
+        public const string UpdatePage = "UpdatePage";
+        public const string PlaceBookPage = "PlaceBookPage";
         private void RegisterNormalPage()
         {
-            Configure(Loginview, "pack://application:,,,/LanjuweiCompleteWpfApplication;component/Service/SubWindowService/View/Page1.xaml");//注册界面 可使用绝对路径或者相对路径 WpfApplication2为项目名称
-            Configure(Loginview1, "pack://application:,,,/LanjuweiCompleteWpfApplication;component/Service/SubWindowService/View/Page2.xaml");
-            Configure(FaceRecognitionFailurePage, "pack://application:,,,/LanjuweiCompleteWpfApplication;component/Service/SubWindowService/View/FaceRecognitionFailurePage.xaml");
+            //Configure(Loginview, "pack://application:,,,/BasicServices;component/SubWindowService/View/Page1.xaml");//注册界面 可使用绝对路径或者相对路径 WpfApplication2为项目名称
+            //Configure(Loginview1, "pack://application:,,,/BasicServices;component/SubWindowService/View/Page2.xaml");
+            Configure(UpdatePage, "pack://application:,,,/BasicServices;component/SubWindowService/View/UpdatePage.xaml");
+            Configure(FaceRecognitionFailurePage, "pack://application:,,,/BasicServices;component/SubWindowService/View/FaceRecognitionFailurePage.xaml");
+            Configure(PlaceBookPage, "pack://application:,,,/BasicServices;component/SubWindowService/View/PlaceBookPage.xaml");
         }
 
         #endregion
@@ -42,6 +46,8 @@ namespace BasicServices.SubWindowService.ViewService
         /// 返回的结果
         /// </summary>
         public object Result { get; set; }
+
+        public string WindowId { get; set; } = string.Empty;
 
         private readonly Dictionary<string, string> _pages = new Dictionary<string, string>();
         private readonly Dictionary<string, SubWindow> _subWindows = new Dictionary<string, SubWindow>();
@@ -69,6 +75,7 @@ namespace BasicServices.SubWindowService.ViewService
             subWindow.Navigate(page, parameter);
             subWindow.Closed += SubWindow_Closed;
             _subWindows.Add(subWindow.Id, subWindow);
+            WindowId = subWindow.Id;
             Result = IsDialog ? subWindow.ShowDialog() : subWindow.Show();
             return subWindow.Id;
         }

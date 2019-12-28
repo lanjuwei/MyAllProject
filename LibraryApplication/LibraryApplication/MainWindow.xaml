@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryApplication"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:command="http://www.galasoft.ch/mvvmlight" 
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:uc="clr-namespace:CommonControls;assembly=CommonControls" 
+        xmlns:individualNeeds="clr-namespace:BaseSetting.Needs;assembly=BaseSetting" 
+        Width="800" Height="450"
         mc:Ignorable="d"  DataContext="{Binding Source={StaticResource Locator},Path=MainViewModel}"
         Title="MainWindow" x:Name="Ma" >
     <i:Interaction.Triggers>
@@ -14,11 +17,13 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Viewbox>
-    <Grid x:Name="RootGrid">
-            <Frame  Grid.Row="0" x:Name="MainFrame" NavigationUIVisibility="Hidden" JournalOwnership="UsesParentJournal" />
-            <!--<Grid>
-            <Border Background="White" Opacity="0.7"></Border>
-        </Grid>-->
+        <Grid x:Name="RootGrid" 
+              Width="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=PageVariables.RootGridWidth}"
+              Height="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=PageVariables.RootGridHeight}">
+            <uc:BusyIndicator IsBusy="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=CommonVariables.IsLoading}" 
+                              BusyContent="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=CommonVariables.LoadingContent}" >
+                <Frame  Grid.Row="0" x:Name="MainFrame" NavigationUIVisibility="Hidden" JournalOwnership="UsesParentJournal" />
+            </uc:BusyIndicator>
         </Grid>
     </Viewbox>
 </Window>

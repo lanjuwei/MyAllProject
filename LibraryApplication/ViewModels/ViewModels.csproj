@@ -111,6 +111,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\BaseSetting\BaseSetting.csproj">
+      <Project>{1B3E7503-4C3C-4012-BB8A-4085809537F7}</Project>
+      <Name>BaseSetting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BasicFunction\BasicFunction.csproj">
       <Project>{8C3F756A-728E-43C8-8D33-F9458A816BAF}</Project>
       <Name>BasicFunction</Name>

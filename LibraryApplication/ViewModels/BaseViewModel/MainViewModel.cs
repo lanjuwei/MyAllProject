@@ -9,6 +9,7 @@ using System.Windows.Input;
 using BasicFunction.Helper;
 using BasicFunction.Log;
 using BasicServices.Navigation;
+using BasicServices.SubWindowService.ViewService;
 using BasicServices.SugarDbService;
 using GalaSoft.MvvmLight.Command;
 using Model;
@@ -20,7 +21,7 @@ namespace ViewModels.Home
     /// <summary>
     /// 之前遇到过框架不一致的问题 更新下框架既可 在每个项目的属性
     /// </summary>
-    public class MainViewModel
+    public class MainViewModel : LibraryViewModelBase
     {
         public MainViewModel()
         {
@@ -41,16 +42,21 @@ namespace ViewModels.Home
             }
             catch (Exception ex)
             {
-                //Logger.Error("Could not initialize db: " + ex);
+                Logger.Error(ex);
             }
         }
 
-        public ICommand LoadCommand => new RelayCommand(()=> 
+        protected override void Load()
         {
-            NaviService.Instance.NavigateTo(PageKey.MainPage);
+            NaviService.Instance.NavigateTo(PageKey.MainPage);//move to page
+            SubWindowsService.Instance.OpenWindow(SubWindowsService.UpdatePage);//wait all data complete
+            if (!Directory.Exists(@"Images"))//创建目录
+            {
+                Directory.CreateDirectory(@"Images/Gif");
+            }
+            var s = DbService.GetDbService();//data running
             //SoundHelper.Instance.TransformTextToVideo("welcome");
-            var s=DbService.GetDbService();
-        });
+        }
 
     }
 }

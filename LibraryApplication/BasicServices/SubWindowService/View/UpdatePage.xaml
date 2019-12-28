@@ -1,0 +1,58 @@
+﻿<Page x:Class="BasicServices.SubWindowService.View.UpdatePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BasicServices.SubWindowService.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="UpdatePage">
+
+    <Page.Resources>
+        <Style x:Key="myProgressBar"
+     TargetType="{x:Type ProgressBar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid MinHeight="36">
+                            <Border 
+            Name="PART_Track" 
+            CornerRadius="20"
+            BorderBrush="White"
+            BorderThickness="1" Background="#ECECEC">
+
+                            </Border>
+                            <Border 
+           x:Name="PART_Indicator" 
+           CornerRadius="16"
+           BorderThickness="0" 
+           HorizontalAlignment="Left">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,1">
+                                        <GradientStop Offset="0" Color="#23bFFF"/>
+                                        <GradientStop Offset="0.5" Color="#23adff"/>
+                                        <GradientStop Offset="1" Color="#239AFF"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid Width="600" Height="464" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Source="/BasicServices;component/Images/upgrade.png"  ></Image>
+        <StackPanel x:Name="MyStackPanel" VerticalAlignment="Bottom"  Margin="0,0,0,40">
+            <TextBlock x:Name="UpgradeTip" Text="初始化中..." FontSize="32" Foreground="#000000"
+                       Opacity="0.8" HorizontalAlignment="Center" Margin="0 0 0 0 "/>
+            <ProgressBar x:Name="MyProgressBar" Width="464" Style="{StaticResource myProgressBar}"
+                             Value="100" Margin="0 20 0 0" Maximum="100"/>
+            <TextBlock x:Name="MyProgressVlaue"  FontSize="28" Foreground="#239AFF"
+                       Opacity="0.8" HorizontalAlignment="Center" Margin="0 4 0 0">
+                        <Run Text="{Binding ElementName=MyProgressBar,Path=Value}"></Run>
+                        <Run>%</Run>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

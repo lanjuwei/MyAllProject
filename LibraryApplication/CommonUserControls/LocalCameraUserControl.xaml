@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uc="clr-namespace:CommonControls;assembly=CommonControls"
              xmlns:local="clr-namespace:CommonUserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Image x:Name="VideoImage" ></Image>
+        <uc:BusyIndicator  BusyContent="打开中.." x:Name="BusyIndicator1">
+            <Grid>
+                <Image x:Name="VideoImage" ></Image>
+            </Grid>
+        </uc:BusyIndicator>
     </Grid>
 </UserControl>

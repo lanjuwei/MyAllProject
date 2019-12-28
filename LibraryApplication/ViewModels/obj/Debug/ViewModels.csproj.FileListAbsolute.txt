@@ -117,3 +117,6 @@ D:\MyGit\MyAllProject\LibraryApplication\ViewModels\obj\Debug\ViewModels.csproj.
 D:\MyGit\MyAllProject\LibraryApplication\ViewModels\obj\Debug\ViewModels.dll
 D:\MyGit\MyAllProject\LibraryApplication\ViewModels\obj\Debug\ViewModels.pdb
 D:\MyGit\MyAllProject\LibraryApplication\ViewModels\bin\Debug\Newtonsoft.Json.xml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\BaseSetting.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\BaseSetting.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\BaseSetting.dll.config

@@ -95,6 +95,12 @@
     </Compile>
     <Compile Include="SocketService\ISocektInterface.cs" />
     <Compile Include="SocketService\SocketService.cs" />
+    <Compile Include="SubWindowService\View\PlaceBookPage.xaml.cs">
+      <DependentUpon>PlaceBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindowService\View\UpdatePage.xaml.cs">
+      <DependentUpon>UpdatePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SugarDbService\DbService.cs" />
     <Compile Include="TipService\TipService.cs" />
     <Compile Include="TipService\Views\ToolTipUserControl.xaml.cs">
@@ -129,6 +135,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="SubWindowService\View\PlaceBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubWindowService\View\UpdatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TipService\Views\ToolTipUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -161,6 +175,10 @@
     <Resource Include="Images\人脸识别失败.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BaseSetting\BaseSetting.csproj">
+      <Project>{1B3E7503-4C3C-4012-BB8A-4085809537F7}</Project>
+      <Name>BaseSetting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BasicFunction\BasicFunction.csproj">
       <Project>{8C3F756A-728E-43C8-8D33-F9458A816BAF}</Project>
       <Name>BasicFunction</Name>
@@ -174,6 +192,8 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\upgrade.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

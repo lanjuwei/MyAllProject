@@ -39,6 +39,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
     <Reference Include="OpenCvSharp">
       <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net461\OpenCvSharp.dll</HintPath>
     </Reference>
@@ -68,6 +72,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BigSoftKeyboardUserControl.xaml.cs">
+      <DependentUpon>BigSoftKeyboardUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\StringToCaseConverter.cs" />
     <Compile Include="CountDownUserControl.xaml.cs">
       <DependentUpon>CountDownUserControl.xaml</DependentUpon>
     </Compile>
@@ -100,6 +108,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="BigSoftKeyboardUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CountDownUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +138,10 @@
       <Project>{7660efcc-7572-4fe1-a558-3ca5f68eae89}</Project>
       <Name>CommonControls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{0C696793-6FE7-492E-975A-63B839F42898}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="haarcascade_frontalface_alt.xml" />
@@ -133,6 +149,13 @@
   <ItemGroup>
     <Resource Include="Images\jiantou.png" />
     <Resource Include="Images\timer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\大写.png" />
+    <Resource Include="Images\小写.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\standerFace.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

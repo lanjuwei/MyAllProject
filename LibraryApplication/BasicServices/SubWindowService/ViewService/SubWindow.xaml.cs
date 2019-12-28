@@ -23,7 +23,11 @@ namespace BasicServices.SubWindowService.ViewService
             InitializeComponent();
             Loaded += SubWindow_Loaded;
             Unloaded += SubWindow_Unloaded;
+            //RootGrid.Width = SystemParameters.PrimaryScreenWidth;//可配置 比例 viewbox会以一定的比例缩放
+            //RootGrid.Height = SystemParameters.PrimaryScreenHeight;
         }
+
+
 
         private void SubWindow_Unloaded(object sender, RoutedEventArgs e)
         {

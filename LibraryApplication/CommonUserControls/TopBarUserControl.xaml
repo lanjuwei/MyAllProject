@@ -10,6 +10,7 @@
     <Grid Background="#23b8ff">
         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="48" Text="{Binding ElementName=UserControl1,Path=Title}"></TextBlock>
         <commoncontrols:CommonButton HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="60" Margin="40,0,0,0" 
+                                     Visibility="{Binding ElementName=UserControl1,Path=GoBackButtonVisibility}"
                                          Background="Transparent"  BorderThickness="1"  BorderBrush="Transparent" Command="{Binding ElementName=UserControl1,Path=GoBackCommand}"></commoncontrols:CommonButton>
         <!--<Image Source="/Images/jiantou.png" HorizontalAlignment="Left"></Image>-->
         <commoncontrols:CommonButton HorizontalAlignment="Right" BorderThickness="0" VerticalAlignment="Center" Background="White" Width="126" Height="60"
