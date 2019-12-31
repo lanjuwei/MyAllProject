@@ -32,64 +32,71 @@ namespace BasicServices.Navigation
 
         public void NavigateTo(PageKey pageKey, object parameter=null, FrameKey frameKey = FrameKey.MainFrame)
         {
-            lock (navigateObject)
+            Application.Current?.Dispatcher?.Invoke(()=> 
             {
-                var item=naviModels.FirstOrDefault(x=>x.FrameKey== frameKey);
-                if (item != null)//能找到item 并且item里面发frame为null 才去寻找frame控件
+                lock (navigateObject)
                 {
-                    if (item.MyFrame == null)
+                    var item = naviModels.FirstOrDefault(x => x.FrameKey == frameKey);
+                    if (item != null)//能找到item 并且item里面发frame为null 才去寻找frame控件
                     {
-                        var frame = FindControlHelper.Instance.GetChildObject<Frame>(Application.Current.MainWindow, item.FrameKey.ToString());
-                        if (frame != null)
+                        if (item.MyFrame == null)
                         {
-                            frame.Navigated -= Frame_Navigated;
-                            frame.Navigated += Frame_Navigated;
-                            item.MyFrame = frame;
+                            var frame = FindControlHelper.Instance.GetChildObject<Frame>(Application.Current.MainWindow, item.FrameKey.ToString());
+                            if (frame != null)
+                            {
+                                frame.Navigated -= Frame_Navigated;
+                                frame.Navigated += Frame_Navigated;
+                                item.MyFrame = frame;
+                            }
+                            else
+                            {
+                                throw new ArgumentException("can not find frame");
+                            }
                         }
-                        else
-                        {
-                            throw new ArgumentException("can not find frame");
-                        }
+                    }
+                    else
+                    {
+                        throw new ArgumentException("can not find frame key");
+                    }
+                    if (!item.UrlDic.ContainsKey(pageKey))
+                    {
+                        throw new ArgumentException($"No such page: {pageKey} At {frameKey}", "pageKey");
+                    }
+                    Parameter = parameter;
+                    if (item.MyFrame.Content != null)
+                    {
+                        item.LastPage = item.MyFrame.Content as Page;//记录上一个界面
+                    }
+                    if (item.PageDic.ContainsKey(pageKey))
+                    {
+                        item.MyFrame.Content = item.PageDic[pageKey];
+                    }
+                    else
+                    {
+                        item.MyFrame.Navigate(item.UrlDic[pageKey]);
+                    }
+                }
+            });
+
+        }
+
+        public void GoBack(FrameKey frameKey = FrameKey.MainFrame)
+        {
+            Application.Current?.Dispatcher?.Invoke(()=> 
+            {
+                var item = naviModels.FirstOrDefault(x => x.FrameKey == frameKey);
+                if (item != null)
+                {
+                    if (item.LastPage != null)
+                    {
+                        item.MyFrame.Content = item.LastPage;
                     }
                 }
                 else
                 {
-                    throw new ArgumentException("can not find frame key");
+                    throw new ArgumentException("can not find frame");
                 }
-                if (!item.UrlDic.ContainsKey(pageKey))
-                {
-                    throw new ArgumentException($"No such page: {pageKey} At {frameKey}", "pageKey");
-                }              
-                Parameter = parameter;
-                if (item.MyFrame.Content!=null)
-                {
-                    item.LastPage = item.MyFrame.Content as Page;//记录上一个界面
-                }
-                if (item.PageDic.ContainsKey(pageKey))
-                {
-                    item.MyFrame.Content = item.PageDic[pageKey];
-                }
-                else
-                {
-                    item.MyFrame.Navigate(item.UrlDic[pageKey]);
-                }  
-            }
-        }
-
-        public void GoBack(FrameKey frameKey = FrameKey.MainFrame)
-        {           
-            var item = naviModels.FirstOrDefault(x => x.FrameKey == frameKey);
-            if (item!=null)
-            {
-                if (item.LastPage!=null)
-                {
-                    item.MyFrame.Content = item.LastPage;
-                }
-            }
-            else
-            {
-                throw new ArgumentException("can not find frame");
-            }
+            });
         }
 
         #region 不需要的内部细节

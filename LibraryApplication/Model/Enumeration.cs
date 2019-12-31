@@ -72,6 +72,13 @@ namespace Model
         Close,
         Success
     }
+
+    public enum CameraStatus
+    {
+        Palying,//播放
+        Suspend,//暂停
+        Stop//停止
+    }
     //public enum VideoFaceOperation 
     //{
     //    /// <summary>

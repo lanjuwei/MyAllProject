@@ -10,7 +10,17 @@
     <Grid>
         <uc:BusyIndicator  BusyContent="打开中.." x:Name="BusyIndicator1">
             <Grid>
-                <Image x:Name="VideoImage" ></Image>
+                <Rectangle Fill="#23c0ff" HorizontalAlignment="Left" VerticalAlignment="Top" Height="8" Width="40"></Rectangle>
+                <Rectangle Fill="#23c0ff" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Width="8"></Rectangle>
+                <Rectangle Fill="#23c0ff" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="8" Width="40"></Rectangle>
+                <Rectangle Fill="#23c0ff" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="40" Width="8"></Rectangle>
+                <Rectangle Fill="#23c0ff" HorizontalAlignment="Right" VerticalAlignment="Top" Height="8" Width="40"></Rectangle>
+                <Rectangle Fill="#23c0ff" HorizontalAlignment="Right" VerticalAlignment="Top" Height="40" Width="8"></Rectangle>
+                <Rectangle Fill="#23c0ff" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="8" Width="40"></Rectangle>
+                <Rectangle Fill="#23c0ff" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="40" Width="8"></Rectangle>
+                <Border Margin="8" Background="White">
+                    <Image x:Name="VideoImage" ></Image>
+                </Border>
             </Grid>
         </uc:BusyIndicator>
     </Grid>

@@ -69,6 +69,7 @@
     <Compile Include="Login\BookModel.cs" />
     <Compile Include="Login\LoginItem.cs" />
     <Compile Include="Login\UserModel.cs" />
+    <Compile Include="NormalModel.cs" />
     <Compile Include="PageVariables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

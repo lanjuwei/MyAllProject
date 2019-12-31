@@ -30,7 +30,7 @@ namespace CommonUserControls
     /// </summary>
     public partial class LocalCameraUserControl : UserControl
     {
-        private VideoCapture _videoCapture;
+        private static VideoCapture _videoCapture;
         private CameraStatus _cameraStatus;
         private bool _isShotsFace;
         private CascadeClassifier _cascadeClassifier;
@@ -185,6 +185,11 @@ namespace CommonUserControls
                   {
                       while (_cameraStatus!= CameraStatus.Stop)
                       {
+                          if (_cameraStatus== CameraStatus.Suspend)
+                          {
+                              Thread.Sleep(1000);
+                              continue;
+                          }
                           cFrame = new Mat();
                           _videoCapture.Read(cFrame);//获取frame从摄像头或者视频文件
                           int sleepTime = (int)Math.Round(1000 / _videoCapture.Fps);//帧数，Thread.Sleep(40);
@@ -270,7 +275,7 @@ namespace CommonUserControls
                             //Cv2.PutText(cFrame, name, new OpenCvSharp.Point(rect[0].X, rect[0].Y), HersheyFonts.Italic, 1, color);
                             if (ExternalAction!=null)
                             {
-                                var isSuccessLogin=ExternalAction.Invoke(id);//同步阻塞
+                                var isSuccessLogin=ExternalAction.Invoke(id);//同步
                                 if (isSuccessLogin)
                                 {
                                     faceRecognitionResult = ResultType.Success;
@@ -346,12 +351,7 @@ namespace CommonUserControls
             }
         }
 
-        public enum CameraStatus
-        {
-            Palying,//播放
-            Suspend,//暂停
-            Stop//停止
-        }
+       
    
         private void GetFaceRecognizer()
         {

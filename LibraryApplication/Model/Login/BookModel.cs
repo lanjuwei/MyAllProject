@@ -26,6 +26,9 @@ namespace Model.Login
         }
         public string BarCode { get; set; }
         public string Title { get; set; }
+
+
+
         public string Status
         {
             get => status; set
@@ -34,7 +37,9 @@ namespace Model.Login
                 Set(() => Status, ref status, value);
             }
         }
-
+        /// <summary>
+        /// 封面图片
+        /// </summary>
         public string ImagePath
         {
             get => imagePath; set
@@ -76,7 +81,7 @@ namespace Model.Login
                         ForgroundColor.Color = (Color)ColorConverter.ConvertFromString("#2db36c");
                         break;
                     default:
-                        Status = "异常";
+                        Status = "未知";
                         ForgroundColor.Color = Colors.Red;
                         break;
                 }

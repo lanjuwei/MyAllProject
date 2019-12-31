@@ -199,5 +199,31 @@
   <ItemGroup>
     <Resource Include="Images\removeBtn.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\errorFlag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\incompleteFace.png" />
+    <Resource Include="Images\sideFace.png" />
+    <Resource Include="Images\vagueFace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Penson\book.png" />
+    <Resource Include="Images\Penson\man.png" />
+    <Resource Include="Images\Penson\personal.png" />
+    <Resource Include="Images\Penson\woman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Penson\deposit.png" />
+    <Resource Include="Images\Penson\lateFee.png" />
+    <Resource Include="Images\Penson\pre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Penson\图书封面.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Penson\xingbienan.png" />
+    <Resource Include="Images\Penson\xingbienv.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,10 +7,45 @@
       xmlns:commonusercontrols="clr-namespace:CommonUserControls;assembly=CommonUserControls"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="PersonalCenterPage">
     <Page.Resources>
+
+        <DataTemplate x:Key="DataTemplate1">
+            <Grid Margin="0,0">
+                <StackPanel Margin="40">
+                    <Image Width="125" Height="185" Source="/Views;component/Images/Penson/图书封面.jpg"></Image>
+                    <TextBlock FontSize="28" Opacity="0.8" Margin="0,27,0,0">
+                    <Run>《</Run>
+                    <TextBlock FontSize="28" Opacity="0.8" TextTrimming="WordEllipsis" Width="180" HorizontalAlignment="Center">做一个刚刚好11111</TextBlock>
+                    <Run>》</Run>
+                    </TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0">
+                        <Border CornerRadius="4" HorizontalAlignment="Center" Background="#239aff" Padding="1">
+                            <TextBlock FontSize="28" Text="还" Foreground="White"/>
+                        </Border>
+                        <TextBlock FontSize="28" Margin="15,0,0,0" VerticalAlignment="Center">2019-12-30</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <Rectangle Height="2" Fill="#f0f0f0"  VerticalAlignment="Bottom"></Rectangle>
+            </Grid>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+            <WrapPanel IsItemsHost="True"/>
+        </ItemsPanelTemplate>
+        <Style x:Key="ItemsControlStyle1" TargetType="{x:Type ItemsControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                        <ScrollViewer   PanningMode="Both" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Page.Resources>
     <i:Interaction.Triggers>
@@ -30,8 +65,140 @@
         <Border Grid.Row="1" Background="#f2f2f2"></Border>
         <Grid Grid.Row="1">
             <commonusercontrols:CountDownUserControl Count="{Binding Time}" Width="100" Height="100" HorizontalAlignment="Right" 
-                                                     VerticalAlignment="Top" Margin="0,40,40,0" />
-
+                                                     VerticalAlignment="Bottom" Margin="0,0,40,20" Grid.ColumnSpan="10" Grid.RowSpan="10"/>
+            <Grid Margin="45,30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Views;component/Images/Penson/personal.png" Stretch="Uniform"></Image>
+                    <TextBlock FontSize="32" Opacity="0.8" FontFamily="FZY3JW--GB1-0" >个人信息</TextBlock>
+                </StackPanel>
+                <Border Grid.Row="1" Background="White" Width="460" Margin="0,18,30,0" CornerRadius="8">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="30" Direction="360" Opacity="0.1"   ></DropShadowEffect>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Image Source="/Views;component/Images/Penson/man.png" Stretch="Uniform" Width="155" Height="132" Margin="0,20,0,0"></Image>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                            <TextBlock  FontSize="24"   Opacity="0.85">蓝</TextBlock>
+                            <Image  Margin="10,0,0,0" Source="/Views;component/Images/Penson/xingbienan.png"></Image>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,12,0,0">
+                            <Rectangle Fill="#5495fe" Width="10" Height="2"></Rectangle>
+                            <TextBlock  FontSize="20"  Opacity="0.85" Margin="5,0" >12506</TextBlock>
+                            <Rectangle Fill="#5495fe" Width="10" Height="2"></Rectangle>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,40,0,0">
+                            <StackPanel Orientation="Horizontal"  >
+                                <Border Background="#23c0ff" CornerRadius="4">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Foreground="White" Margin="20" FontSize="20">可借</TextBlock>
+                                        <TextBlock Foreground="White" Margin="20,0" FontSize="36" VerticalAlignment="Center">3</TextBlock>
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#239aff" CornerRadius="4" Margin="25,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Foreground="White" Margin="20" FontSize="20">已借</TextBlock>
+                                        <TextBlock Foreground="White" Margin="20,0" FontSize="36" VerticalAlignment="Center">1</TextBlock>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                            <Grid Margin="0,60,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Views;component/Images/Penson/deposit.png"></Image>
+                                    <TextBlock Opacity="0.7" FontSize="24" Margin="10,0,0,0">押金</TextBlock>
+                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Right" Opacity="0.7" FontSize="24">35 RMB</TextBlock>
+                            </Grid>
+                            <Rectangle Height="2" Fill="#f0f0f0" Margin="0,20,0,20"></Rectangle>
+                            <Grid Margin="0,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Views;component/Images/Penson/pre.png"></Image>
+                                    <TextBlock Opacity="0.7" FontSize="24" Margin="10,0,0,0">预存款</TextBlock>
+                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Right" Opacity="0.7" FontSize="24">100 RMB</TextBlock>
+                            </Grid>
+                            <Rectangle Height="2" Fill="#f0f0f0" Margin="0,20,0,20"></Rectangle>
+                            <Grid Margin="0,0,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Views;component/Images/Penson/lateFee.png"></Image>
+                                    <TextBlock Opacity="0.7" FontSize="24" Margin="10,0,0,0">滞纳金</TextBlock>
+                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Right" Opacity="0.7" FontSize="24" Foreground="#ff7256">2.5 RMB</TextBlock>
+                            </Grid>
+                        </StackPanel>
+                        <WrapPanel Orientation="Horizontal" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <commoncontrols:CommonButton Width="165" Height="50" CornerRadius="25" Background="Transparent" 
+                                                         Opacity="0.7" FontSize="20" Margin="20,10" BorderBrush="#23c0ff" BorderThickness="2">修改密码</commoncontrols:CommonButton>
+                            <commoncontrols:CommonButton Width="165" Height="50" CornerRadius="25" Background="Transparent" 
+                                                          Opacity="0.7" FontSize="20" Margin="20,10" BorderBrush="#23c0ff" BorderThickness="2">上传人脸</commoncontrols:CommonButton>
+                            <commoncontrols:CommonButton Width="165" Height="50" CornerRadius="25" Background="Transparent" 
+                                                          Opacity="0.7" FontSize="20" Margin="20,10" BorderBrush="#23c0ff" BorderThickness="2">删除人脸</commoncontrols:CommonButton>
+                            <!--<commoncontrols:CommonButton Width="165" Height="50" CornerRadius="25" Background="Transparent" 
+                                                         FontFamily="PingFang-SC-Medium" Opacity="0.7" FontSize="20">修改密码</commoncontrols:CommonButton>-->
+                        </WrapPanel>
+                    </Grid>
+                </Border>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,30,0,0">
+                    <commoncontrols:CommonButton Command="{Binding }"   Width="360" Height="80" Foreground="White" FontSize="30" CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <commoncontrols:CommonButton.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#239aff" Offset="1"/>
+                                <GradientStop Color="#23c0ff" Offset="0"/>
+                            </LinearGradientBrush>
+                        </commoncontrols:CommonButton.Background> 借书
+                    </commoncontrols:CommonButton>
+                    <commoncontrols:CommonButton Command="{Binding }"   Width="360" Height="80" Foreground="White" FontSize="30" CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="36,0" >
+                        <commoncontrols:CommonButton.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#45d388" Offset="0"/>
+                                <GradientStop Color="#2db36c" Offset="1"/>
+                            </LinearGradientBrush>
+                        </commoncontrols:CommonButton.Background> 还书
+                    </commoncontrols:CommonButton>
+                    <commoncontrols:CommonButton Command="{Binding}"   Width="360" Height="80" Foreground="White" FontSize="30" CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <commoncontrols:CommonButton.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#239aff" Offset="1"/>
+                                <GradientStop Color="#23c0ff" Offset="0"/>
+                            </LinearGradientBrush>
+                        </commoncontrols:CommonButton.Background> 续借
+                    </commoncontrols:CommonButton>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <Image Source="/Views;component/Images/Penson/personal.png" Stretch="Uniform"></Image>
+                    <TextBlock FontSize="32" Opacity="0.8" FontFamily="FZY3JW--GB1-0" >在借书单</TextBlock>
+                    <TextBlock FontSize="32" Opacity="0.8" FontFamily="FZY3JW--GB1-0" >
+                        <Run>（共</Run>
+                        <Run>10</Run>
+                         <Run>）</Run>
+                    </TextBlock>
+                </StackPanel>
+                <Border Grid.Row="1" Grid.Column="1" Background="White" CornerRadius="8" Margin="0,18,0,0" Height="747">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="30" Direction="360" Opacity="0.1"   ></DropShadowEffect>
+                    </Border.Effect>
+                    <ItemsControl ItemTemplate="{DynamicResource DataTemplate1}" 
+                                  ItemsPanel="{DynamicResource ItemsPanelTemplate1}" 
+                                  Style="{DynamicResource ItemsControlStyle1}"
+                                  ItemsSource="{Binding BookList}"></ItemsControl>
+                </Border>
+            </Grid>
         </Grid>
+
     </Grid>
 </Page>

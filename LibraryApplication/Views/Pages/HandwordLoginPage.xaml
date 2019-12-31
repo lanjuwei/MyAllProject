@@ -16,7 +16,8 @@
         <Style x:Key="TextBlock1" TargetType="TextBlock">
             <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Opacity" Value="0.8"></Setter>
-            <Setter Property="Margin" Value="0,8,0,8"></Setter>
+            <Setter Property="Margin" Value="-80,0,0,0"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
         </Style>
     </Page.Resources>
     <i:Interaction.Triggers>
@@ -46,12 +47,12 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="30"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Style="{StaticResource TextBlock1}"  >账号：</TextBlock>
+                    <TextBlock Style="{StaticResource TextBlock1}" Grid.Row="1" >账号</TextBlock>
                     <commoncontrols:WatermarkTextBox Grid.Row="1" WaterMark="请输入您的读者证号" 
                                                  Width="470" Height="78" InputMethod.IsInputMethodEnabled="False"
                                                  FontSize="24"  Background="White" 
@@ -61,7 +62,7 @@
                             <KeyBinding Key="Enter" Command="{Binding SureCommand}"></KeyBinding>
                         </commoncontrols:WatermarkTextBox.InputBindings>
                     </commoncontrols:WatermarkTextBox>
-                    <TextBlock Style="{StaticResource TextBlock1}" Grid.Row="2">密码：</TextBlock>
+                    <TextBlock Style="{StaticResource TextBlock1}" Grid.Row="3">密码</TextBlock>
                     <PasswordBox Grid.Row="3"  Width="470" Height="78" PasswordChar="●"
                              FontSize="24" InputMethod.IsInputMethodEnabled="False"
                              Tag="请输入您的读者证密码"

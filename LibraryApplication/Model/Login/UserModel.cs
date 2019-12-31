@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Model.Login
 {
@@ -27,10 +28,28 @@ namespace Model.Login
         /// <summary>
         /// 密码
         /// </summary>
+        [SugarColumn(IsNullable = true)]
         public string Password { get; set; }
         /// <summary>
-        /// 性别
+        /// 性别 0男 1女
         /// </summary>
-        public string Sex { get; set; }
+        public int Sex { get; set; }
+        /// <summary>
+        /// 押金
+        /// </summary>
+        public double Deposit { get; set; }
+        /// <summary>
+        /// 预存款
+        /// </summary>
+        public double PreDeposit { get; set; }
+        /// <summary>
+        /// 滞纳金
+        /// </summary>
+        public double LateFee { get; set; }
+        /// <summary>
+        /// 人脸图片
+        /// </summary>
+        public ImageSource FaceImage { get; set; }
+
     }
 }
