@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using BaseSetting.Needs;
+using BasicFunction.Log;
 using BasicServices.Navigation;
 using BasicServices.SocketService;
 using BasicServices.SubWindowService.ViewService;
+using BasicServices.TipService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Model;
@@ -21,10 +24,10 @@ namespace ViewModels.Home
     /// </summary>
     public abstract class LibraryViewModelBase : ViewModelBase
     {
-        
+
         public LibraryViewModelBase()
         {
-                    
+
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
@@ -41,15 +44,15 @@ namespace ViewModels.Home
 
         public ICommand LoadCommand => new RelayCommand(Load);
         public ICommand UnLoadCommand => new RelayCommand(UnLoad);
-        public ICommand GoBackCommand => new RelayCommand(()=>{ NavigateInterface.GoBack(); });
+        public ICommand GoBackCommand => new RelayCommand(() => { NavigateInterface.GoBack(); });
         public ICommand CloseCommand => new RelayCommand(() => { MoveToNextPage(); });
-        protected static ISocektInterface SocektInterface { get; set; }= new SocketService();
+        protected static ISocektInterface SocektInterface { get; set; } = new SocketService();
         protected static INaviServiceInterface NavigateInterface { get; set; } = NaviService.Instance;
-  
 
-        protected static DispatcherTimer dispatcherTimer=new DispatcherTimer() { Interval= TimeSpan.FromSeconds(1)};
-        private int time;
-        public  int Time{get => time; set{Set(()=> Time,ref time,value);}}
+
+        protected static DispatcherTimer dispatcherTimer = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1) };
+        private int time;//在这里赋值 跟构造函数差不多
+        public int Time { get => time; set { Set(() => Time, ref time, value); } }
         /// <summary>
         /// 当前用户 登录的时候赋予值 用来保存用户信息 以及用唯一主键id来调用其他的接口
         /// </summary>
@@ -62,11 +65,15 @@ namespace ViewModels.Home
         protected virtual void Load()
         {
             Time = 60;
+            StartTimer();
+        }
+        protected void StartTimer()
+        {
             dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer?.Start();
         }
         protected virtual void UnLoad()
-        {           
+        {
             dispatcherTimer?.Stop();
             dispatcherTimer.Tick -= DispatcherTimer_Tick;
             isCanClose = true;
@@ -77,16 +84,16 @@ namespace ViewModels.Home
         /// </summary>
         /// <param name="id"></param>
         /// <param name="password"></param>
-        protected bool LoginIn(string id,string password) 
+        protected async Task<bool> LoginIn(string id, string password)
         {
+            isCanClose = false;
             IndividualNeeds.Instance.CommonVariables.IsLoading = true;
             try
             {
-                var task = SocektInterface.GetUserInfoAsync(id, password);
-                task.Wait();//阻塞
-                if (task.Result.IsSuccess)
+                var result=await SocektInterface.GetUserInfoAsync(id, password);
+                if (result.IsSuccess)
                 {
-                    User = task.Result.Data;
+                    User = result.Data;
                     if (NavigateInterface.Parameter is ButtonType buttonType)
                     {
                         switch (buttonType)
@@ -102,19 +109,23 @@ namespace ViewModels.Home
                         }
                     }
                 }
-                return task.Result.IsSuccess;
-            } 
-            finally            
+                return result.IsSuccess;
+            }
+            finally
             {
                 IndividualNeeds.Instance.CommonVariables.IsLoading = false;
+                isCanClose = false;
             }
         }
+
+        
 
         /// <summary>
         /// 退出登录
         /// </summary>
-        protected void LoginOut()
+        private void LoginOut()
         {
+            SocektInterface.LoginOut();
             User = null;
         }
         /// <summary>

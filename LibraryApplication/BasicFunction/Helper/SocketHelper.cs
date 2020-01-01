@@ -95,7 +95,7 @@ namespace BasicFunction.Helper
                 {
                     if (_client.Connected)
                     {
-                        //var data=GetRespone("CheckConnect");
+                        GetRespone("CheckConnect");
                         Thread.Sleep(5000);
                     }
                     else
@@ -181,5 +181,7 @@ namespace BasicFunction.Helper
     public enum RequestKey
     {
         UserInfo,
+        GetUserBookList,
+        LoginOut,
     }
 }

@@ -106,8 +106,6 @@ namespace ViewModels.Book
                 new BookModel() { BarCode="125004",Title="大地蓝的像一只橙子",BookStatus= Model.BookStatus.Returned},
                 new BookModel() { BarCode="125005",Title="斗罗大陆之蓝银寒魂",BookStatus= Model.BookStatus.None},
             };
-            BookModelList.CollectionChanged += BookModelList_CollectionChanged;
-            RefreshIndex();
         }
 
         protected override void Load()
@@ -115,18 +113,7 @@ namespace ViewModels.Book
             //SubWindowsService.Instance.OpenWindow(SubWindowsService.PlaceBookPage);
             base.Load();
         }
-        private void BookModelList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            RefreshIndex();
-        }
 
-        private void RefreshIndex() 
-        {
-            for (int i = 0; i < BookModelList.Count; i++)
-            {
-                BookModelList[i].Index = i + 1;
-            }
-        }
 
         public ICommand ReCommand => new RelayCommand<BookModel>(t =>
         {

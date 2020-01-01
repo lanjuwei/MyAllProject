@@ -22,8 +22,8 @@ namespace BasicServices.SocketService
         /// <summary>
         /// 获取读者信息
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="password"></param>
+        /// <param name="id">传入读者id</param>
+        /// <param name="password">读者密码</param>
         /// <returns></returns>
         public Task<ResponseModel<UserModel>> GetUserInfoAsync(string id, string password)
         {
@@ -38,7 +38,7 @@ namespace BasicServices.SocketService
                     {
                         var j = (JObject)JsonConvert.DeserializeObject(result);
                         var isOk = false;
-                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk))
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk)&& isOk)
                         {
                             model.IsSuccess = true;
                             model.Data = JsonConvert.DeserializeObject<UserModel>((j["Data"].ToString()));
@@ -51,7 +51,7 @@ namespace BasicServices.SocketService
                     }
                     else
                     {
-                        model.Message = "GetUserInfoAsync方法返回空字符串";
+                        model.Message = "服务器无响应";
                     }
                 }
                 catch (Exception ex)
@@ -65,9 +65,114 @@ namespace BasicServices.SocketService
                     {
                         Logger.Info(model.Message);
                     }
+                    TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
                 }
                 return model;
             });
         }
+
+        /// <summary>
+        /// 获取读者的在借列表
+        /// </summary>
+        /// <param name="id">传入读者的id</param>
+        /// <returns></returns>
+        public Task<ResponseModel<List<BookModel>>> GetUserBookListAsync(string id)
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<List<BookModel>>();
+                try
+                {
+                    var str = JsonConvert.SerializeObject(new { ReaderId = id });
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.GetUserBookList, str);//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Data = JsonConvert.DeserializeObject<List<BookModel>>((j["Data"].ToString()));
+                            model.Message = j["Message"].ToString();
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Task<ResponseModel<string>> LoginOut()
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<string>();
+                try
+                {
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.LoginOut, "");//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Message = j["Message"].ToString();
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                    }
+                    else
+                    {
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
+
+       
     }
 }

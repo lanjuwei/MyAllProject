@@ -1,4 +1,5 @@
-﻿using BasicFunction.Helper;
+﻿using BaseSetting.Needs;
+using BasicFunction.Helper;
 using BasicFunction.Log;
 using BasicServices.SubWindowService.ViewService;
 using BasicServices.TipService;
@@ -86,14 +87,7 @@ namespace CommonUserControls
             set { SetValue(CameraStatusProperty, value); }
         }
 
- 
-        /// <summary>
-        /// 外部命令
-        /// </summary>
-        public Func<string, bool> ExternalAction
-        {
-            get;set;
-        }
+
 
         static LocalCameraUserControl()
         {
@@ -178,7 +172,7 @@ namespace CommonUserControls
        
         private Task PlayLacalCamera()
         {
-            return Task.Run(() =>
+            return Task.Run(async () =>
               {
                   Mat cFrame = null;
                   try
@@ -218,7 +212,7 @@ namespace CommonUserControls
                                       Cv2.Rectangle(cFrame, item, color, 2);
                                   }
                                   ShotFace(cFrame, rect);//嵌入功能 截图
-                                  var result=DistinguishFace(cFrame, rect);//同步运行 阻塞 引用传递
+                                  var result=await DistinguishFaceAsync(cFrame, rect);//同步运行 阻塞 引用传递
                                   if (result!= ResultType.RecogineAgian)
                                   {
                                       _cameraStatus = CameraStatus.Stop;
@@ -247,7 +241,7 @@ namespace CommonUserControls
         }
 
 
-        private ResultType DistinguishFace( Mat cFrame, OpenCvSharp.Rect[] rect) 
+        private async Task<ResultType> DistinguishFaceAsync( Mat cFrame, OpenCvSharp.Rect[] rect) 
         {
             var faceRecognitionResult = ResultType.RecogineAgian;
             try
@@ -273,23 +267,28 @@ namespace CommonUserControls
                         {
                             //开始登录 返回bool 
                             //Cv2.PutText(cFrame, name, new OpenCvSharp.Point(rect[0].X, rect[0].Y), HersheyFonts.Italic, 1, color);
-                            if (ExternalAction!=null)
+                            var str = id.Split('_');
+                            if (str.Length == 2)
                             {
-                                var isSuccessLogin=ExternalAction.Invoke(id);//同步
+                                var isSuccessLogin = await IndividualNeeds.Instance.CommonVariables.LoginAction.Invoke(str[0], str[1]);//同步
                                 if (isSuccessLogin)
                                 {
                                     faceRecognitionResult = ResultType.Success;
                                 }
-                            }                           
+                            }
+                            else
+                            {
+                                Logger.Info("人脸传过来的id解析不对啊");
+                            }
                         }
                         else
                         {
                             //弹框 3种选择 dialog
-                            this.Dispatcher?.Invoke(()=>
+                            this.Dispatcher?.Invoke(() =>
                             {
-                                SubWindowsService.Instance.OpenWindow(SubWindowsService.FaceRecognitionFailurePage,IsDialog:true);
+                                SubWindowsService.Instance.OpenWindow(SubWindowsService.FaceRecognitionFailurePage, IsDialog: true);
                                 ResultType resultType;
-                                if (Enum.TryParse(SubWindowsService.Instance.Result.ToString(),out resultType))
+                                if (Enum.TryParse(SubWindowsService.Instance.Result.ToString(), out resultType))
                                 {
                                     faceRecognitionResult = resultType;
                                 }

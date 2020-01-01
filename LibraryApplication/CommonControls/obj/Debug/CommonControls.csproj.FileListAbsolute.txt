@@ -65,3 +65,5 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonControls\obj\D
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonControls\obj\Debug\CommonControls.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonControls\obj\Debug\GifImagePlayerUserControl.g.cs
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonControls\obj\Debug\GifImagePlayerUserControl.baml
+D:\MyGit\MyAllProject\LibraryApplication\CommonControls\obj\Debug\GifImagePlayerUserControl.g.cs
+D:\MyGit\MyAllProject\LibraryApplication\CommonControls\obj\Debug\GifImagePlayerUserControl.baml

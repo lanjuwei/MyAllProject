@@ -17,6 +17,7 @@
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
         <converters:LengthToVisibilityConverter x:Key="LengthToVisibilityConverter"></converters:LengthToVisibilityConverter>
+        <converters:BookStatusToColorConverter x:Key="BookStatusToColorConverter"></converters:BookStatusToColorConverter>
         <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
             <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
@@ -53,15 +54,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!--ListView样式-->
+        <!--<converters:ItemToIndexConverter x:Key="ItemToIndexConverter1"></converters:ItemToIndexConverter>-->
         <DataTemplate x:Key="BlackTextDataTemplate" >
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Border Background="Black" Opacity="0.8" CornerRadius="4"></Border>
                 <TextBlock x:Name="Tb" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Center" TextWrapping="Wrap"
-                           Text="{Binding Title}" Margin="10"  FontSize="28" MaxWidth="400"></TextBlock>
+                           Text="{Binding Title}" Margin="10"  FontSize="24" MaxWidth="400"></TextBlock>
             </Grid>
         </DataTemplate>
-        <!--ListView样式-->
-        <!--<converters:ItemToIndexConverter x:Key="ItemToIndexConverter1"></converters:ItemToIndexConverter>-->
         <Style x:Key="BookWhileHeader" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="FontSize" Value="28"/>
@@ -99,7 +101,7 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Template" >
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
@@ -112,7 +114,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-       
         <Style x:Key="BookListViewStyle1" TargetType="{x:Type ListView}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -183,15 +184,6 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="编号"   HeaderContainerStyle="{StaticResource BookWhileHeader}" 
-                                                Width="{Binding BookColumn.NumberColumnWidth}">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Style="{StaticResource BookGridViewTextStyle}" 
-                                                   Text="{Binding Index}" ></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
                                     <GridViewColumn Header="条码号"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
                                                 Width="{Binding BookColumn.BarcodeColumnWidth}"  >
                                         <GridViewColumn.CellTemplate>
@@ -227,7 +219,7 @@
                                             <DataTemplate>
                                                 <Grid >
                                                     <TextBlock Style="{StaticResource BookGridViewTextStyle}" Text="{Binding Status}" 
-                                                            Foreground="{Binding ForgroundColor}"/>
+                                                            Foreground="{Binding BookStatus,Converter={StaticResource BookStatusToColorConverter}}"/>
                                                 </Grid>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>

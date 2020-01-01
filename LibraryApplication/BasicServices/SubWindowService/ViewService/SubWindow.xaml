@@ -6,7 +6,7 @@
              mc:Ignorable="d" ShowInTaskbar="False" WindowStyle="None" Background="Transparent" ResizeMode="NoResize" AllowsTransparency="True"
              WindowStartupLocation="CenterOwner" 
              xmlns:individualNeeds="clr-namespace:BaseSetting.Needs;assembly=BaseSetting" 
-             Title="SubWindow" Width="800" Height="450"
+             Title="SubWindow" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Window.Resources>
         <Storyboard x:Key="ShowStoryboard" >

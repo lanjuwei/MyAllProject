@@ -30,11 +30,11 @@ namespace BasicServices.Navigation
         
         public object Parameter { get; set; }
 
-        public void NavigateTo(PageKey pageKey, object parameter=null, FrameKey frameKey = FrameKey.MainFrame)
+        public void NavigateTo(PageKey pageKey, object parameter = null, FrameKey frameKey = FrameKey.MainFrame)
         {
-            Application.Current?.Dispatcher?.Invoke(()=> 
+            lock (navigateObject)
             {
-                lock (navigateObject)
+                Application.Current?.Dispatcher?.Invoke(() =>
                 {
                     var item = naviModels.FirstOrDefault(x => x.FrameKey == frameKey);
                     if (item != null)//能找到item 并且item里面发frame为null 才去寻找frame控件
@@ -75,9 +75,8 @@ namespace BasicServices.Navigation
                     {
                         item.MyFrame.Navigate(item.UrlDic[pageKey]);
                     }
-                }
-            });
-
+                });
+            }
         }
 
         public void GoBack(FrameKey frameKey = FrameKey.MainFrame)

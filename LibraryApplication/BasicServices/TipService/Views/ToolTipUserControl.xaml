@@ -7,7 +7,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid >
-            <Border   Padding="10" CornerRadius="15" Background="#B2000000"  HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border   Padding="20,10" CornerRadius="15" Background="#B2000000"  HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock x:Name="Tb"  Text="{Binding}" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap"  VerticalAlignment="Center" FontSize="39" Background="{x:Null}"/>
             </Border>
         </Grid>

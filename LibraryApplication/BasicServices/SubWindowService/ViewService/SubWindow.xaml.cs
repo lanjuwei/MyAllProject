@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BaseSetting.Needs;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -23,6 +24,8 @@ namespace BasicServices.SubWindowService.ViewService
             InitializeComponent();
             Loaded += SubWindow_Loaded;
             Unloaded += SubWindow_Unloaded;
+            Width = Application.Current.MainWindow.ActualWidth;
+            Height = Application.Current.MainWindow.ActualHeight;
             //RootGrid.Width = SystemParameters.PrimaryScreenWidth;//可配置 比例 viewbox会以一定的比例缩放
             //RootGrid.Height = SystemParameters.PrimaryScreenHeight;
         }
@@ -51,6 +54,7 @@ namespace BasicServices.SubWindowService.ViewService
 
         private void SubWindow_Loaded(object sender, RoutedEventArgs e)
         {
+         
             Frame.Navigated += _frame_Navigated;
         }
 

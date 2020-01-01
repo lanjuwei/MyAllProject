@@ -1,4 +1,7 @@
-﻿using BasicFunction.Log;
+﻿using BaseSetting.Needs;
+using BasicFunction.Log;
+using BasicServices.Navigation;
+using BasicServices.TipService;
 using GalaSoft.MvvmLight.Command;
 using Model;
 using System;
@@ -87,24 +90,13 @@ namespace ViewModels.Login
         /// <summary>
         /// 登录命令
         /// </summary>
-        public RelayCommand SureCommand => new RelayCommand(() =>
+        public RelayCommand SureCommand => new RelayCommand(async () =>
         {
-            isCanClose = false;
-            try
+            if (!IsSureButtonEnable)
             {
-                Task.Run(()=>
-                {
-                    LoginIn(ReadCardId, Password);
-                });             
+                return;
             }
-            catch (Exception ex)
-            {
-                Logger.Error(ex);
-            }
-            finally
-            {
-                isCanClose = true;
-            }
+            await LoginIn(ReadCardId, Password);
         });
 
         private void IsCanClick()

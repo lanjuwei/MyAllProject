@@ -24,13 +24,6 @@ namespace Views.Pages
         public FaceLoginPage()
         {
             InitializeComponent();
-            Loaded += FaceLoginPage_Loaded;
-        }
-
-        private void FaceLoginPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            var vm = DataContext as FaceLoginViewModel;
-            LocalCameraUserControl1.ExternalAction = vm.Login;
         }
     }
 }

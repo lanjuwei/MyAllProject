@@ -185,3 +185,11 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\obj\De
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\bin\Debug\BaseSetting.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\bin\Debug\BaseSetting.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\bin\Debug\BaseSetting.dll.config
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\bin\Debug\BaseSetting.dll
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\bin\Debug\BaseSetting.pdb
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\bin\Debug\BaseSetting.dll.config
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\obj\Debug\SubWindowService\View\PlaceBookPage.g.cs
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\obj\Debug\SubWindowService\View\UpdatePage.g.cs
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\obj\Debug\BasicServices_MarkupCompile.lref
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\obj\Debug\SubWindowService\View\PlaceBookPage.baml
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\obj\Debug\SubWindowService\View\UpdatePage.baml

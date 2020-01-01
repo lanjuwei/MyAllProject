@@ -158,7 +158,6 @@ D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\BasicServices.dll
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\BasicFunction.dll
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.dll
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\SqlSugar.dll
-D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.dll
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\CommonServiceLocator.dll
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.Extras.dll
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\System.Data.SQLite.dll
@@ -177,8 +176,6 @@ D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\BasicServices.pdb
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\BasicFunction.pdb
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.pdb
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.xml
-D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.pdb
-D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.xml
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\GalaSoft.MvvmLight.Extras.xml
 D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\System.Data.SQLite.xml
@@ -222,3 +219,7 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Page
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.dll.config
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.dll
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.pdb
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\BaseSetting.dll.config
+D:\MyGit\MyAllProject\LibraryApplication\Views\obj\Debug\GeneratedInternalTypeHelper.g.cs

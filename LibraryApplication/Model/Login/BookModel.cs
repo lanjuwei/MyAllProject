@@ -1,10 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
+using SqlSugar;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Model.Login
@@ -13,22 +15,10 @@ namespace Model.Login
     {
         private BookStatus bookStatus;
         private string status;
-        private SolidColorBrush forgroundColor = new SolidColorBrush(Colors.Black);
-        private string imagePath;
-        private int index;
+       
 
-        public int Index
-        {
-            get => index; set
-            {
-                Set(() => Index, ref index, value);
-            }
-        }
         public string BarCode { get; set; }
         public string Title { get; set; }
-
-
-
         public string Status
         {
             get => status; set
@@ -38,25 +28,34 @@ namespace Model.Login
             }
         }
         /// <summary>
-        /// 封面图片
+        /// 归还日期
         /// </summary>
-        public string ImagePath
-        {
-            get => imagePath; set
-            {
-                Set(() => ImagePath, ref imagePath, value);
-            }
-        }
+        [SugarColumn(IsNullable = true)]
+        public string ReturnDate { get; set; }
+        /// <summary>
+        /// 借书日期
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string BorrowDate { get; set; }
+        /// <summary>
+        /// 图书描述
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string Describe { get; set; }
 
-        public SolidColorBrush ForgroundColor
-        {
-            get => forgroundColor; set
-            {
-                forgroundColor = value;
-                Set(() => ForgroundColor, ref forgroundColor, value);
-            }
-        }
+        //千万不要将ui上的东西 用set通知界面啊 因为ui上的东西是主线程的 set是另一条异步线程啊 妈的 
+        //就算没有set 也不能再不同set线程里面乱搞啊 吗的 必须用转换器
 
+        //private SolidColorBrush forgroundColor = new SolidColorBrush(Colors.Black);
+        //public SolidColorBrush ForgroundColor
+        //{
+        //    get => forgroundColor; set
+        //    {
+        //        forgroundColor = value;
+        //        Set(() => ForgroundColor, ref forgroundColor, value);
+        //    }
+        //}
+        ////public SolidColorBrush ForgroundColor { get; set; } = new SolidColorBrush(Colors.Red);
         public BookStatus BookStatus
         {
             get => bookStatus; set
@@ -66,23 +65,18 @@ namespace Model.Login
                 {
                     case BookStatus.None:
                         Status = "未知";
-                        ForgroundColor.Color = Colors.Red;
                         break;
                     case BookStatus.Lended:
                         Status = "已借出";
-                        ForgroundColor.Color = (Color)ColorConverter.ConvertFromString("#ff7256");
                         break;
                     case BookStatus.Returned:
                         Status = "在馆";
-                        ForgroundColor.Color = (Color)ColorConverter.ConvertFromString("#ffaa56");
                         break;
                     case BookStatus.Reserved:
                         Status = "已预借";
-                        ForgroundColor.Color = (Color)ColorConverter.ConvertFromString("#2db36c");
                         break;
                     default:
                         Status = "未知";
-                        ForgroundColor.Color = Colors.Red;
                         break;
                 }
                 Set(() => BookStatus, ref bookStatus, value);

@@ -18,6 +18,7 @@ namespace BaseSetting.Needs
         /// 界面变量
         /// </summary>
         public PageVariables PageVariables { get; set; } = new PageVariables();
+        
 
     }
 }

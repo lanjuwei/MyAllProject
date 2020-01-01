@@ -62,9 +62,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BookStatusToColorConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\ItemToIndexConverter.cs" />
     <Compile Include="Converters\LengthToVisibilityConverter.cs" />
+    <Compile Include="Converters\ReturnDateToColorConverter.cs" />
     <Compile Include="Pages\ChangePasswordPage.xaml.cs">
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
     </Compile>

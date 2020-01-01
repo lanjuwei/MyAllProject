@@ -15,6 +15,7 @@ namespace Model.Book
         private double titleColumnWidth;
         private double statusColumnWidth;
         private double romoveColumnWidth;
+        private double _returnDateColumnWidth;
 
         /// <summary>
         /// 空白列
@@ -67,6 +68,14 @@ namespace Model.Book
             get => romoveColumnWidth; set
             {
                 Set(() => RomoveColumnWidth, ref romoveColumnWidth, value);
+            }
+        }
+
+        public double ReturnDateColumnWidth
+        {
+            get => _returnDateColumnWidth; set
+            {
+                Set(() => ReturnDateColumnWidth, ref _returnDateColumnWidth, value);
             }
         }
 

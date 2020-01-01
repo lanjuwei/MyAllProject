@@ -27,5 +27,9 @@ namespace Model
                 Set(() => LoadingContent, ref loadingContent, value);
             }
         }
+        /// <summary>
+        /// 登录方法
+        /// </summary>
+        public Func<string,string, Task<bool>> LoginAction { get; set; }
     }
 }

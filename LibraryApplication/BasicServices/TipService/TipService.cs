@@ -126,8 +126,8 @@ namespace BasicServices.TipService
                     PlacementTarget = Application.Current.MainWindow,
                     Placement= PlacementMode.Center,
                 };
-                _currentPopup.Width = Application.Current.MainWindow.Width;
-                _currentPopup.Height = Application.Current.MainWindow.Height;
+                _currentPopup.Width = Application.Current.MainWindow.ActualWidth;
+                _currentPopup.Height = Application.Current.MainWindow.ActualHeight;
                 if (_currentPopup.Child is Viewbox viewbox&& viewbox.Child is Grid grid)
                 {
                     grid.Children.Clear();

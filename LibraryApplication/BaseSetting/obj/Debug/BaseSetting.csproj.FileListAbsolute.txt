@@ -44,3 +44,10 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debu
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.xml
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.CopyComplete
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\Model.dll
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.dll
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\SqlSugar.dll
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\Model.pdb
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.xml
+D:\MyGit\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.CopyComplete
