@@ -29,7 +29,7 @@
             </DoubleAnimation>
             <DoubleAnimation From="1" To="0" Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" Duration="0:0:0.2" Storyboard.TargetName="Frame">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase/>
+                    <CubicEase />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>

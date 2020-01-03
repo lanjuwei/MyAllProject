@@ -22,7 +22,8 @@
               Height="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=PageVariables.RootGridHeight}">
             <uc:BusyIndicator IsBusy="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=CommonVariables.IsLoading}" 
                               BusyContent="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=CommonVariables.LoadingContent}" >
-                <Frame  Grid.Row="0" x:Name="MainFrame" NavigationUIVisibility="Hidden" JournalOwnership="UsesParentJournal" />
+                <Frame  Grid.Row="0" x:Name="MainFrame" NavigationUIVisibility="Hidden" JournalOwnership="UsesParentJournal" >
+                </Frame>
             </uc:BusyIndicator>
         </Grid>
     </Viewbox>

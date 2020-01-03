@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:command="http://www.galasoft.ch/mvvmlight" 
-      xmlns:local="clr-namespace:Views.Pages"
+      xmlns:local="clr-namespace:Views.Pages" 
       xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
       xmlns:commonusercontrols="clr-namespace:CommonUserControls;assembly=CommonUserControls"
       xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
@@ -47,14 +47,18 @@
             <RowDefinition Height="110*"/>
             <RowDefinition Height="970*"/>
         </Grid.RowDefinitions>
-        <commonusercontrols:TopBarUserControl  CloseCommand="{Binding CloseCommand}" Title="登录" GoBackCommand="{Binding GoBackCommand}"/>
+        <commonusercontrols:TopBarUserControl   CloseCommand="{Binding CloseCommand}" Title="登录" GoBackCommand="{Binding GoBackCommand}"/>
         <Border Grid.Row="1" Background="#f2f2f2"></Border>
         <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="73*"/>
+                <ColumnDefinition Width="311*"/>
+            </Grid.ColumnDefinitions>
             <commonusercontrols:CountDownUserControl Count="{Binding Time}" Width="100" Height="100" HorizontalAlignment="Right" 
-                                                     VerticalAlignment="Top" Margin="0,40,40,0" />
+                                                     VerticalAlignment="Top" Margin="0,40,40,0" Grid.Column="1" />
             <ItemsControl  ItemsPanel="{DynamicResource ItemsPanelTemplate1}" Background="Transparent" BorderThickness="0"
                       HorizontalAlignment="Center" VerticalAlignment="Center" ItemTemplate="{DynamicResource DataTemplate1}"  
-                 ItemsSource="{Binding LoginItemList}" Width="805"></ItemsControl>
+                 ItemsSource="{Binding LoginItemList}" Width="804" Grid.Column="1" Margin="193.472,351,558,351"></ItemsControl>
             <!--<Border HorizontalAlignment="Center"  VerticalAlignment="Center" BorderBrush="Red" BorderThickness="1">
                 <commonusercontrols:LocalCameraUserControl Width="800" Height="450" ></commonusercontrols:LocalCameraUserControl>
             </Border>-->
