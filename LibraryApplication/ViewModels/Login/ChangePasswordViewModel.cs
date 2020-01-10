@@ -1,4 +1,5 @@
-﻿using BasicServices.TipService;
+﻿using BaseSetting.Needs;
+using BasicServices.TipService;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -104,14 +105,14 @@ namespace ViewModels.Login
             StartTimer();
         }
 
-        public RelayCommand SureCommand => new RelayCommand(() =>
+        public RelayCommand SureCommand => new RelayCommand(async () =>
         {
             if (User.Password!= OldPassword)
             {
                 OldPassword = string.Empty;
                 IsFocusOldPassword = false;
                 IsFocusOldPassword = true;
-                TipService.Instance.ShowTip(TipService.ToolTip, 1000, "旧密码不正确");
+                TipService.Instance.ShowTip(TipService.ToolTip, 500, "旧密码不正确");
                 return;
             }
             if (NewPassword!= ConfirmPassword)
@@ -120,10 +121,12 @@ namespace ViewModels.Login
                 ConfirmPassword = string.Empty;
                 IsFocusNewPassword = false;
                 IsFocusNewPassword = true;
-                TipService.Instance.ShowTip(TipService.ToolTip, 1000, "新密码与确认密码不匹配");
+                TipService.Instance.ShowTip(TipService.ToolTip, 500, "新密码与确认密码不匹配");
                 return;
             }
-
+            IndividualNeeds.Instance.CommonVariables.IsLoading = true;
+            await SocektInterface.ChangePassword(ConfirmPassword);
+            IndividualNeeds.Instance.CommonVariables.IsLoading = false;
         });
 
         private void IsCanClick()

@@ -1,0 +1,107 @@
+2020-01-09 18:12:46,546 [1] INFO  infoLogger [(null)] - Activate Result:0
+2020-01-09 18:12:47,858 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:12:49,124 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:14:04,367 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:14:04,504 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:14:16,276 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:17:01,631 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:17:01,773 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:17:02,102 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:18:05,962 [12] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 18:18:05,967 [12] INFO  infoLogger [(null)] - 服务器无响应
+2020-01-09 18:20:20,289 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:20:20,437 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:20:20,780 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:21:12,184 [4] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 18:21:12,188 [4] INFO  infoLogger [(null)] - 服务器无响应
+2020-01-09 18:22:55,175 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:22:56,643 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:22:58,190 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:25:33,041 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:25:46,742 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:26:02,581 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:29:37,949 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:29:38,117 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:29:38,489 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:34:43,444 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:34:43,605 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:34:43,973 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:37:59,930 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:38:00,069 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:38:00,401 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:42:57,118 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:42:57,256 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:42:57,603 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:44:52,532 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:44:52,671 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:44:52,990 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:45:28,120 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:45:28,256 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:45:28,578 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:46:53,714 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:46:53,886 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:46:54,241 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:48:51,590 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:48:51,728 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:48:52,063 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:53:09,598 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:53:09,745 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:53:10,102 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:53:48,386 [3] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 18:53:48,396 [3] INFO  infoLogger [(null)] - 服务器无响应
+2020-01-09 18:54:02,990 [4] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 18:54:02,997 [4] INFO  infoLogger [(null)] - 服务器无响应
+2020-01-09 18:55:16,889 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 18:55:17,047 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 18:55:17,431 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 18:55:59,457 [4] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 18:55:59,462 [4] INFO  infoLogger [(null)] - 服务器无响应
+2020-01-09 19:04:58,089 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:04:58,248 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:04:58,614 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:04:58,669 [1] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:04:58,817 [1] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:04:59,193 [1] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:17:37,447 [3] INFO  infoLogger [(null)] - 图片21060_123456.png检测不到人脸
+2020-01-09 19:17:37,475 [3] INFO  infoLogger [(null)] - 图片21061_123456.png检测不到人脸
+2020-01-09 19:17:37,490 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:17:37,638 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:17:37,998 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:18:49,881 [3] INFO  infoLogger [(null)] - 图片21060_123456.png检测不到人脸
+2020-01-09 19:18:49,909 [3] INFO  infoLogger [(null)] - 图片21061_123456.png检测不到人脸
+2020-01-09 19:18:49,925 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:18:50,060 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:18:50,402 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:19:40,116 [3] INFO  infoLogger [(null)] - 图片21060_123456.png检测不到人脸
+2020-01-09 19:19:40,137 [3] INFO  infoLogger [(null)] - 图片21061_123456.png检测不到人脸
+2020-01-09 19:19:40,151 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:19:40,278 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:19:40,600 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:21:31,390 [3] INFO  infoLogger [(null)] - 图片21060_123456.png检测不到人脸
+2020-01-09 19:21:31,421 [3] INFO  infoLogger [(null)] - 图片21061_123456.png检测不到人脸
+2020-01-09 19:21:31,439 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:21:31,582 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:21:31,958 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:21:41,419 [3] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 19:21:41,432 [3] INFO  infoLogger [(null)] - 服务器无响应
+2020-01-09 19:23:37,558 [3] INFO  infoLogger [(null)] - 图片21060_123456.png检测不到人脸
+2020-01-09 19:23:37,578 [3] INFO  infoLogger [(null)] - 图片21061_123456.png检测不到人脸
+2020-01-09 19:23:37,592 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:23:37,728 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:23:38,060 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:23:42,516 [3] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 19:23:42,527 [3] INFO  infoLogger [(null)] - 服务器无响应
+2020-01-09 19:29:33,047 [3] INFO  infoLogger [(null)] - 图片21060_123456.png检测不到人脸
+2020-01-09 19:29:33,070 [3] INFO  infoLogger [(null)] - 图片21061_123456.png检测不到人脸
+2020-01-09 19:29:33,086 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:29:33,233 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:29:33,601 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:30:14,904 [4] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 19:30:14,914 [4] INFO  infoLogger [(null)] - 服务器无响应
+2020-01-09 19:38:01,066 [3] INFO  infoLogger [(null)] - 图片21060_123456.png检测不到人脸
+2020-01-09 19:38:01,092 [3] INFO  infoLogger [(null)] - 图片21061_123456.png检测不到人脸
+2020-01-09 19:38:01,106 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-09 19:38:01,238 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-09 19:38:01,576 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-09 19:38:08,622 [3] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-09 19:38:08,628 [3] INFO  infoLogger [(null)] - 服务器无响应

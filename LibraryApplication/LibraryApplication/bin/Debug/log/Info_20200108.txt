@@ -1,0 +1,2 @@
+2020-01-08 13:24:28,629 [3] INFO  infoLogger [(null)] - 没有连接到Socket服务器
+2020-01-08 13:24:28,649 [3] INFO  infoLogger [(null)] - 服务器无响应

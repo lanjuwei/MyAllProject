@@ -3,7 +3,6 @@ using BasicFunction.Log;
 using GalaSoft.MvvmLight.Command;
 using Model;
 using Model.Login;
-using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;

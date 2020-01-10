@@ -54,7 +54,7 @@
                     <commoncontrols:GifImagePlayerUserControl GifImagePath="{Binding GifPath}"></commoncontrols:GifImagePlayerUserControl>
                 </Border>
                 <TextBlock Grid.Column="2" Opacity="0.8" FontSize="28" HorizontalAlignment="Center">人脸识别区</TextBlock>
-                <Grid  Height="536" Grid.Row="1" Grid.Column="2" Width="536"  >
+                <Grid  Height="480" Grid.Row="1" Grid.Column="2" Width="640"  >
                     <commonusercontrols:LocalCameraUserControl x:Name="LocalCameraUserControl1" IsDetectFace="True" IsRecognitionFace="True" ></commonusercontrols:LocalCameraUserControl>
                 </Grid>
             </Grid>
