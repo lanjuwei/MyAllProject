@@ -79,6 +79,13 @@ namespace Model
         Success
     }
 
+    public enum FaceResult 
+    {
+        Success,
+        Fail,
+        NotStrat
+    }
+
     public enum CameraStatus
     {
         Palying,//播放

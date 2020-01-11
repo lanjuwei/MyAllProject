@@ -231,12 +231,12 @@ namespace CommonUserControls
             BusyIndicator1.IsBusy = true;
             Task.Run(()=> 
             {
-                GetLocalFaceImage();//获取本地图片
                 if (!isLoad)
                 {
                     InitEngines();//加载引擎一次就好
                     isLoad = true;
                 }
+                GetLocalFaceImage();//获取本地图片
                 this.Dispatcher?.Invoke(()=> 
                 {
                     initVideo();

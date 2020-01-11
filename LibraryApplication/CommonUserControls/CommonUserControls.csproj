@@ -105,6 +105,9 @@
     <Compile Include="LocalCameraUserControl.xaml.cs">
       <DependentUpon>LocalCameraUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OpencvCameraUserControl.xaml.cs">
+      <DependentUpon>OpencvCameraUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -140,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LocalCameraUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OpencvCameraUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

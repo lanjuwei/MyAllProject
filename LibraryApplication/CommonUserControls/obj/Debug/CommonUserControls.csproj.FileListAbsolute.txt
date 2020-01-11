@@ -201,3 +201,5 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\o
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\CommonUserControls.csproj.CopyComplete
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\CommonUserControls.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\CommonUserControls.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\OpencvCameraUserControl.g.cs
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\OpencvCameraUserControl.baml

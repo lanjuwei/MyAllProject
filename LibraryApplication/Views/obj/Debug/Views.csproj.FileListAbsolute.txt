@@ -228,3 +228,6 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\View
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Views.csproj.GenerateResource.cache
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Views.csproj.CopyComplete
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\Views.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.xml
