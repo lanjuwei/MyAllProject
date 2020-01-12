@@ -1,11 +1,15 @@
 ﻿using BasicFunction.Helper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 
 namespace BasicServices.Navigation
 {
@@ -34,7 +38,7 @@ namespace BasicServices.Navigation
         {
             lock (navigateObject)
             {
-                Application.Current?.Dispatcher?.Invoke(() =>
+                Application.Current?.Dispatcher?.Invoke(async () =>
                 {
                     var item = naviModels.FirstOrDefault(x => x.FrameKey == frameKey);
                     if (item != null)//能找到item 并且item里面发frame为null 才去寻找frame控件
@@ -70,6 +74,10 @@ namespace BasicServices.Navigation
                     if (item.PageDic.ContainsKey(pageKey))
                     {
                         item.MyFrame.Content = item.PageDic[pageKey];
+                        if (pageKey != PageKey.MainPage)//首页不需要
+                        {
+                            LeftAndRightAllAnimation(item.PageDic[pageKey],true);//page animation
+                        }
                     }
                     else
                     {
@@ -89,6 +97,7 @@ namespace BasicServices.Navigation
                     if (item.LastPage != null)
                     {
                         item.MyFrame.Content = item.LastPage;
+                        LeftAndRightAllAnimation(item.LastPage,false);
                     }
                 }
                 else
@@ -108,9 +117,15 @@ namespace BasicServices.Navigation
             if (!item.PageDic.ContainsValue(page))
             {
                 var d=item.UrlDic.FirstOrDefault(x=>x.Value==e.Uri);
-                item.PageDic.Add(d.Key, page);
+                item.PageDic.Add(d.Key, page);//add page         
+                if (d.Key!= PageKey.MainPage)//首页不需要
+                {
+                    LeftAndRightAllAnimation(page,true);//page animation
+                }
             }
         }
+
+ 
 
         /// <summary>
         /// 注册页面
@@ -167,6 +182,64 @@ namespace BasicServices.Navigation
 
 
         private object navigateObject = new object();//导航锁
+
+        private static bool _isLeft;
+        private static Storyboard _allStoryboard;
+        private static DoubleAnimation _allAnimation;
+
+        private void LeftAndRightAllAnimation(FrameworkElement frameworkElement, bool isLeft ) 
+        {
+            _isLeft = isLeft;
+            if (!(frameworkElement.RenderTransform is TransformGroup))
+            {
+                var transformGroup = new TransformGroup();
+                transformGroup.Children.Add(new TranslateTransform() { X = 0, Y = 0 });
+                frameworkElement.RenderTransformOrigin = new Point(0.5, 0.5);
+                frameworkElement.RenderTransform = transformGroup;
+                frameworkElement.Loaded +=(sender,e)=>
+                {
+                    if (_isLeft)
+                    {
+                        _allAnimation.From = frameworkElement.ActualWidth * 2 / 3;
+                        _allAnimation.To = 0;
+                    }
+                    else
+                    {
+                        _allAnimation.From = -frameworkElement.ActualWidth * 2 / 3;
+                        _allAnimation.To =0;
+                    }
+                    _allStoryboard.Begin();
+                };
+            }
+            if (_allStoryboard==null)
+            {
+                _allStoryboard = new Storyboard();
+                _allAnimation = new DoubleAnimation() { Duration = TimeSpan.FromSeconds(0.8), EasingFunction = new CubicEase() };
+                _allStoryboard.Children.Add(_allAnimation);
+            }
+            Storyboard.SetTarget(_allAnimation, frameworkElement);
+            Storyboard.SetTargetProperty(_allAnimation, new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)"));
+        }
+        //public BitmapImage DrawElement( FrameworkElement element)
+        //{
+        //    int width = (int)element.ActualWidth; 
+        //    int height = (int)element.ActualHeight; 
+        //    RenderTargetBitmap bmp = new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Pbgra32); 
+        //    bmp.Render(element); 
+        //    PngBitmapEncoder encoder = new PngBitmapEncoder();
+        //    encoder.Frames.Add(BitmapFrame.Create(bmp)); 
+        //    BitmapImage bitmapImage = new BitmapImage();
+        //    using (var memoryStream = new MemoryStream()) 
+        //    { 
+        //        encoder.Save(memoryStream); 
+        //        memoryStream.Seek(0, SeekOrigin.Begin); 
+        //        bitmapImage.BeginInit(); 
+        //        bitmapImage.CacheOption = BitmapCacheOption.OnLoad; 
+        //        bitmapImage.StreamSource = memoryStream; 
+        //        bitmapImage.EndInit(); 
+        //    }
+        //    return bitmapImage;
+        //}
 
         public NaviService()
         {

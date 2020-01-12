@@ -183,5 +183,6 @@ namespace BasicFunction.Helper
         UserInfo,
         GetUserBookList,
         LoginOut,
+        ChangePassword
     }
 }

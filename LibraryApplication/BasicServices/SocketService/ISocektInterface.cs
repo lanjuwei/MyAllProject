@@ -32,5 +32,11 @@ namespace BasicServices.SocketService
         /// <param name="id"></param>
         /// <returns></returns>
         Task<ResponseModel<string>> LoginOut();
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<ResponseModel<string>> ChangePassword(string password);
     }
 }

@@ -39,6 +39,13 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Emgu.CV.UI, Version=4.1.0.3420, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\lanjuwei\Desktop\ArcfaceDemo_CSharp_2.2-master\ArcSoftFace\ArcSoftFace\bin\Debug\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.World">
+      <HintPath>C:\Users\lanjuwei\Desktop\ArcfaceDemo_CSharp_2.2-master\ArcSoftFace\ArcSoftFace\bin\Debug\Emgu.CV.World.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -63,9 +70,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\ASFFunctions.cs" />
+    <Compile Include="Helper\FaceUtil.cs" />
     <Compile Include="Helper\FindControlHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
     <Compile Include="Helper\ImageHelper.cs" />
+    <Compile Include="Helper\ImageUtil.cs" />
+    <Compile Include="Helper\MemoryUtil.cs" />
     <Compile Include="Helper\SocketHelper.cs" />
     <Compile Include="Helper\SoundHelper.cs" />
     <Compile Include="Helper\Win32Helper.cs" />
@@ -112,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Log\log4netConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Emgu.CV.UI.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

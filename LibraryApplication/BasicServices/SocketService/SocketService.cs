@@ -172,7 +172,58 @@ namespace BasicServices.SocketService
                 return model;
             });
         }
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Task<ResponseModel<string>> ChangePassword(string password)
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<string>();
+                try
+                {
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.ChangePassword, password);//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Message = j["Message"].ToString();
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                    }
+                    else
+                    {
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
 
-       
+
     }
 }

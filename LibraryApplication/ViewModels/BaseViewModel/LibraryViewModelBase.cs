@@ -114,7 +114,7 @@ namespace ViewModels.Home
             finally
             {
                 IndividualNeeds.Instance.CommonVariables.IsLoading = false;
-                isCanClose = false;
+                isCanClose = true;
             }
         }
 

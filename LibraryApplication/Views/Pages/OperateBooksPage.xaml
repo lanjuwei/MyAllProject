@@ -8,7 +8,7 @@
       xmlns:helpers="clr-namespace:CommonControls.Attach;assembly=CommonControls"
       xmlns:commonusercontrols="clr-namespace:CommonUserControls;assembly=CommonUserControls"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
-      xmlns:converters="clr-namespace:Views.Converters"
+      xmlns:converters="clr-namespace:Views.Converters" 
       xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
       mc:Ignorable="d"  x:Name="OperateBooksPage1"
       DataContext="{Binding Source={StaticResource Locator},Path=OperateBooksViewModel}"

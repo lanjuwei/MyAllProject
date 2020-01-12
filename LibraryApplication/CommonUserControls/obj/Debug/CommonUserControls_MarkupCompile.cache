@@ -4,17 +4,17 @@
 library
 C#
 .cs
-D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\
 CommonUserControls
 none
 false
 DEBUG;TRACE
 
-4-744435134
+5311236954
 
-8-1605186062
-12816037827
-BigSoftKeyboardUserControl.xaml;CountDownUserControl.xaml;LocalCameraUserControl.xaml;TopBarUserControl.xaml;
+92096630106
+1372073615991
+BigSoftKeyboardUserControl.xaml;CountDownUserControl.xaml;LocalCameraUserControl.xaml;OpencvCameraUserControl.xaml;TopBarUserControl.xaml;
 
 False
 

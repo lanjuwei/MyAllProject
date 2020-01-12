@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Views.Pages"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      xmlns:command="http://www.galasoft.ch/mvvmlight"
+      xmlns:command="http://www.galasoft.ch/mvvmlight" 
       xmlns:commonusercontrols="clr-namespace:CommonUserControls;assembly=CommonUserControls"
       xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
       xmlns:helpers="clr-namespace:CommonControls.Attach;assembly=CommonControls"

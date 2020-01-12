@@ -67,10 +67,23 @@ namespace Model
     //}
     public enum ResultType
     {
+        //再次识别
         RecogineAgian,
+        //重新登录
         ToLogin,
+        //退出主界面
         Close,
+        /// <summary>
+        /// 登陆成功
+        /// </summary>
         Success
+    }
+
+    public enum FaceResult 
+    {
+        Success,
+        Fail,
+        NotStrat
     }
 
     public enum CameraStatus
@@ -98,4 +111,8 @@ namespace Model
     //    /// </summary>
     //    None
     //}
+    /// <summary>
+    /// 图片检测模式
+    /// </summary>
+
 }

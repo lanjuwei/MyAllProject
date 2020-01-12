@@ -7,7 +7,7 @@
       xmlns:commonControls="clr-namespace:CommonControls;assembly=CommonControls"
       xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
       mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator},Path=HomeViewModel}"
-      d:DesignHeight="1080" d:DesignWidth="1920" x:Name="Page1"
+      d:DesignHeight="1080" d:DesignWidth="1920" x:Name="Page1" 
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
       Title="MainPage">

@@ -41,12 +41,15 @@ D:\MyGit\MyAllProject\LibraryApplication\BasicFunction\obj\Debug\BasicFunction.d
 D:\MyGit\MyAllProject\LibraryApplication\BasicFunction\obj\Debug\BasicFunction.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\BasicFunction.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\BasicFunction.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Emgu.CV.UI.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Emgu.CV.World.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\log4net.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Model.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Newtonsoft.Json.dll
-D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\SqlSugar.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\GalaSoft.MvvmLight.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\SqlSugar.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Model.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Emgu.CV.World.xml
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\log4net.xml
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Newtonsoft.Json.xml
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\GalaSoft.MvvmLight.pdb

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Views.Pages"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      xmlns:command="http://www.galasoft.ch/mvvmlight"
+      xmlns:command="http://www.galasoft.ch/mvvmlight" 
       xmlns:commonusercontrols="clr-namespace:CommonUserControls;assembly=CommonUserControls"
       xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
       mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator},Path=FaceLoginViewModel}"
@@ -54,8 +54,8 @@
                     <commoncontrols:GifImagePlayerUserControl GifImagePath="{Binding GifPath}"></commoncontrols:GifImagePlayerUserControl>
                 </Border>
                 <TextBlock Grid.Column="2" Opacity="0.8" FontSize="28" HorizontalAlignment="Center">人脸识别区</TextBlock>
-                <Grid  Height="536" Grid.Row="1" Grid.Column="2" Width="536"  >
-                    <commonusercontrols:LocalCameraUserControl x:Name="LocalCameraUserControl1" IsDetectFace="True" IsRecognitionFace="True" ></commonusercontrols:LocalCameraUserControl>
+                <Grid  Height="480" Grid.Row="1" Grid.Column="2" Width="640"  >
+                    <commonusercontrols:OpencvCameraUserControl x:Name="LocalCameraUserControl1" IsDetectFace="True" IsRecognitionFace="True" ></commonusercontrols:OpencvCameraUserControl>
                 </Grid>
             </Grid>
         </Grid>

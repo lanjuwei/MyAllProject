@@ -64,6 +64,8 @@
     <Compile Include="Book\BookColumnModel.cs" />
     <Compile Include="Book\StepModel.cs" />
     <Compile Include="CommonVariables.cs" />
+    <Compile Include="Entity\FaceTrackUnit.cs" />
+    <Compile Include="Entity\ImageInfo.cs" />
     <Compile Include="Enumeration.cs" />
     <Compile Include="FaceUserModel.cs" />
     <Compile Include="Login\BookModel.cs" />
@@ -85,6 +87,20 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Request\ResponseModel.cs" />
+    <Compile Include="SDKModels\ASF_AgeInfo.cs" />
+    <Compile Include="SDKModels\ASF_Face3DAngle.cs" />
+    <Compile Include="SDKModels\ASF_FaceFeature.cs" />
+    <Compile Include="SDKModels\ASF_GenderInfo.cs" />
+    <Compile Include="SDKModels\ASF_ImagePixelFormat.cs" />
+    <Compile Include="SDKModels\ASF_LivenessInfo.cs" />
+    <Compile Include="SDKModels\ASF_MultiFaceInfo.cs" />
+    <Compile Include="SDKModels\ASF_OrientCode.cs" />
+    <Compile Include="SDKModels\ASF_OrientPriority.cs" />
+    <Compile Include="SDKModels\ASF_SingleFaceInfo.cs" />
+    <Compile Include="SDKModels\ASF_VERSION.cs" />
+    <Compile Include="SDKModels\DetectionMode.cs" />
+    <Compile Include="SDKModels\FaceEngineMask.cs" />
+    <Compile Include="SDKModels\MRECT.cs" />
     <Compile Include="VisualStates.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
