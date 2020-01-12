@@ -10,6 +10,7 @@
       xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
       xmlns:converters="clr-namespace:Views.Converters"
       mc:Ignorable="d" 
+       DataContext="{Binding Source={StaticResource Locator},Path=RegistrateFaceViewModel}"
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="RegistrateFacePage">
     <Page.Resources>
@@ -18,7 +19,7 @@
             <Grid>
                 <StackPanel>
                     <Image Width="162" Height="162" Stretch="Uniform" Source="{Binding ImagePath}"></Image>
-                    <TextBlock FontSize="20" Opacity="0.8" HorizontalAlignment="Center" Margin="0,15" Text="{Binding Name}"></TextBlock>
+                    <TextBlock FontSize="20" Opacity="0.8" HorizontalAlignment="Center" Margin="0,5" Text="{Binding Name}"></TextBlock>
                     <Image Width="31" Height="30" Source="/Views;component/Images/errorFlag.png" ></Image>
                 </StackPanel>
             </Grid>
@@ -56,36 +57,18 @@
                 <TextBlock Foreground="#ff7256" FontSize="35" FontWeight="Bold" Opacity="0.8">温馨提示：上传前请摘掉帽子和眼镜</TextBlock>
                 <TextBlock  FontSize="28" Opacity="0.8" HorizontalAlignment="Center" Margin="0,12,0,0" >请拍摄本人清晰的正脸照</TextBlock>
             </StackPanel>
-            <Grid  Height="430" Grid.Row="1"  Width="430" Margin="0,30,0,0"  >
-                <commonusercontrols:LocalCameraUserControl x:Name="LocalCameraUserControl1" IsDetectFace="True" IsShotsFace="{Binding IsShotsFace}" Status="{Binding Status}" ></commonusercontrols:LocalCameraUserControl>
+            <Grid  Height="480" Grid.Row="1"  Width="640" Margin="0,15,0,0"  >
+                <commonusercontrols:OpencvCameraUserControl x:Name="OpencvCameraUserControl1" IsDetectFace="True" IsRecognitionFace="False" IsShotsFace="{Binding IsShotsFace,Mode=TwoWay}" ></commonusercontrols:OpencvCameraUserControl>
             </Grid>
-            <Grid Grid.Row="2" Margin="0,40,0,0"  HorizontalAlignment="Center">
-                <commoncontrols:CommonButton Command="{Binding TakePhotosCommand}" Visibility="{Binding IsTakePhotosVisible,Converter={StaticResource BoolToVisibilityConverter}}"  Width="300" Height="72" Foreground="White" FontSize="30" CornerRadius="36" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Grid Grid.Row="2" Margin="0,15,0,0"  HorizontalAlignment="Center">
+                <commoncontrols:CommonButton Command="{Binding ConfirmUploadCommand}"   Width="300" Height="72" Foreground="White" FontSize="30" CornerRadius="36" HorizontalAlignment="Center" VerticalAlignment="Center" >
                     <commoncontrols:CommonButton.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#239aff" Offset="1"/>
                             <GradientStop Color="#23c0ff" Offset="0"/>
                         </LinearGradientBrush>
-                    </commoncontrols:CommonButton.Background> 拍照
+                    </commoncontrols:CommonButton.Background> 确认上传
                 </commoncontrols:CommonButton>
-                <StackPanel Orientation="Horizontal" Visibility="{Binding IsTakePhotosAgainVisible,Converter={StaticResource BoolToVisibilityConverter}}">
-                    <commoncontrols:CommonButton  Command="{Binding TakePhotosAgainCommand}" Width="240" Height="86" Foreground="White" FontSize="30" CornerRadius="43" Margin="0,0,36,0" >
-                        <commoncontrols:CommonButton.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#239aff" Offset="1"/>
-                                <GradientStop Color="#23c0ff" Offset="0"/>
-                            </LinearGradientBrush>
-                        </commoncontrols:CommonButton.Background> 重新拍照
-                    </commoncontrols:CommonButton>
-                    <commoncontrols:CommonButton  Command="{Binding ConfirmUploadCommand}" Width="240" Height="86" Foreground="White" FontSize="30" CornerRadius="43" >
-                        <commoncontrols:CommonButton.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#45d388" Offset="0"/>
-                                <GradientStop Color="#2db36c" Offset="1"/>
-                            </LinearGradientBrush>
-                        </commoncontrols:CommonButton.Background> 确认上传
-                    </commoncontrols:CommonButton>
-                </StackPanel>
             </Grid>
             <ItemsControl Grid.Row="3" ItemTemplate="{DynamicResource DataTemplate1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}" 
                           HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding ErrorImageList}"></ItemsControl>

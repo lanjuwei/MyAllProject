@@ -41,3 +41,4 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Mode
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csproj.CopyComplete
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Model.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Model\obj\Debug\Model.pdb
+D:\MyGit\MyAllProject\LibraryApplication\Model\obj\Debug\Model.csprojAssemblyReference.cache

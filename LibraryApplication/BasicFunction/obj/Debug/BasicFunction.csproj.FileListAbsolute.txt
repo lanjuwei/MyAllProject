@@ -62,3 +62,4 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\obj\De
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\obj\Debug\BasicFunction.csproj.CopyComplete
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\obj\Debug\BasicFunction.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\obj\Debug\BasicFunction.pdb
+D:\MyGit\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Emgu.CV.UI.dll

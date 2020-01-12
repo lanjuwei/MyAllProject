@@ -58,9 +58,9 @@ namespace ViewModels.Home
         /// </summary>
         protected static UserModel User { get; set; }
         /// <summary>
-        /// 能否回到主界面
+        /// 这里会有个问题 一边是你正在处理的线程 一边是会回退到主页
         /// </summary>
-        protected static bool isCanClose = true;
+        protected bool IsWorkingLock = false;
 
         protected virtual void Load()
         {
@@ -76,7 +76,7 @@ namespace ViewModels.Home
         {
             dispatcherTimer?.Stop();
             dispatcherTimer.Tick -= DispatcherTimer_Tick;
-            isCanClose = true;
+            IsWorkingLock = false;
         }
 
         /// <summary>
@@ -84,16 +84,17 @@ namespace ViewModels.Home
         /// </summary>
         /// <param name="id"></param>
         /// <param name="password"></param>
-        protected async Task<bool> LoginIn(string id, string password)
+        protected virtual async Task<bool> LoginIn(string id, string password)
         {
-            isCanClose = false;
+            IsWorkingLock = true;
             IndividualNeeds.Instance.CommonVariables.IsLoading = true;
             try
             {
                 var result=await SocektInterface.GetUserInfoAsync(id, password);
                 if (result.IsSuccess)
                 {
-                    User = result.Data;
+                    IndividualNeeds.Instance.CommonVariables.User = result.Data;
+                    User = IndividualNeeds.Instance.CommonVariables.User;
                     if (NavigateInterface.Parameter is ButtonType buttonType)
                     {
                         switch (buttonType)
@@ -114,7 +115,7 @@ namespace ViewModels.Home
             finally
             {
                 IndividualNeeds.Instance.CommonVariables.IsLoading = false;
-                isCanClose = true;
+                IsWorkingLock = false;
             }
         }
 
@@ -133,7 +134,7 @@ namespace ViewModels.Home
         /// </summary>
         protected virtual void MoveToNextPage(object parameter =null)
         {
-            if (isCanClose)
+            if (!IsWorkingLock)//isworkinglock锁用来阻止回退
             {
                 if (SubWindowsService.Instance.IsAliveWindow(SubWindowsService.Instance.WindowId))
                 {

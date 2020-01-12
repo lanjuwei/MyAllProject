@@ -38,7 +38,7 @@ namespace BasicServices.Navigation
         {
             lock (navigateObject)
             {
-                Application.Current?.Dispatcher?.Invoke(async () =>
+                Application.Current?.Dispatcher?.Invoke( () =>
                 {
                     var item = naviModels.FirstOrDefault(x => x.FrameKey == frameKey);
                     if (item != null)//能找到item 并且item里面发frame为null 才去寻找frame控件
@@ -73,6 +73,7 @@ namespace BasicServices.Navigation
                     }
                     if (item.PageDic.ContainsKey(pageKey))
                     {
+                        item.MyFrame.Content = null;
                         item.MyFrame.Content = item.PageDic[pageKey];
                         if (pageKey != PageKey.MainPage)//首页不需要
                         {

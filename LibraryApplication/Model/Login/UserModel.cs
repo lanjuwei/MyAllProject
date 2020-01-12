@@ -22,7 +22,6 @@ namespace Model.Login
         private int _canBorrowCount;
         private int _lendCount;
         private string _faceImage;
-        private byte[] _faceByte;
 
         /// <summary>
         /// 读者证号 唯一Key
@@ -115,18 +114,9 @@ namespace Model.Login
                 Set(() => LendCount, ref _lendCount, value);
             }
         }
+
         /// <summary>
-        /// 图片流
-        /// </summary>
-        public byte[] FaceByte
-        {
-            get => _faceByte; set
-            {
-                Set(() => FaceByte, ref _faceByte, value);
-            }
-        }
-        /// <summary>
-        /// 人脸图片
+        /// 人脸图片 base64
         /// </summary>
         [SugarColumn(IsNullable = true)]
         public string FaceImage

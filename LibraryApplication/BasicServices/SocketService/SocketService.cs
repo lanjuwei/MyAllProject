@@ -224,6 +224,52 @@ namespace BasicServices.SocketService
             });
         }
 
-
+        public Task<ResponseModel<string>> UploadImage(byte[] imageData)
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<string>();
+                try
+                {
+                    var str = Convert.ToBase64String(imageData);
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.UploadImage, str);//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Message = j["Message"].ToString();
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                    }
+                    else
+                    {
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
     }
 }

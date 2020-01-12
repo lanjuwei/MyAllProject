@@ -1,4 +1,5 @@
-﻿using BasicServices.Navigation;
+﻿using BaseSetting.Needs;
+using BasicServices.Navigation;
 using GalaSoft.MvvmLight.Command;
 using Model;
 using System;
@@ -14,10 +15,7 @@ namespace ViewModels.Login
 {
     public class RegistrateFaceViewModel : LibraryViewModelBase
     {
-        private bool isTakePhotosVisible = true;
-        private bool isTakePhotosAgainVisible;
         private bool isShotsFace;
-        private CameraStatus status= CameraStatus.Palying;
 
         /// <summary>
         /// 步骤显示的内容和颜色
@@ -29,21 +27,6 @@ namespace ViewModels.Login
             new NormalModel(){ ImagePath="/Views;component/Images/incompleteFace.png",Name="残缺"},
         };
 
-        public bool IsTakePhotosVisible
-        {
-            get => isTakePhotosVisible; set
-            {
-                Set(() => IsTakePhotosVisible, ref isTakePhotosVisible, value);
-            }
-        }
-        public bool IsTakePhotosAgainVisible
-        {
-            get => isTakePhotosAgainVisible; set
-            {
-                Set(() => IsTakePhotosAgainVisible, ref isTakePhotosAgainVisible, value);
-            }
-        }
-
         public bool IsShotsFace
         {
             get => isShotsFace; set
@@ -52,18 +35,13 @@ namespace ViewModels.Login
             }
         }
 
-        public CameraStatus Status
+        public RegistrateFaceViewModel()
         {
-            get => status; set
-            {
-                Set(() => Status, ref status, value);
-            }
+            IndividualNeeds.Instance.CommonVariables.UploadImageAction = UploadImage;
         }
 
         protected override void Load()
         {
-            IsTakePhotosVisible = true;
-            IsTakePhotosAgainVisible = false;
             base.Load();
         }
 
@@ -72,24 +50,28 @@ namespace ViewModels.Login
             NavigateInterface.NavigateTo(PageKey.PersonalCenterPage);
         }
 
-        public ICommand TakePhotosCommand => new RelayCommand(() =>
-        {
-            Status = CameraStatus.Suspend;
-            IsTakePhotosVisible = false;
-            IsTakePhotosAgainVisible = true;
-        });
-
-        public ICommand TakePhotosAgainCommand => new RelayCommand(() =>
-        {
-            IsTakePhotosVisible = true;
-            IsTakePhotosAgainVisible = false;
-            Status = CameraStatus.Palying;
-        });
-
         public ICommand ConfirmUploadCommand => new RelayCommand(() =>
         {
-
+            IsWorkingLock = true;
+            IsShotsFace = true;//拍照
         });
 
+        public async Task<bool> UploadImage(byte[] imageData)
+        {           
+            try
+            {
+                var result = await SocektInterface.UploadImage(imageData);
+                if (result.IsSuccess)
+                {
+                    NavigateInterface.GoBack();
+                }
+                return result.IsSuccess;
+            }
+            finally
+            {
+                IsWorkingLock = false;
+            }
+            
+        }
     }
 }

@@ -14,7 +14,11 @@ namespace ViewModels.Login
         public string GifPath { get; set; } = @"Images/Gif/刷脸动画.gif";
         public FaceLoginViewModel()
         {
-            IndividualNeeds.Instance.CommonVariables.LoginAction = base.LoginIn;
+            IndividualNeeds.Instance.CommonVariables.LoginAction = LoginIn;
+        }
+        protected override Task<bool> LoginIn(string id, string password)
+        {
+            return base.LoginIn(id, password);
         }
 
     }

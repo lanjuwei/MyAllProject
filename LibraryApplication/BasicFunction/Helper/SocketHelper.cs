@@ -48,12 +48,18 @@ namespace BasicFunction.Helper
             }
         }
         /// <summary>
-        /// 析构函数 程序进程关闭时必须释放全部的_client资源 不然会产生内存泄漏 如果socket是长连接的话
+        /// 析构函数 程序进程关闭时必须释放全部的_client资源并关闭连接 
+        /// 光是dispose是不够的 只是释放了内存 垃圾回收器还没有回收 连接如果还在的话 系统进程依旧有 会不停的给服务器发送消息
+        /// 直到关闭
         /// </summary>
         ~SocketHelper()
         {
             isRuning = false;
-            _client?.Dispose();
+            if (_client?.Connected==true)
+            {
+                _client.Shutdown( SocketShutdown.Both);//关闭收发
+            }
+            _client?.Dispose();//释放内存
         }
 
         /// <summary>
@@ -72,15 +78,18 @@ namespace BasicFunction.Helper
         {
             try
             {
-                _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                _client.ReceiveTimeout = 30000;//30秒超时便结束         
-                _client.SendTimeout =30000;
+                if (_client==null)
+                {
+                    _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//只实例化一个socket
+                    _client.ReceiveTimeout = 30000;//30秒超时便结束         
+                    _client.SendTimeout = 30000;
+                }               
                 _client.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2012));//连接    
             }
             catch (Exception ex)
             {
-                //_client.Close();不用close() 这种方法在垃圾回收的时候才释放内存 不能及时的释放
-                _client?.Dispose();//及时释放 不占用内存
+                //_client.Close();close() 与Dispose一样
+                //_client?.Dispose();//及时释放 不占用内存
             }
             finally
             {
@@ -183,6 +192,7 @@ namespace BasicFunction.Helper
         UserInfo,
         GetUserBookList,
         LoginOut,
-        ChangePassword
+        ChangePassword,
+        UploadImage
     }
 }
