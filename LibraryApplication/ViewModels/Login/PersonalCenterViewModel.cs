@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using ViewModels.Home;
 
 namespace ViewModels.Login
@@ -19,8 +20,9 @@ namespace ViewModels.Login
     public class PersonalCenterViewModel : LibraryViewModelBase
     {
         private ObservableCollection<BookModel> _bookList;
-        private UserModel _currentUser; 
+        private UserModel _currentUser;
         private BookColumnModel bookColumn;
+        private ImageSource _faceImage;
 
         public ObservableCollection<BookModel> BookList
         {
@@ -48,6 +50,14 @@ namespace ViewModels.Login
             }
         }
 
+        public ImageSource FaceImage
+        {
+            get => _faceImage; set
+            {
+                Set(() => FaceImage, ref _faceImage, value);
+            }
+        }
+
         public PersonalCenterViewModel()
         {
             //初始化列表的宽度
@@ -56,14 +66,20 @@ namespace ViewModels.Login
                 BlankLineWidth = 60,
                 BarcodeColumnWidth = 150,
                 TitleColumnWidth = 950,
-                ReturnDateColumnWidth=150
+                ReturnDateColumnWidth = 150
             };
+        }
+
+        public void UiLoad()
+        {
+            Time = 60;
+            StartTimer();
+            LoadUserDataAsync();
         }
 
         protected override void Load()
         {
-            base.Load();
-            LoadUserDataAsync();
+
         }
 
 
@@ -96,15 +112,18 @@ namespace ViewModels.Login
 
         private async void LoadUserDataAsync()
         {
-            if (User?.FaceByte != null)
+            if (User?.FaceImage != null)
             {
-                var bitmap = ImageHelper.Instance.ToImage(User.FaceByte);
+                var data = Convert.FromBase64String(User.FaceImage);
+                var bitmap = ImageHelper.Instance.ToImage(data);
                 bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.None;
-                User.FaceImage = bitmap.UriSource.AbsolutePath;
+                FaceImage=bitmap;
             }
             else
             {
-                User.FaceImage = User?.Sex == 0 ? "/Views;component/Images/Penson/man.png" : "/Views;component/Images/Penson/woman.png";
+                var bitmap = new System.Windows.Media.Imaging.BitmapImage(User?.Sex == 0 ? new Uri("/Views;component/Images/Penson/man.png") : new Uri("/Views;component/Images/Penson/woman.png"));
+                bitmap.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.None;             
+                FaceImage = bitmap;
             }
             CurrentUser = User;
             if (User != null)

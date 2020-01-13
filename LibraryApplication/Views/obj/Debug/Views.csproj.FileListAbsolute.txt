@@ -231,3 +231,10 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\View
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\bin\Debug\OpenCvSharp.Extensions.xml
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\AForge.Video.DirectShow.dll
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\AForge.Controls.dll
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\AForge.Video.dll
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\AForge.dll
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\AForge.Imaging.dll
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\Emgu.CV.World.dll
+D:\MyGit\MyAllProject\LibraryApplication\Views\bin\Debug\AForge.Math.dll

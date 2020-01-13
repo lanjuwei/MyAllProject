@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.Login;
 
 namespace BaseSetting.Needs
 {

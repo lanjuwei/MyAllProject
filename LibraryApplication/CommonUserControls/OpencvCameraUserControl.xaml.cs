@@ -40,7 +40,7 @@ namespace CommonUserControls
         private static VideoCapture _irVideoCapture;
         private CameraStatus _cameraStatus;
         private bool _isShotsFace;
-        private CascadeClassifier _cascadeClassifier;
+        //private CascadeClassifier _cascadeClassifier;
         private bool _isDetectFace = false;
         private bool _isRecognitionFace = false;
         private static bool isDoubleShot;
@@ -58,7 +58,7 @@ namespace CommonUserControls
         /// <summary>
         /// 本地人脸特征列表还有对应的ID：id_password
         /// </summary>
-        private static Dictionary<IntPtr, string> imagesFeatureList = new Dictionary<IntPtr, string>();
+        private static Dictionary<string, IntPtr> imagesFeatureList = new Dictionary<string, IntPtr>();
         /// <summary>
         /// 引擎Handle
         /// </summary>
@@ -91,10 +91,10 @@ namespace CommonUserControls
         private Font font = new Font(System.Drawing.FontFamily.GenericSerif, 10f, System.Drawing.FontStyle.Bold);
         private SolidBrush redBrush = new SolidBrush(System.Drawing.Color.Red);
         private SolidBrush greenBrush = new SolidBrush(System.Drawing.Color.Green);
-        private bool isRGBLock = false;
+        
         private bool isLiveLock = false;
         private bool isRecogniteLock = false;
-        private bool isIRLock = false;
+        
         private MRECT allRect = new MRECT();
         private int _rectX;
         private int _rectY;
@@ -104,13 +104,15 @@ namespace CommonUserControls
         private bool isRectLock = false;
         private bool isIrLive = false;//ir是否过关
         private object _trackLock = new object();
-        private FaceResult faceResult= FaceResult.NotStrat;
+        private FaceResult faceResult= FaceResult.Continue;
         public OpencvCameraUserControl()
         {
             InitializeComponent();
             Loaded += LocalCameraUserControl_Loaded;
             Unloaded += LocalCameraUserControl_UnloadedAsync;
-            _cascadeClassifier = new CascadeClassifier(@"haarcascade_frontalface_alt.xml");
+            Application.Current.MainWindow.Closed += MainWindow_Closed;
+
+            //_cascadeClassifier = new CascadeClassifier(@"haarcascade_frontalface_alt.xml");
 
         }
         public static readonly DependencyProperty IsShotsFaceProperty;
@@ -163,11 +165,6 @@ namespace CommonUserControls
             IsRecognitionFaceProperty = DependencyProperty.Register("IsRecognitionFace", typeof(bool), typeof(OpencvCameraUserControl), new PropertyMetadata(false, IsRecognitionFaceCallBack));
         }
 
-        ~OpencvCameraUserControl()
-        {
-
-        }
-
         private static void IsRecognitionFaceCallBack(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var c = d as OpencvCameraUserControl;
@@ -192,12 +189,38 @@ namespace CommonUserControls
             c._isShotsFace = (bool)e.NewValue;
         }
 
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                //销毁引擎
+                int retCode = ASFFunctions.ASFUninitEngine(pImageEngine);
+                Console.WriteLine("UninitEngine pImageEngine Result:" + retCode);
+                //销毁引擎
+                retCode = ASFFunctions.ASFUninitEngine(pVideoEngine);
+                Console.WriteLine("UninitEngine pVideoEngine Result:" + retCode);
 
+                //销毁引擎
+                retCode = ASFFunctions.ASFUninitEngine(pVideoRGBImageEngine);
+                Console.WriteLine("UninitEngine pVideoImageEngine Result:" + retCode);
+
+                //销毁引擎
+                retCode = ASFFunctions.ASFUninitEngine(pVideoIRImageEngine);
+                Console.WriteLine("UninitEngine pVideoIRImageEngine Result:" + retCode);
+                foreach (var item in imagesFeatureList)
+                {
+                    MemoryUtil.Free(item.Value);//释放内存
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("UninitEngine pImageEngine Error:" + ex.Message);
+            }
+        }
         private void LocalCameraUserControl_Loaded(object sender, RoutedEventArgs e)
         {
             BusyIndicator1.IsBusy = true;
-            _cameraStatus = CameraStatus.Palying;
-            faceResult = FaceResult.NotStrat;
+            faceResult = FaceResult.Continue;           
             loginId = string.Empty;
             isIrLive = false;
             _rgbVideoCapture?.RetrieveMat();
@@ -210,54 +233,8 @@ namespace CommonUserControls
                     isLoad = true;
                 }
                 GetLocalFaceImage();//获取本地图片检测人脸
-                if (_rgbVideoCapture == null)
-                {
-                    if (rgbCameraIndex != irCameraIndex)
-                    {
-                        _rgbVideoCapture = new VideoCapture(rgbCameraIndex);
-                        _irVideoCapture = new VideoCapture(irCameraIndex);
-                        var isRgbOpen = _rgbVideoCapture.IsOpened();
-                        if (!isRgbOpen)
-                        {
-                            this.Dispatcher?.Invoke(() =>
-                            {
-                                BusyIndicator1.IsBusy = false;
-                            });
-                            TipService.Instance.ShowTip(TipService.ToolTip, 1000, "未检测到彩色摄像头!");
-                        }
-                        var isIrOpen = _irVideoCapture.IsOpened();
-                        if (!isIrOpen)
-                        {
-                            this.Dispatcher?.Invoke(() =>
-                            {
-                                BusyIndicator1.IsBusy = false;
-                            });
-                            TipService.Instance.ShowTip(TipService.ToolTip, 1000, "未检测到红外摄像头!");
-                        }
-                        if (!isIrOpen|| !isRgbOpen)
-                        {
-                            return;
-                        }
-                        isDoubleShot = true;
-                    }
-                    else
-                    {
-                        _rgbVideoCapture = new VideoCapture(0);
-                        if (!_rgbVideoCapture.IsOpened())
-                        {
-                            this.Dispatcher?.Invoke(() =>
-                            {
-                                BusyIndicator1.IsBusy = false;
-                            });
-                            TipService.Instance.ShowTip(TipService.ToolTip, 1000, "未检测到摄像头，请确保已安装摄像头或驱动!");
-                            return;
-                        }
-                        _rgbVideoCapture.Set(CaptureProperty.FrameWidth, this.ActualWidth);//宽度 根据控件的大小来决定           
-                        _rgbVideoCapture.Set(CaptureProperty.FrameHeight, this.ActualHeight);//高度   
-                    }  
-                }
+                InitVideo();
                 PlayLacalCamera();
-
             });
         }
 
@@ -266,6 +243,7 @@ namespace CommonUserControls
         private  void LocalCameraUserControl_UnloadedAsync(object sender, RoutedEventArgs e)
         {
             _cameraStatus = CameraStatus.Stop;
+            
             VideoImage.Source = null;
             IrImage.Source = null;
         }
@@ -311,164 +289,11 @@ namespace CommonUserControls
                         //私有属性是否开启检测 由于是异步的 依赖性属性不能放入
                         if (_isDetectFace)
                         {
-                            if (isIRLock==false&&isDoubleShot)
-                            {
-                                isIRLock = true;
-                                var irBitmap = cIrFrame.ToBitmap();
-                                Task.Run(()=> 
-                                {
-                                    try
-                                    {
-                                        ASF_MultiFaceInfo irMultiFaceInfo = FaceUtil.DetectFace(pVideoIRImageEngine, irBitmap);
-                                        int retCode_Liveness = -1;
-                                        //将图片进行灰度转换，然后获取图片数据
-                                        ImageInfo irImageInfo = ImageUtil.ReadBMP_IR(irBitmap);
-                                        if (irImageInfo == null)
-                                        {
-                                            return;
-                                        }
-                                        //IR活体检测
-                                        ASF_LivenessInfo liveInfo = FaceUtil.LivenessInfo_IR(pVideoIRImageEngine, irImageInfo, irMultiFaceInfo, out retCode_Liveness);
-                                        //判断检测结果
-                                        if (retCode_Liveness == 0 && liveInfo.num > 0)
-                                        {
-                                            int isLive = MemoryUtil.PtrToStructure<int>(liveInfo.isLive);
-                                            trackIRUnit.message = isLive==1?"Ir Yes": "Ir No";
-                                            isIrLive = isLive == 1;
-                                        }
-                                        MemoryUtil.Free(irImageInfo.imgData);//释放当前指针所指向的内存
-                                    }
-                                    catch (Exception)
-                                    {
-                                    }
-                                    finally 
-                                    {
-                                        irBitmap?.Dispose();
-                                        isIRLock = false;
-                                    }
-                                });
-                            }
-                            if (isRGBLock==false)
-                            {
-                                isRGBLock = true;
-                                var bitmap = cFrame.ToBitmap();
-                                Task.Run(()=>
-                                {
-                                    try
-                                    {
-                                        _rectX = 0;
-                                        _rectY = 0;
-                                        _rectWidth = 0;
-                                        _rectHeight = 0;
-                                        ASF_MultiFaceInfo multiFaceInfo = FaceUtil.DetectFace(pVideoEngine, bitmap);                        
-                                        if (multiFaceInfo.faceNum > 0)
-                                        {
-                                            ASF_SingleFaceInfo maxFace = FaceUtil.GetMaxFace(multiFaceInfo);
-                                            _rectX = maxFace.faceRect.left;
-                                            _rectY = maxFace.faceRect.top;
-                                            _rectWidth = maxFace.faceRect.right - maxFace.faceRect.left;
-                                            _rectHeight = maxFace.faceRect.bottom - maxFace.faceRect.top;//将耗时的识别结果返回搞到上个一个线程 识别结果并不一定要等待才有 不等待什么时候完成返回也可以
-                                            if (isLiveLock == false && _rectWidth != 0 && _rectHeight != 0)
-                                            {
-                                                isLiveLock = true;
-                                                var liveBitmap = bitmap.Clone() as Bitmap;
-                                                Task.Run(() =>
-                                                {
-                                                    try
-                                                    {
-                                                        //调整图片数据，非常重要
-                                                        ImageInfo imageInfo = ImageUtil.ReadBMP(liveBitmap);//值传递
-                                                        if (imageInfo == null)
-                                                        {
-                                                            return;
-                                                        }
-                                                        int retCode_Liveness = -1;
-                                                        //RGB活体检测
-                                                        ASF_LivenessInfo liveInfo = FaceUtil.LivenessInfo_RGB(pVideoRGBImageEngine, imageInfo, multiFaceInfo, out retCode_Liveness);
-                                                        //判断检测结果
-                                                        if (retCode_Liveness == 0 && liveInfo.num > 0)
-                                                        {
-                                                            int isLive = MemoryUtil.PtrToStructure<int>(liveInfo.isLive);
-                                                            if (isDoubleShot && !isIrLive)//是双目 但是活体没过
-                                                            {
-                                                                return;
-                                                            }
-                                                            if (isLive == 1)
-                                                            {
-                                                                if (isRecogniteLock == false)
-                                                                {
-                                                                    isRecogniteLock = true;
-                                                                    var reBitmap = liveBitmap.Clone() as Bitmap;
-                                                                    Task.Run(() =>
-                                                                    {
-                                                                        try
-                                                                        {
-                                                                            //提取人脸特征
-                                                                            IntPtr feature = FaceUtil.ExtractFeature(pVideoRGBImageEngine, reBitmap, maxFace);
-                                                                            float similarity = 0f;
-                                                                            //得到比对结果
-                                                                            var result = compareFeature(feature, out similarity);
-                                                                            MemoryUtil.Free(feature);
-                                                                            if (!string.IsNullOrEmpty(result))
-                                                                            {
-                                                                                //将比对结果放到显示消息中，用于最新显示
-                                                                                trackRGBUnit.message = string.Format(" Socre {0},{1}", similarity, "RGB Yes");
-                                                                                faceResult = FaceResult.Success;
-                                                                                loginId = result;
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                faceResult = FaceResult.Fail;
-                                                                                trackRGBUnit.message = "RGB  Yes";
-                                                                            }                                                                           
-                                                                        }
-                                                                        catch (Exception)
-                                                                        {
-                                                                        }
-                                                                        finally
-                                                                        {
-                                                                            reBitmap?.Dispose();
-                                                                            isRecogniteLock = false;
-                                                                        }
-                                                                    });
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                trackRGBUnit.message = "RGB  No";
-                                                            }
-                                                        }
-                                                        if (imageInfo != null)
-                                                        {
-                                                            MemoryUtil.Free(imageInfo.imgData);
-                                                        }
-                                                    }
-                                                    catch (Exception ex)
-                                                    {
-
-                                                    }
-                                                    finally
-                                                    {
-                                                        liveBitmap?.Dispose();
-                                                        isLiveLock = false;
-                                                    }
-
-                                                });
-                                            }
-                                        }
-                                    }
-                                    catch (Exception)
-                                    {
-                                        //当页面关闭的时候cFrame被真正的释放到了 用lock也没有用的 虽然两条线程操作了同一个对象cframe
-                                    }
-                                    finally
-                                    {
-                                        bitmap.Dispose();
-                                        isRGBLock = false;
-                                    }
-                                });
-                            }
+                            IrCheck(cIrFrame);//不等待的异步 通过全局变量返回结果
+                            RgbCheck(cFrame);
                         }
+
+                        //drawRect And text
                         if (_rectX != 0&& _rectY != 0&& _rectWidth != 0&& _rectHeight != 0)
                         {
                             Cv2.Rectangle(cFrame, new OpenCvSharp.Rect(_rectX, _rectY, _rectWidth, _rectHeight), Scalar.Yellow, 2);
@@ -485,59 +310,10 @@ namespace CommonUserControls
                                 }
                             }
                         }
-                        //switch (faceResult)
-                        //{
-                        //    case FaceResult.Success:
-                        //        if (!string.IsNullOrEmpty(loginId))
-                        //        {
-                        //            var str = loginId.Split('_');
-                        //            if (str.Length == 2)
-                        //            {
-                        //                var isSuccessLogin = await IndividualNeeds.Instance.CommonVariables.LoginAction.Invoke(str[0], str[1]);//同步
-                        //                if (isSuccessLogin)
-                        //                {
-                        //                    _cameraStatus = CameraStatus.Stop;
-                        //                }
-                        //            }
-                        //            else
-                        //            {
-                        //                Logger.Info("人脸传过来的id解析不对啊");
-                        //            }
-                        //        }
-                        //        break;
-                        //    case FaceResult.Fail:
-                        //        //弹框 3种选择 dialog
-                        //        this.Dispatcher?.Invoke(() =>
-                        //        {
-                        //            SubWindowsService.Instance.OpenWindow(SubWindowsService.FaceRecognitionFailurePage, IsDialog: true);
-                        //            ResultType resultType;
-                        //            if (SubWindowsService.Instance.Result != null && Enum.TryParse(SubWindowsService.Instance.Result.ToString(), out resultType))
-                        //            {
-                        //                switch (resultType)
-                        //                {
-                        //                    case ResultType.RecogineAgian:
-                        //                        faceResult = FaceResult.NotStrat;
-                        //                        break;
-                        //                    case ResultType.ToLogin:
-                        //                        _cameraStatus = CameraStatus.Stop;
-                        //                        NaviService.Instance.GoBack();
-                        //                        break;
-                        //                    case ResultType.Close:
-                        //                        _cameraStatus = CameraStatus.Stop;
-                        //                        NaviService.Instance.NavigateTo(PageKey.MainPage);
-                        //                        break;
-                        //                }
-                        //            }
-                        //            else
-                        //            {
-                        //                Logger.Info("人脸失败弹窗无结果返回");
-                        //            }
-                        //        });
-                        //        break;
-                        //    case FaceResult.NotStrat:
-                        //        break;
-                        //}
-                   
+
+                        await RecogResult();//等待线程完成
+
+
                         Application.Current.Dispatcher?.Invoke(() =>
                         {
                            // var image = ImageHelper.Instance.ConvertBitmapToBitmapImage(cFrame.ToBitmap());
@@ -562,87 +338,6 @@ namespace CommonUserControls
             });
         }
 
-
-        //private async Task<ResultType> DistinguishFaceAsync(Mat cFrame, OpenCvSharp.Rect[] rect)
-        //{
-        //    var faceRecognitionResult = ResultType.RecogineAgian;
-        //    try
-        //    {
-        //        //是否开启识别
-        //        if (_isRecognitionFace)
-        //        {
-        //            if (rect.Length > 2)
-        //            {
-        //                TipService.Instance.ShowTip(TipService.ToolTip, 1000, "检测到多张人脸");
-        //                Thread.Sleep(1000);
-        //            }
-        //            else
-        //            {
-
-        //                bool isLiveness = false;
-        //                //调整图片数据，非常重要
-        //                ImageInfo imageInfo = ImageUtil.ReadBMP(cFrame.ToBitmap());//值传递
-        //                int retCode_Liveness = -1;
-        //                //RGB活体检测
-        //                ASF_LivenessInfo liveInfo = FaceUtil.LivenessInfo_RGB(pVideoRGBImageEngine, imageInfo, multiFaceInfo, out retCode_Liveness);
-        //                //判断检测结果
-        //                if (retCode_Liveness == 0 && liveInfo.num > 0)
-        //                {
-        //                    int isLive = MemoryUtil.PtrToStructure<int>(liveInfo.isLive);
-        //                    isLiveness = (isLive == 1) ? true : false;
-        //                }
-        //                if (imageInfo != null)
-        //                {
-        //                    MemoryUtil.Free(imageInfo.imgData);
-        //                }
-        //                //if (_labelsToId.TryGetValue(label, out id))//识别到了返回id
-        //                //{
-        //                //    //开始登录 返回bool 
-        //                //    //Cv2.PutText(cFrame, name, new OpenCvSharp.Point(rect[0].X, rect[0].Y), HersheyFonts.Italic, 1, color);
-        //                //    var str = id.Split('_');
-        //                //    if (str.Length == 2)
-        //                //    {
-        //                //        var isSuccessLogin = await IndividualNeeds.Instance.CommonVariables.LoginAction.Invoke(str[0], str[1]);//同步
-        //                //        if (isSuccessLogin)
-        //                //        {
-        //                //            faceRecognitionResult = ResultType.Success;
-        //                //        }
-        //                //    }
-        //                //    else
-        //                //    {
-        //                //        Logger.Info("人脸传过来的id解析不对啊");
-        //                //    }
-        //                //}
-        //                else
-        //                {
-        //                    //弹框 3种选择 dialog
-        //                    this.Dispatcher?.Invoke(() =>
-        //                    {
-        //                        SubWindowsService.Instance.OpenWindow(SubWindowsService.FaceRecognitionFailurePage, IsDialog: true);
-        //                        ResultType resultType;
-        //                        if (Enum.TryParse(SubWindowsService.Instance.Result.ToString(), out resultType))
-        //                        {
-        //                            faceRecognitionResult = resultType;
-        //                        }
-        //                        else
-        //                        {
-        //                            Logger.Info("人脸失败弹窗无结果返回");
-        //                        }
-        //                    });
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Logger.Error(ex);
-        //    }
-        //    finally
-        //    {
-
-        //    }
-        //    return faceRecognitionResult;
-        //}
         private string compareFeature(IntPtr feature, out float similarity)
         {
             string result = string.Empty;
@@ -653,10 +348,10 @@ namespace CommonUserControls
                 foreach (var item in imagesFeatureList)
                 {
                     //调用人脸匹配方法，进行匹配
-                    ASFFunctions.ASFFaceFeatureCompare(pVideoRGBImageEngine, feature, item.Key, ref similarity);
+                    ASFFunctions.ASFFaceFeatureCompare(pVideoRGBImageEngine, feature, item.Value, ref similarity);
                     if (similarity >= threshold)
                     {
-                        result = item.Value;
+                        result = item.Key;
                         break;
                     }
                 }
@@ -664,41 +359,73 @@ namespace CommonUserControls
             return result;
         }
 
-        private void ShotFace(Mat cFrame, OpenCvSharp.Rect[] rect)
+        private void ShotFace(Bitmap bitmap, int left,int top,int right,int bottom)
         {
             //是否截取人脸图片 只截取一张
             if (_isShotsFace)
             {
-                try
-                {
-                    if (rect.Length > 2)
-                    {
-                        TipService.Instance.ShowTip(TipService.ToolTip, 1000, "检测到多张人脸");
-                        Thread.Sleep(1000);
+                _isShotsFace = false;//锁住
+                IndividualNeeds.Instance.CommonVariables.IsLoading = true;
+                _cameraStatus = CameraStatus.Suspend;
+                System.Drawing.Image saveBitmap = ImageUtil.CutImage(bitmap, left, top, right, bottom);
+                Task.Run(async  ()=> 
+                {               
+                    try
+                    {   
+                        saveBitmap = ImageUtil.ScaleImage(saveBitmap, 200, 200);
+                        if (IndividualNeeds.Instance.CommonVariables.User != null)
+                        {
+                            ASF_SingleFaceInfo singleFaceInfo = new ASF_SingleFaceInfo();
+                            IntPtr feature = FaceUtil.ExtractFeature(pImageEngine, saveBitmap, out singleFaceInfo);
+                            MemoryUtil.Free(feature);//释放
+                            if (singleFaceInfo.faceRect.left == 0 && singleFaceInfo.faceRect.right == 0)
+                            {
+                                Logger.Info($"无法检测不到特征值");
+                                TipService.Instance.ShowTip(TipService.ToolTip, 1000, "无法检测不到特征值");
+                                return;
+                            }
+                            var id = $"{IndividualNeeds.Instance.CommonVariables.User.Id}_{IndividualNeeds.Instance.CommonVariables.User.Password}";
+                            var path = $"{AppDomain.CurrentDomain.BaseDirectory}Faces\\" +
+                            $"{id}.png";
+                            if (File.Exists(path))
+                            {
+                                File.Delete(path);
+                            }
+                            saveBitmap.Save(path);
+                            if (imagesFeatureList.ContainsKey(id))
+                            {
+                                MemoryUtil.Free(imagesFeatureList[id]);
+                                imagesFeatureList.Remove(id);
+                            }
+                            var imageData=File.ReadAllBytes(path);
+                            if (IndividualNeeds.Instance.CommonVariables.UploadImageAction!=null)
+                            {
+                                var isSuccess = await IndividualNeeds.Instance.CommonVariables.UploadImageAction?.Invoke(imageData);
+                                if (isSuccess)
+                                {
+                                    _cameraStatus = CameraStatus.Stop;
+                                }
+                                else
+                                {
+                                    _cameraStatus = CameraStatus.Palying;
+                                }
+                            }
+                        }
                     }
-                    else
+                    catch (Exception ex)
+                    {
+                        Logger.Error(ex);
+                    }
+                    finally
                     {
                         Application.Current.Dispatcher?.Invoke(() =>
                         {
-                            Mat cHead = new Mat(cFrame, rect[0]);//截图区域   
-                            Cv2.Resize(cHead, cHead, new OpenCvSharp.Size(200, 200));//图片过大 缩放图片为100 100
-                            var path = $"{AppDomain.CurrentDomain.BaseDirectory}Faces\\12506_123456.png";
-                            Cv2.ImWrite(path, cHead); //写入文件
-                            cHead.Release();
+                            IsShotsFace = false;
                         });
+                        saveBitmap?.Dispose();
+                        IndividualNeeds.Instance.CommonVariables.IsLoading = false;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
-                }
-                finally
-                {
-                    Application.Current.Dispatcher?.Invoke(() =>
-                    {
-                        IsShotsFace = false;
-                    });
-                }
+                });
             }
         }
 
@@ -717,7 +444,8 @@ namespace CommonUserControls
             }
             foreach (FileInfo fi in directoryInfo.GetFiles())
             {
-                if (imagesFeatureList.ContainsValue(fi.Name))
+                var id = fi.Name.Replace(fi.Extension, "");
+                if (imagesFeatureList.ContainsKey(id))
                 {
                     continue;
                 }
@@ -756,9 +484,8 @@ namespace CommonUserControls
                             Logger.Info($"图片{fi.Name}检测不到特征值");
                         }
                         else
-                        {
-                            var id = fi.Name.Replace(fi.Extension, "");
-                            imagesFeatureList.Add(feature, id);//name 也是key
+                        {                         
+                            imagesFeatureList.Add(id, feature);//name 也是key
                         }
                     }
                     else
@@ -849,5 +576,292 @@ namespace CommonUserControls
             Logger.Info("InitVideoEngine Result:" + retCode);
         }
 
+        private bool isIRLock = false;
+        /// <summary>
+        /// 异步锁处理ir活体检测 将结果返回到最上级线程
+        /// </summary>
+        /// <param name="cIrFrame"></param>
+        private void IrCheck(Mat cIrFrame)
+        {
+            if (isIRLock == false && isDoubleShot&& cIrFrame!=null)
+            {
+                isIRLock = true;
+                var irBitmap = cIrFrame.ToBitmap();
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        ASF_MultiFaceInfo irMultiFaceInfo = FaceUtil.DetectFace(pVideoIRImageEngine, irBitmap);
+                        int retCode_Liveness = -1;
+                        //将图片进行灰度转换，然后获取图片数据
+                        ImageInfo irImageInfo = ImageUtil.ReadBMP_IR(irBitmap);
+                        if (irImageInfo == null)
+                        {
+                            return;
+                        }
+                        //IR活体检测
+                        ASF_LivenessInfo liveInfo = FaceUtil.LivenessInfo_IR(pVideoIRImageEngine, irImageInfo, irMultiFaceInfo, out retCode_Liveness);
+                        //判断检测结果
+                        if (retCode_Liveness == 0 && liveInfo.num > 0)
+                        {
+                            int isLive = MemoryUtil.PtrToStructure<int>(liveInfo.isLive);
+                            trackIRUnit.message = isLive == 1 ? "Ir Yes" : "Ir No";
+                            isIrLive = isLive == 1;
+                        }
+                        MemoryUtil.Free(irImageInfo.imgData);//释放当前指针所指向的内存
+                    }
+                    catch (Exception)
+                    {
+                    }
+                    finally
+                    {
+                        irBitmap?.Dispose();
+                        isIRLock = false;
+                    }
+                });
+            }
+        }
+        private bool isRGBLock = false;
+        private void RgbCheck(Mat cFrame)
+        {
+            if (isRGBLock == false)
+            {
+                isRGBLock = true;
+                var bitmap = cFrame.ToBitmap();
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        _rectX = 0;
+                        _rectY = 0;
+                        _rectWidth = 0;
+                        _rectHeight = 0;
+                        ASF_MultiFaceInfo multiFaceInfo = FaceUtil.DetectFace(pVideoEngine, bitmap);
+                        if (multiFaceInfo.faceNum > 0)
+                        {
+                            ASF_SingleFaceInfo maxFace = FaceUtil.GetMaxFace(multiFaceInfo);
+                            _rectX = maxFace.faceRect.left;
+                            _rectY = maxFace.faceRect.top;
+                            _rectWidth = maxFace.faceRect.right - maxFace.faceRect.left;
+                            _rectHeight = maxFace.faceRect.bottom - maxFace.faceRect.top;//将耗时的识别结果返回搞到上个一个线程 识别结果并不一定要等待才有 不等待什么时候完成返回也可以
+                            ShotFace(bitmap, _rectX, _rectY, maxFace.faceRect.right, maxFace.faceRect.bottom);//截图
+                            if (isLiveLock == false && _rectWidth != 0 && _rectHeight != 0)//锁住检测rgb活体
+                            {
+                                isLiveLock = true;
+                                var liveBitmap = bitmap.Clone() as Bitmap;
+                                Task.Run(() =>
+                                {
+                                    try
+                                    {
+                                        //调整图片数据，非常重要
+                                        ImageInfo imageInfo = ImageUtil.ReadBMP(liveBitmap);//值传递
+                                        if (imageInfo == null)
+                                        {
+                                            return;
+                                        }
+                                        int retCode_Liveness = -1;
+                                        //RGB活体检测
+                                        ASF_LivenessInfo liveInfo = FaceUtil.LivenessInfo_RGB(pVideoRGBImageEngine, imageInfo, multiFaceInfo, out retCode_Liveness);
+                                        //判断检测结果
+                                        if (retCode_Liveness == 0 && liveInfo.num > 0)
+                                        {
+                                            int isLive = MemoryUtil.PtrToStructure<int>(liveInfo.isLive);
+                                            if (isDoubleShot && !isIrLive)//是双目 但是活体没过
+                                            {
+                                                return;
+                                            }
+                                            if (isLive == 1)
+                                            {
+                                                if (_isRecognitionFace)
+                                                {
+                                                    if (isRecogniteLock == false)//锁住 人脸匹配
+                                                    {
+                                                        isRecogniteLock = true;
+                                                        var reBitmap = liveBitmap.Clone() as Bitmap;
+                                                        Task.Run(() =>
+                                                        {
+                                                            try
+                                                            {
+                                                                //提取人脸特征
+                                                                IntPtr feature = FaceUtil.ExtractFeature(pVideoRGBImageEngine, reBitmap, maxFace);
+                                                                float similarity = 0f;
+                                                                //得到比对结果
+                                                                var result = compareFeature(feature, out similarity);
+                                                                MemoryUtil.Free(feature);
+                                                                if (!string.IsNullOrEmpty(result))
+                                                                {
+                                                                    //将比对结果放到显示消息中，用于最新显示
+                                                                    trackRGBUnit.message = string.Format(" Socre {0},{1}", similarity, "RGB Yes");
+                                                                    faceResult = FaceResult.Success;
+                                                                    loginId = result;
+                                                                }
+                                                                else
+                                                                {
+                                                                    faceResult = FaceResult.Fail;
+                                                                    trackRGBUnit.message = "RGB  Yes";
+                                                                }
+                                                            }
+                                                            catch (Exception)
+                                                            {
+                                                            }
+                                                            finally
+                                                            {
+                                                                reBitmap?.Dispose();
+                                                                isRecogniteLock = false;
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    trackRGBUnit.message = "RGB  Yes";
+                                                }                                             
+                                            }
+                                            else
+                                            {
+                                                trackRGBUnit.message = "RGB  No";
+                                            }
+                                        }
+                                        if (imageInfo != null)
+                                        {
+                                            MemoryUtil.Free(imageInfo.imgData);
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+
+                                    }
+                                    finally
+                                    {
+                                        liveBitmap?.Dispose();
+                                        isLiveLock = false;
+                                    }
+
+                                });
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        //当页面关闭的时候cFrame被真正的释放到了 用lock也没有用的 虽然两条线程操作了同一个对象cframe
+                    }
+                    finally
+                    {
+                        bitmap.Dispose();
+                        isRGBLock = false;
+                    }
+                });
+            }
+        }
+        private async Task RecogResult()
+        {
+            switch (faceResult)
+            {
+                case FaceResult.Success:
+                    if (!string.IsNullOrEmpty(loginId))
+                    {
+                        var str = loginId.Split('_');
+                        if (str.Length == 2)
+                        {
+                            var isSuccessLogin = await IndividualNeeds.Instance.CommonVariables.LoginAction.Invoke(str[0], str[1]);//同步
+                            if (isSuccessLogin)
+                            {
+                                _cameraStatus = CameraStatus.Stop;
+                            }
+                        }
+                        else
+                        {
+                            Logger.Info("人脸传过来的id解析不对啊");
+                        }
+                    }
+                    break;
+                case FaceResult.Fail:
+                    //弹框 3种选择 dialog
+                    this.Dispatcher?.Invoke(() =>
+                    {
+                        SubWindowsService.Instance.OpenWindow(SubWindowsService.FaceRecognitionFailurePage, IsDialog: true);
+                        ResultType resultType;
+                        if (SubWindowsService.Instance.Result==null)//计时器关闭 无返回值
+                        {
+                            SubWindowsService.Instance.Result = ResultType.Close;
+                        }
+                        if (Enum.TryParse(SubWindowsService.Instance.Result.ToString(), out resultType))
+                        {
+                            switch (resultType)
+                            {
+                                case ResultType.RecogineAgian:
+                                    faceResult = FaceResult.Continue;
+                                    break;
+                                case ResultType.ToLogin:
+                                    _cameraStatus = CameraStatus.Stop;
+                                    NaviService.Instance.GoBack();
+                                    break;
+                                case ResultType.Close:
+                                    _cameraStatus = CameraStatus.Stop;
+                                    NaviService.Instance.NavigateTo(PageKey.MainPage);
+                                    break;
+                            }
+                        }
+                    });
+                    break;
+                case FaceResult.Continue:
+                    break;
+            }
+        }
+        private void InitVideo()
+        {
+            if (_rgbVideoCapture == null)
+            {
+                if (rgbCameraIndex != irCameraIndex)
+                {
+                    _rgbVideoCapture = new VideoCapture(rgbCameraIndex);
+                    _irVideoCapture = new VideoCapture(irCameraIndex);
+                    var isRgbOpen = _rgbVideoCapture.IsOpened();
+                    if (!isRgbOpen)
+                    {
+                        this.Dispatcher?.Invoke(() =>
+                        {
+                            BusyIndicator1.IsBusy = false;
+                        });
+                        TipService.Instance.ShowTip(TipService.ToolTip, 1000, "未检测到彩色摄像头!");
+                    }
+                    var isIrOpen = _irVideoCapture.IsOpened();
+                    if (!isIrOpen)
+                    {
+                        this.Dispatcher?.Invoke(() =>
+                        {
+                            BusyIndicator1.IsBusy = false;
+                        });
+                        TipService.Instance.ShowTip(TipService.ToolTip, 1000, "未检测到红外摄像头!");
+                    }
+                    if (!isIrOpen || !isRgbOpen)
+                    {
+                        return;
+                    }
+                    isDoubleShot = true;
+                }
+                else
+                {
+                    _rgbVideoCapture = new VideoCapture(0);
+                    if (!_rgbVideoCapture.IsOpened())
+                    {
+                        this.Dispatcher?.Invoke(() =>
+                        {
+                            BusyIndicator1.IsBusy = false;
+                        });
+                        TipService.Instance.ShowTip(TipService.ToolTip, 1000, "未检测到摄像头，请确保已安装摄像头或驱动!");
+                        return;
+                    }
+                }
+            }
+            if (_rgbVideoCapture.IsOpened())
+            {
+                _cameraStatus = CameraStatus.Palying;
+            }
+            else
+            {
+                _cameraStatus = CameraStatus.Stop;
+            }
+        }
     }
 }

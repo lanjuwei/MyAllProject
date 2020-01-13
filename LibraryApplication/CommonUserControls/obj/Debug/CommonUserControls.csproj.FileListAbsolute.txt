@@ -203,3 +203,13 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\o
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\CommonUserControls.pdb
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\OpencvCameraUserControl.g.cs
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\OpencvCameraUserControl.baml
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AForge.Controls.dll
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AForge.dll
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AForge.Imaging.dll
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AForge.Imaging.Formats.dll
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AForge.Math.dll
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AForge.Video.DirectShow.dll
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AForge.Video.dll
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\Emgu.CV.World.dll
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\OpencvCameraUserControl.g.cs
+D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\OpencvCameraUserControl.baml

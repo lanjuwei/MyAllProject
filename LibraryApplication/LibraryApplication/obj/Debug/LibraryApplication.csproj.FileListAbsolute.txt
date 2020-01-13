@@ -301,3 +301,10 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\o
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\obj\Debug\LibraryApplication.csproj.CopyComplete
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\obj\Debug\LibraryApplication.exe
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\obj\Debug\LibraryApplication.pdb
+D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\Emgu.CV.World.dll
+D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.Video.DirectShow.dll
+D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.Controls.dll
+D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.Video.dll
+D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.dll
+D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.Imaging.dll
+D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.Math.dll

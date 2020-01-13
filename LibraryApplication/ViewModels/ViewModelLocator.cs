@@ -29,6 +29,7 @@ namespace ViewModels
             SimpleIoc.Default.Register<FaceLoginViewModel>();//人脸登录
             SimpleIoc.Default.Register<PersonalCenterViewModel>();//个人中心
             SimpleIoc.Default.Register<ChangePasswordViewModel>();//修改密码
+            SimpleIoc.Default.Register<RegistrateFaceViewModel>();//注册人脸
             #endregion
             #region book
             SimpleIoc.Default.Register<OperateBooksViewModel>();
@@ -45,5 +46,6 @@ namespace ViewModels
         public PersonalCenterViewModel PersonalCenterViewModel => ServiceLocator.Current.GetInstance<PersonalCenterViewModel>();
         public OperateBooksViewModel OperateBooksViewModel => ServiceLocator.Current.GetInstance<OperateBooksViewModel>();
         public ChangePasswordViewModel ChangePasswordViewModel => ServiceLocator.Current.GetInstance<ChangePasswordViewModel>();
+        public RegistrateFaceViewModel RegistrateFaceViewModel => ServiceLocator.Current.GetInstance<RegistrateFaceViewModel>();
     }
 }

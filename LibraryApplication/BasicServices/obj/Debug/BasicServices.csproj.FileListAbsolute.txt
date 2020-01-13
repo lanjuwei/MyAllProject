@@ -195,3 +195,4 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\obj\De
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\obj\Debug\BasicServices.csproj.CopyComplete
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\obj\Debug\BasicServices.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\obj\Debug\BasicServices.pdb
+D:\MyGit\MyAllProject\LibraryApplication\BasicServices\bin\Debug\Emgu.CV.World.dll

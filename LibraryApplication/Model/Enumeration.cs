@@ -83,7 +83,7 @@ namespace Model
     {
         Success,
         Fail,
-        NotStrat
+        Continue
     }
 
     public enum CameraStatus

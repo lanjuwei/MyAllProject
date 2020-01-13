@@ -38,5 +38,11 @@ namespace BasicServices.SocketService
         /// <param name="id"></param>
         /// <returns></returns>
         Task<ResponseModel<string>> ChangePassword(string password);
+        /// <summary>
+        /// 上传图片
+        /// </summary>
+        /// <param name="imageData"></param>
+        /// <returns></returns>
+        Task<ResponseModel<string>> UploadImage(byte[] imageData);
     }
 }
