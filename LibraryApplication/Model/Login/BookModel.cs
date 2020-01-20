@@ -15,8 +15,23 @@ namespace Model.Login
     {
         private BookStatus bookStatus;
         private string status;
-       
+        private string describe;
+        private string imagePath;
+        private string currentData;
+        private string returnDate;
+        private bool isSlelected;
 
+        public bool IsSlelected
+        {
+            get => isSlelected; set
+            {
+                Set(() => IsSlelected, ref isSlelected, value);
+            }
+        }
+
+        /// <summary>
+        /// 图书的唯一id 
+        /// </summary>
         public string BarCode { get; set; }
         public string Title { get; set; }
         public string Status
@@ -31,7 +46,29 @@ namespace Model.Login
         /// 归还日期
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public string ReturnDate { get; set; }
+        public string ReturnDate
+        {
+            get => returnDate; set
+            {
+                returnDate = value;
+                if (value is string str)
+                {
+                    DateTime t;
+                    if (DateTime.TryParse(value.ToString(), out t))
+                    {
+                        var d = (t - DateTime.Now).TotalSeconds;
+                        if (d < 0)
+                        {
+                            CurrentData = $"{str}[超期]";
+                        }
+                        else
+                        {
+                            CurrentData = value;
+                        }
+                    }
+                }
+            }
+        }
         /// <summary>
         /// 借书日期
         /// </summary>
@@ -41,7 +78,35 @@ namespace Model.Login
         /// 图书描述
         /// </summary>
         [SugarColumn(IsNullable = true)]
-        public string Describe { get; set; }
+        public string Describe
+        {
+            get => describe; set
+            {
+                Set(() => Describe, ref describe, value);
+            }
+        }
+        /// <summary>
+        /// 结果图片地址
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string ImagePath
+        {
+            get => imagePath; set
+            {
+                Set(() => ImagePath, ref imagePath, value);
+            }
+        }
+        /// <summary>
+        /// 书的日期加上特殊格式 例如已过期的要表示已超期
+        /// </summary>
+        [SugarColumn(IsNullable = true)]
+        public string CurrentData
+        {
+            get => currentData; set
+            {
+                Set(() => CurrentData, ref currentData, value);
+            }
+        }
 
         //千万不要将ui上的东西 用set通知界面啊 因为ui上的东西是主线程的 set是另一条异步线程啊 妈的 
         //就算没有set 也不能再不同set线程里面乱搞啊 吗的 必须用转换器

@@ -25,6 +25,11 @@ namespace BasicFunction.Helper
         private bool isRuning = true;
         private Task backgroundTask;
         /// <summary>
+        /// socket断开回调
+        /// </summary>
+        public  event Action<bool> SocketDisconnectCallBack;
+        private int disconnectCount;
+        /// <summary>
         /// 长连接初始化
         /// </summary>
         public  void InitLongSocketAsync()
@@ -36,14 +41,14 @@ namespace BasicFunction.Helper
             });
         }
         /// <summary>
-        /// 短连接获取响应
+        /// 短连接获取响应 不是这么写的
         /// </summary>
         public  string GeResponseAsyncByShortConnect(RequestKey key, string json) 
-        {           
+        {
             using (_client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
                 _client.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2012));//连接socket
-                _client.ReceiveTimeout = 5;
+                _client.ReceiveTimeout = 5000;
                 return  GetRespone(key.ToString(), json);
             }
         }
@@ -104,12 +109,22 @@ namespace BasicFunction.Helper
                 {
                     if (_client.Connected)
                     {
+                        if (disconnectCount==3)//代表窗口已经打开
+                        {
+                            SocketDisconnectCallBack?.Invoke(false);
+                            disconnectCount = 0;
+                        } 
                         GetRespone("CheckConnect");
                         Thread.Sleep(5000);
                     }
                     else
                     {
-                        Thread.Sleep(3000);
+                        disconnectCount++;
+                        if (disconnectCount==3)
+                        {
+                            SocketDisconnectCallBack?.Invoke(true);                           
+                        }
+                        Thread.Sleep(1000);
                         Connect();
                     }
                 }
@@ -193,6 +208,11 @@ namespace BasicFunction.Helper
         GetUserBookList,
         LoginOut,
         ChangePassword,
-        UploadImage
+        UploadImage,
+        DeleteFace,
+        ReturnBooks,
+        GetAllbooks,
+        BorrowBooks,
+        RenewBooks
     }
 }

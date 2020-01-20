@@ -1,0 +1,24 @@
+2020-01-15 17:38:55,980 [3] INFO  infoLogger [(null)] - 
+2020-01-15 18:40:19,374 [14] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:40:28,094 [10] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:42:10,455 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-15 18:42:10,695 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-15 18:42:11,092 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-15 18:42:16,405 [10] INFO  infoLogger [(null)] - 
+2020-01-15 18:42:38,861 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-15 18:42:39,017 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-15 18:42:39,354 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-15 18:43:52,794 [17] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:43:55,319 [18] INFO  infoLogger [(null)] - 
+2020-01-15 18:44:15,616 [18] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:47:30,943 [21] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:48:27,736 [3] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:48:35,261 [16] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:49:13,783 [3] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:56:20,898 [3] INFO  infoLogger [(null)] - 密码错误
+2020-01-15 18:57:03,230 [14] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:58:08,259 [16] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 18:59:33,690 [14] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-15 19:04:36,480 [14] INFO  infoLogger [(null)] - 密码错误
+2020-01-15 19:06:30,449 [3] INFO  infoLogger [(null)] - 
+2020-01-15 19:10:35,340 [5] INFO  infoLogger [(null)] - 

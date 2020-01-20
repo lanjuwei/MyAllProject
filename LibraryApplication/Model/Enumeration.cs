@@ -114,5 +114,9 @@ namespace Model
     /// <summary>
     /// 图片检测模式
     /// </summary>
-
+    public enum LanguageType 
+    {
+        En,
+        Cn,
+    }
 }

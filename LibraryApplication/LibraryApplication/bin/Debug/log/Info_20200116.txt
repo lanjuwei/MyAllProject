@@ -1,0 +1,21 @@
+2020-01-16 08:59:04,418 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-16 08:59:04,642 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-16 08:59:05,028 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-16 08:59:34,521 [3] INFO  infoLogger [(null)] - 
+2020-01-16 09:21:36,569 [1] INFO  infoLogger [(null)] - 程序发生意外错误！！
+2020-01-16 09:25:43,904 [5] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-16 09:25:44,054 [5] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-16 09:25:44,400 [5] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-16 09:30:46,116 [14] INFO  infoLogger [(null)] - 
+2020-01-16 09:43:31,854 [11] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-16 09:43:31,995 [11] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-16 09:43:32,316 [11] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-16 09:49:18,076 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-16 09:49:18,220 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-16 09:49:18,557 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-16 09:51:56,627 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-16 09:51:56,773 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-16 09:51:57,114 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-16 10:01:29,574 [11] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-16 10:01:29,712 [11] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-16 10:01:30,031 [11] INFO  infoLogger [(null)] - InitVideoEngine Result:0

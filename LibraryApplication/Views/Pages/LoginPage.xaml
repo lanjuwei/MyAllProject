@@ -20,7 +20,7 @@
             <Grid  Margin="14">
                 <commoncontrols:CommonButton Background="White" PressedBackground="#e7e7e7" CornerRadius="16" BorderThickness="0" 
                                                  Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Page},Path=DataContext.SelectCurrentLoginItemCommand}" 
-                                                 CommandParameter="{Binding}" Width="240" Height="240" IsEnabled="{Binding IsEnabled}">
+                                                 CommandParameter="{Binding}" Width="240" Height="240"  DisabledBackground="#cdcdcd" IsEnabled="{Binding IsEnabled}">
                     <commoncontrols:CommonButton.Effect>
                         <DropShadowEffect Color="#A8A8A8" Opacity="0.2" BlurRadius="8" Direction="-90"  ShadowDepth="4"></DropShadowEffect>
                     </commoncontrols:CommonButton.Effect>

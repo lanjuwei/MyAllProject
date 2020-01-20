@@ -1,4 +1,5 @@
 ﻿
+using BasicFunction.Log;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,7 +41,7 @@ namespace BasicFunction.Helper
             }
             else
             {
-                //_logger.Info($"Can not find {xmlFilePath} 文件");
+                Logger.Info($"Can not find {xmlFilePath} 文件");
             }
             return (T)result;
         }

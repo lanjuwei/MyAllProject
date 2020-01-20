@@ -13,12 +13,25 @@ namespace Views.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is bool)) return Visibility.Collapsed;
-            if ((bool)value)
+            if (parameter?.ToString()=="false")
             {
-                return Visibility.Visible;
+                if (value is bool b && b)
+                {
+                    return Visibility.Collapsed;
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
             }
-            return Visibility.Collapsed;
+            else
+            {
+                if (value is bool b && b)
+                {
+                    return Visibility.Visible;
+                }
+                return Visibility.Collapsed;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

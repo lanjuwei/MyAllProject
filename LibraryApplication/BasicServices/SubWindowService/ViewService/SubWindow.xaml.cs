@@ -73,7 +73,8 @@ namespace BasicServices.SubWindowService.ViewService
                 vm.DragAction = DragWindow;
                 vm.CloseWithParameter = CloseWindow;
                 vm.Close = NormalCloseWindow;
-                vm.Loaded(_parameter);
+                vm.LoadParamerter = _parameter;
+                vm.Loaded();
                 vm.Id = this.Id;
 
                 //Frame.SizeChanged += Page_SizeChanged; 除非需要窗口拖动 否则不须计算宽高

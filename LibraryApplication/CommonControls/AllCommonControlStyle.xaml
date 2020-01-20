@@ -87,14 +87,15 @@
 
     <!--通用CheckBox-->
     <converter1:CommonCheckBoxPropertyConverter x:Key="CommonCheckBoxPropertyConverter"></converter1:CommonCheckBoxPropertyConverter>
-    <Style   TargetType="{x:Type commonControls:CommonCheckBox}">
-        <Setter Property="Background" Value="#FFDDDDDD"/>
-        <Setter Property="BorderBrush" Value="#FF707070"/>
+    <Style x:Key="CommonCheckBoxStyle"  TargetType="{x:Type commonControls:CommonCheckBox}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type commonControls:CommonCheckBox}">
@@ -156,6 +157,7 @@
                             <Setter  Property="TextElement.Foreground" TargetName="contentPresenter" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=CheckForeground}"/>
                             <Setter Property="BorderThickness" TargetName="border" Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource CommonCheckBoxPropertyConverter},ConverterParameter=CheckThickness}"/>
                             <Setter TargetName="CheckImage" Property="Visibility" Value="Visible"></Setter>
+                            <Setter TargetName="NormalImage" Property="Visibility" Value="Collapsed"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -164,9 +166,9 @@
     </Style>
 
     <converter1:CommonListBoxPropertyConverter x:Key="CommonListBoxPropertyConverter"></converter1:CommonListBoxPropertyConverter>
-    <Style  TargetType="{x:Type commonControls:CommonListBox}">
-        <Setter Property="Background" Value="#FFFFFFFF"/>
-        <Setter Property="BorderBrush" Value="#FFABADB3"/>
+    <Style x:Key="CommonListBoxStyle"  TargetType="{x:Type commonControls:CommonListBox}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -175,11 +177,14 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="ItemContainerStyle" Value="{StaticResource CommonListBoxItemStyle}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
-                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true">
+                    <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            
+                            Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="true"
+                            >
                         <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </ScrollViewer>
@@ -215,13 +220,13 @@
         <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=NormalItemBackground,Converter={StaticResource CommonListBoxPropertyConverter}}"/>
         <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl},Path=NormalItemBorderBrush,Converter={StaticResource CommonListBoxPropertyConverter}}"/>
         <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=NormalItemThickness,Converter={StaticResource CommonListBoxPropertyConverter}}"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Margin" Value="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=ItemMargin,Converter={StaticResource CommonListBoxPropertyConverter}}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Grid>
-                        <Border x:Name="Bd" 
+                        <Border x:Name="Bd"
                                     CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=ItemCornerRadius,Converter={StaticResource CommonListBoxPropertyConverter}}"
                                     Opacity="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl },Path=NormalItemOpacity,Converter={StaticResource CommonListBoxPropertyConverter}}" 
                                     BorderBrush="{TemplateBinding BorderBrush}" 

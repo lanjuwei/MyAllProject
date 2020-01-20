@@ -24,12 +24,14 @@ namespace BasicServices.SubWindowService.ViewService
         /// 窗口加载
         /// </summary>
         /// <param name="parameter"></param>
-        public virtual void Loaded(object parameter=null)
+        public virtual void Loaded()
         {
 
         }
-
-
+        /// <summary>
+        /// 导航过来的参数
+        /// </summary>
+        public object LoadParamerter { get; set; }
         public  Action<object> CloseWithParameter { get; set; }
         public Action Close { get; set; }
         /// <summary>

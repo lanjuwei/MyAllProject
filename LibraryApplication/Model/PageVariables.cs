@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,5 +27,7 @@ namespace Model
                 Set(() => RootGridHeight, ref rootGridHeight, value);
             }
         }
+
+        public string OfficialAccountImagePath{ get; } =File.Exists(@"\Images\公众号二维码.png") ? @"\Images\公众号二维码.png" : null;
     }
 }

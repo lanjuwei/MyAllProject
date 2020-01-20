@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using ToolTipUserControl = BasicServices.TipService.Views.ToolTipUserControl;
 using TopUserControl = BasicServices.TipService.Views.TopUserControl;
@@ -157,8 +158,8 @@ namespace BasicServices.TipService
             if (_hideStory != null) _hideStory.Completed += _hideStory_Completed;
             
                 _currentPopup?.Child?.BeginAnimation(UIElement.OpacityProperty, _showStory);
-            
-            _isNeedTimer = isNeedTimr;
+                _currentPopup.Opened += _currentPopup_Opened;
+                _isNeedTimer = isNeedTimr;
             if (isNeedTimr)//需要内部计时器
             {
                 _token = new CancellationTokenSource(); //被使用和释放的token必须重新实例化
@@ -180,11 +181,42 @@ namespace BasicServices.TipService
             }));
         }
 
+        private void _currentPopup_Opened(object sender, EventArgs e)
+        {
+            SetPopupRoot();
+        }
+
+        /// <summary>
+        /// 设置popup最顶层可视化树元素PopupRoot
+        /// </summary>
+        private void SetPopupRoot()
+        {
+            _currentPopup?.Dispatcher?.InvokeAsync(() =>
+            {
+                DependencyObject obj = _currentPopup.Child;
+                while (obj != null)
+                {
+                    obj = VisualTreeHelper.GetParent(obj);
+                    if (obj == null || obj.ToString() != "System.Windows.Controls.Primitives.PopupRoot")
+                    {
+                        Thread.Sleep(200);
+                        continue;
+                    }
+                    var element = obj as FrameworkElement;
+                    element.Width = SystemParameters.PrimaryScreenWidth;
+                    element.Height = SystemParameters.PrimaryScreenHeight;
+                    break;
+                }
+            });
+
+        }
+
         private void _hideStory_Completed(object sender, object e)
         {
 
             if (_currentPopup != null)
             {
+                _currentPopup.Opened -= _currentPopup_Opened;
                 _currentPopup.IsOpen = false;
                 _currentPopup.Child = null;
                 _currentPopup = null;

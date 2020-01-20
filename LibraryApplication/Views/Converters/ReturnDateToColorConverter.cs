@@ -21,12 +21,12 @@ namespace Views.Converters
             DateTime t;
             if (DateTime.TryParse(value.ToString(),out t))
             {
-                var d = (t - DateTime.Now).Days;
-                if (d <= 30)
+                var d = (t - DateTime.Now).TotalSeconds;//所剩下的秒 如果还有则蓝色显示
+                if (d >=0)
                 {
                     forgroundColor.Color = (Color)ColorConverter.ConvertFromString("#ff7256");
                 }
-                else if (d>30)
+                else //过期则橙红色显示
                 {
                     forgroundColor.Color = (Color)ColorConverter.ConvertFromString("#ffaa56");
                 }             

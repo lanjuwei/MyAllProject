@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,11 +23,16 @@ namespace CommonUserControls
     /// </summary>
     public partial class BigSoftKeyboardUserControl : System.Windows.Controls.UserControl
     {
-
+        private static Storyboard storyboard;
         public BigSoftKeyboardUserControl()
         {
             InitializeComponent();
             Loaded += BigSoftKeyboardUserControl_Loaded;
+        }
+
+        static BigSoftKeyboardUserControl()
+        {
+            
         }
 
         private void BigSoftKeyboardUserControl_Loaded(object sender, RoutedEventArgs e)
@@ -36,6 +42,17 @@ namespace CommonUserControls
             {
                 InputCommand?.Execute("CapsLock");//恢复小写
             }
+            if (storyboard==null)
+            {
+                storyboard = new Storyboard();
+                var d = new DoubleAnimation() { Duration = TimeSpan.FromSeconds(0.8), EasingFunction = new CubicEase() };
+                d.From = this.ActualHeight;
+                d.To = 0;
+                storyboard.Children.Add(d);
+                Storyboard.SetTarget(d, RootGrid);
+                Storyboard.SetTargetProperty(d, new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)"));
+            }
+            storyboard?.Begin();
         }
 
         public ICommand InputCommand => new RelayCommand<string>(t =>

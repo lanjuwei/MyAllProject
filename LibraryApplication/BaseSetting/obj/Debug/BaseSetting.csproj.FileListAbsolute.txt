@@ -42,8 +42,6 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debu
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\SqlSugar.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\Model.pdb
-D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.pdb
-D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\GalaSoft.MvvmLight.xml
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csprojAssemblyReference.cache
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.g.resources
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.Properties.Resources.resources
@@ -51,3 +49,14 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debu
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.csproj.CopyComplete
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\obj\Debug\BaseSetting.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BasicFunction.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\log4net.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\Emgu.CV.World.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\AudioSwitcher.AudioApi.CoreAudio.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\AudioSwitcher.AudioApi.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BasicFunction.pdb
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\log4net.xml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\Emgu.CV.World.xml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\EPPlus.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\BasicFunction.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BaseSetting\bin\Debug\EPPlus.xml

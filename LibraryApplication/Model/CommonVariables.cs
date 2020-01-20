@@ -34,5 +34,6 @@ namespace Model
         public Func<string,string, Task<bool>> LoginAction { get; set; }
         public UserModel User { get; set; }
         public Func<byte[], Task<bool>> UploadImageAction { get; set; }
+        public Action<bool> CheckImage { get; set; }
     }
 }

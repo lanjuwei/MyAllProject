@@ -112,7 +112,12 @@
         </Style>
         <converters:StringToCaseConverter x:Key="StringToCaseConverter"></converters:StringToCaseConverter>
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="RootGrid">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="372*"/>
             <RowDefinition Height="12*"/>

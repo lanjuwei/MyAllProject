@@ -11,10 +11,9 @@ namespace BasicServices.SubWindowService.View
         {
         }
 
-        public override void Loaded(object parameter = null)
+        public override void Loaded()
         {
-            
-            base.Loaded(parameter);//调用基类的方法
+            base.Loaded();//调用基类的方法
         }
 
     }

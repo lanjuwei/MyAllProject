@@ -95,8 +95,14 @@
     </Compile>
     <Compile Include="SocketService\ISocektInterface.cs" />
     <Compile Include="SocketService\SocketService.cs" />
+    <Compile Include="SubWindowService\View\NetworkAbnormalPage.xaml.cs">
+      <DependentUpon>NetworkAbnormalPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SubWindowService\View\PlaceBookPage.xaml.cs">
       <DependentUpon>PlaceBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SubWindowService\View\PrintPage.xaml.cs">
+      <DependentUpon>PrintPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SubWindowService\View\UpdatePage.xaml.cs">
       <DependentUpon>UpdatePage.xaml</DependentUpon>
@@ -129,13 +135,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="SubWindowService\View\NetworkAbnormalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SubWindowService\View\PlaceBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SubWindowService\View\PrintPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,6 +209,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\upgrade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\打印.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\popUp_404.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

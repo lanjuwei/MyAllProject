@@ -40,15 +40,23 @@ namespace CommonControls
     /// <summary>
     /// 通用ListBox 用来改变listboxitem背景颜色 边框 透明度等
     /// </summary>
-    public class CommonListBox : System.Windows.Controls.ListBox
+    public class CommonListBox : ListBox
     {
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(CommonListBox), new PropertyMetadata(new CornerRadius(0)));
+
         public CornerRadius ItemCornerRadius
         {
             get { return (CornerRadius)GetValue(ItemCornerRadiusProperty); }
             set { SetValue(ItemCornerRadiusProperty, value); }
         }
         public static readonly DependencyProperty ItemCornerRadiusProperty =
-             DependencyProperty.Register("ItemCornerRadius", typeof(CornerRadius), typeof(CommonListBox), new PropertyMetadata(new CornerRadius(0)));
+             DependencyProperty.Register("ItemCornerRadius", typeof(CornerRadius), typeof(CommonListBox), new PropertyMetadata(new CornerRadius(0,0,0,0)));
 
         public double NormalItemOpacity
         {
@@ -64,7 +72,7 @@ namespace CommonControls
             set { SetValue(ItemMarginProperty, value); }
         }
         public static readonly DependencyProperty ItemMarginProperty =
-             DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(CommonListBox), new PropertyMetadata(new Thickness(0)));
+             DependencyProperty.Register("ItemMargin", typeof(Thickness), typeof(CommonListBox), new PropertyMetadata(new Thickness(0,0,0,0)));
 
         public Thickness ItemPadding
         {
@@ -72,7 +80,7 @@ namespace CommonControls
             set { SetValue(ItemPaddingProperty, value); }
         }
         public static readonly DependencyProperty ItemPaddingProperty =
-             DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(CommonListBox), new PropertyMetadata(new Thickness(0)));
+             DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(CommonListBox), new PropertyMetadata(new Thickness(0,0,0,0)));
 
         #region 正常颜色
 
@@ -100,7 +108,7 @@ namespace CommonControls
             set { SetValue(NormalThicknessProperty, value); }
         }
         public static readonly DependencyProperty NormalThicknessProperty =
-             DependencyProperty.Register("NormalItemThickness", typeof(Thickness), typeof(CommonListBox), new PropertyMetadata(new Thickness(0)));
+             DependencyProperty.Register("NormalItemThickness", typeof(Thickness), typeof(CommonListBox), new PropertyMetadata(new Thickness(0,0,0,0)));
 
         #endregion
 
@@ -228,12 +236,18 @@ namespace CommonControls
             }
             if (scrollViewer.ScrollableHeight <= 0 && this.Items?.Count < Total)
             {
-                LoadMoreCommond.Execute(null);
+                LoadMoreCommond?.Execute(null);
             }
         }
 
         #endregion
 
+        public CommonListBox() 
+        {
+            var dic = new ResourceDictionary { Source = new Uri("/CommonControls;component/AllCommonControlStyle.xaml", UriKind.RelativeOrAbsolute) };
+            this.Style = dic["CommonListBoxStyle"] as Style;
+            this.ItemContainerStyle = dic["CommonListBoxItemStyle"] as Style;//有点特殊 不能讲这style放入总的listboxstyle
+        }
         static CommonListBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CommonListBox), new FrameworkPropertyMetadata(typeof(CommonListBox)));

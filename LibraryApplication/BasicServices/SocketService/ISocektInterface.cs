@@ -44,5 +44,33 @@ namespace BasicServices.SocketService
         /// <param name="imageData"></param>
         /// <returns></returns>
         Task<ResponseModel<string>> UploadImage(byte[] imageData);
+        /// <summary>
+        /// 删除人脸图片
+        /// </summary>
+        /// <returns></returns>
+        Task<ResponseModel<string>> DeleteFaceImage();
+        /// <summary>
+        /// 归还图书
+        /// </summary>
+        /// <param name="bookModelsList"></param>
+        /// <returns></returns>
+        Task<ResponseModel<string>> RetrueBooks(List<BookModel> bookModelsList);
+        /// <summary>
+        /// 获取全部图书馆全部的图书
+        /// </summary>
+        /// <returns></returns>
+        Task<ResponseModel<List<BookModel>>> GetAllBooks();
+        /// <summary>
+        /// 借书
+        /// </summary>
+        /// <param name="bookModelsList"></param>
+        /// <returns></returns>
+        Task<ResponseModel<string>> BorrowBooks(List<BookModel> bookModelsList);
+        /// <summary>
+        /// 续借
+        /// </summary>
+        /// <param name="bookModelsList"></param>
+        /// <returns></returns>
+        Task<ResponseModel<string>> RenewBooks(List<BookModel> bookModelsList);
     }
 }

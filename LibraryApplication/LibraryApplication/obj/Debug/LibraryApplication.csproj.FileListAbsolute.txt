@@ -308,3 +308,11 @@ D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.Vid
 D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.dll
 D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.Imaging.dll
 D:\MyGit\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AForge.Math.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AudioSwitcher.AudioApi.CoreAudio.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\AudioSwitcher.AudioApi.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\CommonUserControls.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\Views.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\EPPlus.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\BasicFunction.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\BasicServices.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\LibraryApplication\bin\Debug\EPPlus.xml

@@ -55,8 +55,30 @@ namespace ViewModels.Home
                 Directory.CreateDirectory(@"Images/Gif");
             }
             var s = DbService.GetDbService();//data running
+            SocketHelper.Instance.SocketDisconnectCallBack += Instance_SocketDisconnectCallBack;
             //SoundHelper.Instance.TransformTextToVideo("welcome");
         }
 
+        protected override void UnLoad()
+        {
+            SocketHelper.Instance.SocketDisconnectCallBack -= Instance_SocketDisconnectCallBack;
+            base.UnLoad();
+        }
+
+        private void Instance_SocketDisconnectCallBack(bool obj)
+        {
+            if (obj)//断开
+            {
+                CloseCommand?.Execute(null);//退回到主页
+                SubWindowsService.Instance.OpenWindow(SubWindowsService.NetworkAbnormalPage);
+            }
+            else
+            {
+                if (SubWindowsService.Instance.IsAliveWindow(SubWindowsService.Instance.WindowId))
+                {
+                    SubWindowsService.Instance.CloseWindow(SubWindowsService.Instance.WindowId);
+                }
+            }
+        }
     }
 }

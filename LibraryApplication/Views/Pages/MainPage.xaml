@@ -6,10 +6,13 @@
       xmlns:local="clr-namespace:Views.Pages"
       xmlns:commonControls="clr-namespace:CommonControls;assembly=CommonControls"
       xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+      xmlns:commoncontrols="clr-namespace:CommonControls;assembly=CommonControls"
       mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator},Path=HomeViewModel}"
       d:DesignHeight="1080" d:DesignWidth="1920" x:Name="Page1" 
+      xmlns:individualNeeds="clr-namespace:BaseSetting.Needs;assembly=BaseSetting" 
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
+      xmlns:commonusercontrols="clr-namespace:CommonUserControls;assembly=CommonUserControls"
       Title="MainPage">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -24,24 +27,27 @@
             <Grid>
                 <commonControls:CommonButton Command="{Binding ElementName=Page1,Path=DataContext.SelectCommand}"
                                              CommandParameter="{Binding}" 
-                                             Margin="10"  BorderThickness="0" Background="White" Padding="0" CornerRadius="32" Width="450" Height="300">
+                                             Margin="10"  BorderThickness="0"  Padding="0"   Width="448" Height="280">
+                    <commonControls:CommonButton.Background>
+                        <ImageBrush ImageSource="{Binding BackImagePath}"></ImageBrush>
+                    </commonControls:CommonButton.Background>
                     <commonControls:CommonButton.Effect>
                         <DropShadowEffect Color="Black" Opacity="0.3"  BlurRadius="15" ></DropShadowEffect>
                     </commonControls:CommonButton.Effect>
                     <commonControls:CommonButton.Content>
-                        <Grid>
-                            <Grid VerticalAlignment="Center">
+                        <Grid >
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="215"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
-                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
                                 </Grid.RowDefinitions>
                                 <Image Source="{Binding ImagePath}" Width="110" Height="110" Grid.RowSpan="2" Grid.Column="0" Margin="0,0,15,0"  ></Image>
-                                <TextBlock FontSize="40" Opacity="0.8" VerticalAlignment="Center" Text="{Binding BtnName}" Grid.Row="0" Grid.Column="1" ></TextBlock>
-                                <TextBlock FontSize="28" Opacity="0.6" VerticalAlignment="Center" Text="{Binding BtnNameEn}" Grid.Row="1" Grid.Column="1" ></TextBlock>
+                                <TextBlock FontSize="40" Opacity="0.8" VerticalAlignment="Center" Text="{Binding BtnName}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" ></TextBlock>
+                                <!--<TextBlock FontSize="28" Opacity="0.6" VerticalAlignment="Center" Text="{Binding BtnNameEn}" Grid.Row="1" Grid.Column="1" ></TextBlock>-->
                             </Grid>
                         </Grid>
                     </commonControls:CommonButton.Content>
@@ -51,18 +57,71 @@
         <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
             <WrapPanel IsItemsHost="True"/>
         </ItemsPanelTemplate>
+        <DataTemplate x:Key="VolumeDataTemplate">
+            <commonusercontrols:VolumeControllerUserControl x:Name="VolumeControllerUserControl1"></commonusercontrols:VolumeControllerUserControl>
+        </DataTemplate>
+        <DataTemplate x:Key="LangDataTemplate">
+            <Border Width="170" Height='54'>
+                <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="DataTemplate2">
+            <commoncontrols:CommonListBox ItemsSource="{Binding LanguageList}" HorizontalContentAlignment="Stretch"
+                                          Background="Transparent"
+                                          ItemTemplate="{StaticResource LangDataTemplate}"
+                                          NormalItemBackground="Black"
+                                          NormalItemOpacity="0.4"
+                                          ItemCornerRadius="0"
+                                          FontSize="24"
+                                          
+                                          PressedItemOpacity="1"
+                                          Foreground="White"
+                                          BorderThickness="0"
+                                            ></commoncontrols:CommonListBox>
+        </DataTemplate>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="680*"/>
-            <ColumnDefinition Width="960*"/>
-            <ColumnDefinition Width="280*"/>
+            <ColumnDefinition Width="730*"/>
+            <ColumnDefinition Width="942*"/>
+            <ColumnDefinition Width="242*"/>
         </Grid.ColumnDefinitions>
         <Image Source="../Images/bg.png" Grid.RowSpan="4" Grid.ColumnSpan="3"></Image>
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="50,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Image Source="/Views;component/Images/光明图书馆logo-绿.png" Width="227" Height="48"></Image>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="56,60,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock Foreground="#28323b" FontSize="36" FontFamily="Corbel Light"  Text="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=LanguageVariables.ProductName}"></TextBlock>
         </StackPanel>
-        <ItemsControl Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsPanel="{StaticResource ItemsPanelTemplate1}" ItemTemplate="{StaticResource DataTemplate1}" ItemsSource="{Binding BtnContentList }">
+        <Border Background="White" Grid.Row="0" Grid.Column="0" CornerRadius="8" Width="130" Padding="5" Height="182" VerticalAlignment="Bottom" HorizontalAlignment="Left" BorderThickness="2" BorderBrush="#fecb04" Margin="56,0,0,30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=PageVariables.OfficialAccountImagePath}"></Image>
+                <Grid Grid.Row="1"  >
+                    <Border  Background="#fecb04" Opacity="0.5" CornerRadius="0,0,8,8"></Border>
+                    <TextBlock  FontSize="16" Text="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=LanguageVariables.PublicNumberDescription}" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,6"
+                                TextTrimming="WordEllipsis" TextWrapping="Wrap" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self},Path=Text}"></TextBlock>
+                </Grid>
+            </Grid>
+        </Border>
+        <TextBlock Grid.ColumnSpan="3" FontSize="20" VerticalAlignment="Bottom" Margin="0,0,0,30" Foreground="#59687a" HorizontalAlignment="Center" 
+                   Text="{Binding Source={x:Static individualNeeds:IndividualNeeds.Instance},Path=LanguageVariables.TerminalNumber}"></TextBlock>
+        <ItemsControl Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsPanel="{StaticResource ItemsPanelTemplate1}" ItemTemplate="{StaticResource DataTemplate1}" 
+                      ItemsSource="{Binding BtnContentList }">
         </ItemsControl>
+        <StackPanel Grid.ColumnSpan="3" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,56,30">
+            <commonControls:CommonButton   Background="#fbbb3b" Padding="20,15" CornerRadius="25" FontSize="20" Foreground="White" VerticalAlignment="Center"
+                                           Content="语言/Language"
+                                           commoncontrols:AttachBubble.ShowBubbleLocation="Top"
+                                           commoncontrols:AttachBubble.VerticalOffset="-10"
+                                           commoncontrols:AttachBubble.ShowBubbleType="Press"
+                                           commoncontrols:AttachBubble.BubbleContent="{StaticResource DataTemplate2}"></commonControls:CommonButton>
+            <commonControls:CommonButton x:Name="VolumeBtn"  Width="70" Height="70" Background="#fbbb3b"  CornerRadius="86" Margin="15,0,0,0"
+                                          commoncontrols:AttachBubble.ShowBubbleLocation="Top"
+                                          commoncontrols:AttachBubble.VerticalOffset="-10"
+                                          commoncontrols:AttachBubble.ShowBubbleType="Press" ImageHeight="30" ImageWidth="32"           
+                                          commoncontrols:AttachBubble.BubbleContent="{StaticResource VolumeDataTemplate}"></commonControls:CommonButton>
+        </StackPanel>
     </Grid>
 </Page>

@@ -1,0 +1,14 @@
+2020-01-19 11:22:13,217 [3] INFO  infoLogger [(null)] - Activate Result:90114
+2020-01-19 11:22:13,453 [3] INFO  infoLogger [(null)] - InitEngine Result:0
+2020-01-19 11:22:13,847 [3] INFO  infoLogger [(null)] - InitVideoEngine Result:0
+2020-01-19 11:22:27,454 [10] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-19 11:25:52,013 [16] INFO  infoLogger [(null)] - 
+2020-01-19 11:33:58,884 [10] INFO  infoLogger [(null)] - 
+2020-01-19 14:06:47,857 [10] INFO  infoLogger [(null)] - 该读者无在借图书
+2020-01-19 14:24:44,554 [5] INFO  infoLogger [(null)] - 
+2020-01-19 14:24:54,946 [13] INFO  infoLogger [(null)] - 
+2020-01-19 14:25:20,613 [3] INFO  infoLogger [(null)] - 
+2020-01-19 14:25:56,114 [10] INFO  infoLogger [(null)] - 
+2020-01-19 14:26:04,186 [5] INFO  infoLogger [(null)] - 
+2020-01-19 17:04:32,552 [10] INFO  infoLogger [(null)] - 
+2020-01-19 17:08:15,253 [13] INFO  infoLogger [(null)] - 

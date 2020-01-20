@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using GalaSoft.MvvmLight;
+using Model;
 using Model.Login;
 
 namespace BaseSetting.Needs
@@ -6,9 +7,11 @@ namespace BaseSetting.Needs
     /// <summary>
     /// 个性化需求 满足不同的图书馆要求
     /// </summary>
-    public partial class IndividualNeeds
+    public partial class IndividualNeeds : ViewModelBase
     {
         private static IndividualNeeds _individualNeeds;
+        
+
         public static IndividualNeeds Instance => _individualNeeds ?? (_individualNeeds = new IndividualNeeds());
 
         /// <summary>
@@ -19,7 +22,6 @@ namespace BaseSetting.Needs
         /// 界面变量
         /// </summary>
         public PageVariables PageVariables { get; set; } = new PageVariables();
-        
-
+       
     }
 }

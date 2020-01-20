@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-8-1420544413
+10942084981
 
-22-1703253344
+24-1307353791
 1281108074593
-SubWindowService\View\PlaceBookPage.xaml;SubWindowService\View\UpdatePage.xaml;TipService\Views\ToolTipUserControl.xaml;TipService\Views\TopUserControl.xaml;SubWindowService\ViewService\SubWindow.xaml;SubWindowService\View\FaceRecognitionFailurePage.xaml;SubWindowService\View\Page1.xaml;SubWindowService\View\Page2.xaml;
+SubWindowService\View\NetworkAbnormalPage.xaml;SubWindowService\View\PlaceBookPage.xaml;SubWindowService\View\PrintPage.xaml;SubWindowService\View\UpdatePage.xaml;TipService\Views\ToolTipUserControl.xaml;TipService\Views\TopUserControl.xaml;SubWindowService\ViewService\SubWindow.xaml;SubWindowService\View\FaceRecognitionFailurePage.xaml;SubWindowService\View\Page1.xaml;SubWindowService\View\Page2.xaml;
 
 True
 

@@ -18,6 +18,8 @@ namespace BasicServices.SubWindowService.ViewService
         public const string FaceRecognitionFailurePage = "FaceRecognitionFailurePage";
         public const string UpdatePage = "UpdatePage";
         public const string PlaceBookPage = "PlaceBookPage";
+        public const string PrintPage = "PrintPage";
+        public const string NetworkAbnormalPage = "NetworkAbnormalPage";
         private void RegisterNormalPage()
         {
             //Configure(Loginview, "pack://application:,,,/BasicServices;component/SubWindowService/View/Page1.xaml");//注册界面 可使用绝对路径或者相对路径 WpfApplication2为项目名称
@@ -25,6 +27,8 @@ namespace BasicServices.SubWindowService.ViewService
             Configure(UpdatePage, "pack://application:,,,/BasicServices;component/SubWindowService/View/UpdatePage.xaml");
             Configure(FaceRecognitionFailurePage, "pack://application:,,,/BasicServices;component/SubWindowService/View/FaceRecognitionFailurePage.xaml");
             Configure(PlaceBookPage, "pack://application:,,,/BasicServices;component/SubWindowService/View/PlaceBookPage.xaml");
+            Configure(PrintPage, "pack://application:,,,/BasicServices;component/SubWindowService/View/PrintPage.xaml");
+            Configure(NetworkAbnormalPage, "pack://application:,,,/BasicServices;component/SubWindowService/View/NetworkAbnormalPage.xaml");
         }
 
         #endregion

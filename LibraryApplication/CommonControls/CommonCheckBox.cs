@@ -214,7 +214,7 @@ namespace CommonControls
             set { SetValue(ImageWidthProperty, value); }
         }
         public static readonly DependencyProperty ImageWidthProperty =
-             DependencyProperty.Register("ImageWidth", typeof(double), typeof(CommonCheckBox), new PropertyMetadata(0.0));
+             DependencyProperty.Register("ImageWidth", typeof(double), typeof(CommonCheckBox), new PropertyMetadata(double.NaN));
 
         public double ImageHeight
         {
@@ -222,7 +222,7 @@ namespace CommonControls
             set { SetValue(ImageHeightProperty, value); }
         }
         public static readonly DependencyProperty ImageHeightProperty =
-             DependencyProperty.Register("ImageHeight", typeof(double), typeof(CommonCheckBox), new PropertyMetadata(0.0));
+             DependencyProperty.Register("ImageHeight", typeof(double), typeof(CommonCheckBox), new PropertyMetadata(double.NaN));
 
         #endregion
 
@@ -263,6 +263,12 @@ namespace CommonControls
 
 
         #endregion
+
+        public CommonCheckBox() 
+        {
+            var dic = new ResourceDictionary { Source = new Uri("/CommonControls;component/AllCommonControlStyle.xaml", UriKind.RelativeOrAbsolute) };
+            Style = dic["CommonCheckBoxStyle"] as Style;
+        }
 
         static CommonCheckBox()
         {

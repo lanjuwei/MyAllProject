@@ -14,7 +14,7 @@
       Title="PersonalCenterPage">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding LoadCommand}"></command:EventToCommand>
+            <i:InvokeCommandAction Command="{Binding LoadCommand}"></i:InvokeCommandAction>
         </i:EventTrigger>
         <i:EventTrigger EventName="Unloaded">
             <command:EventToCommand Command="{Binding UnLoadCommand}"></command:EventToCommand>
@@ -101,7 +101,7 @@
             <RowDefinition Height="110*"/>
             <RowDefinition Height="970*"/>
         </Grid.RowDefinitions>
-        <commonusercontrols:TopBarUserControl GoBackButtonVisibility="Collapsed" CloseCommand="{Binding CloseCommand}" Title="个人中心" GoBackCommand="{Binding GoBackCommand}"/>
+        <commonusercontrols:TopBarUserControl GoBackButtonVisibility="Visible" CloseCommand="{Binding CloseCommand}" Title="个人中心" GoBackCommand="{Binding GoBackCommand}"/>
         <Border Grid.Row="1" Background="#f2f2f2"></Border>
         <Grid Grid.Row="1">
             <Grid Margin="40,0,40,0">
@@ -138,22 +138,28 @@
                             <Image  Margin="10,0,0,0" Source="/Views;component/Images/Penson/xingbienan.png" Width="16" Height="16"></Image>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,12,0,0">
-                            <Rectangle Fill="#5495fe" Width="10" Height="2"></Rectangle>
+                            <Rectangle Fill="#5495fe" Width="10" Height="3"></Rectangle>
                             <TextBlock  FontSize="20"  Opacity="0.85" Margin="5,0" Text="{Binding CurrentUser.Id}"></TextBlock>
-                            <Rectangle Fill="#5495fe" Width="10" Height="2"></Rectangle>
+                            <Rectangle Fill="#5495fe" Width="10" Height="3"></Rectangle>
                         </StackPanel>
                         <StackPanel Grid.Row="3" HorizontalAlignment="Center" Margin="0,40,0,0">
                             <StackPanel Orientation="Horizontal"  >
-                                <Border Background="#23c0ff" CornerRadius="4" Width="140">
+                                <Border Width="150" >
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="/Views;component/Images/Penson/cardLeft.png" ></ImageBrush>
+                                    </Border.Background>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Foreground="White" Margin="20" FontSize="20">可借</TextBlock>
-                                        <TextBlock Foreground="White" Margin="20,0" FontSize="36" VerticalAlignment="Center" Text="{Binding CurrentUser.CanBorrowCount}"></TextBlock>
+                                        <TextBlock Foreground="White" Margin="30" FontSize="20">可借</TextBlock>
+                                        <TextBlock Foreground="White" Margin="0,0,0,0" FontSize="36" VerticalAlignment="Center" Text="{Binding CurrentUser.CanBorrowCount}"></TextBlock>
                                     </StackPanel>
                                 </Border>
-                                <Border Background="#239aff" CornerRadius="4" Margin="25,0,0,0" Width="140">
+                                <Border  Margin="25,0,0,0" Width="150">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="/Views;component/Images/Penson/cardRight.png" ></ImageBrush>
+                                    </Border.Background>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Foreground="White" Margin="20" FontSize="20">已借</TextBlock>
-                                        <TextBlock Foreground="White" Margin="20,0" FontSize="36" VerticalAlignment="Center" Text="{Binding CurrentUser.LendCount}"></TextBlock>
+                                        <TextBlock Foreground="White" Margin="30" FontSize="20">已借</TextBlock>
+                                        <TextBlock Foreground="White" Margin="0,0" FontSize="36" VerticalAlignment="Center" Text="{Binding CurrentUser.LendCount}"></TextBlock>
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
@@ -290,7 +296,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn Header="归还日期"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
-                                            Width="{Binding BookColumn.ReturnDateColumnWidth}">
+                                            Width="{Binding BookColumn.DateColumnWidth}">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Grid >

@@ -125,7 +125,15 @@ namespace ViewModels.Login
                 return;
             }
             IndividualNeeds.Instance.CommonVariables.IsLoading = true;
-            await SocektInterface.ChangePassword(ConfirmPassword);
+            var result=await SocektInterface.ChangePassword(ConfirmPassword);
+            if (result.IsSuccess)
+            {
+                if (IndividualNeeds.Instance.CommonVariables.User!=null)
+                {
+                    IndividualNeeds.Instance.CommonVariables.User.Password = ConfirmPassword;
+                    NavigateInterface.GoBack();
+                }
+            }
             IndividualNeeds.Instance.CommonVariables.IsLoading = false;
         });
 

@@ -271,5 +271,265 @@ namespace BasicServices.SocketService
                 return model;
             });
         }
+
+        public Task<ResponseModel<string>> DeleteFaceImage()
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<string>();
+                try
+                {
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.DeleteFace,"");//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Message = j["Message"].ToString();
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                    }
+                    else
+                    {
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
+        /// <summary>
+        /// 还书
+        /// </summary>
+        /// <param name="bookModelsList"></param>
+        /// <returns></returns>
+        public Task<ResponseModel<string>> RetrueBooks(List<BookModel> bookModelsList)
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<string>();
+                try
+                {
+                    var str = JsonConvert.SerializeObject(bookModelsList);
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.ReturnBooks, str);//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Message = j["Message"].ToString();
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                    }
+                    else
+                    {
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
+
+        /// <summary>
+        ///  获取图书馆全部的图书列表
+        /// </summary>
+        /// <param name="bookModelsList"></param>
+        /// <returns></returns>
+        public Task<ResponseModel<List<BookModel>>> GetAllBooks()
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<List<BookModel>>();
+                try
+                {
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.GetAllbooks, "");//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Message = j["Message"].ToString();
+                            model.Data = JsonConvert.DeserializeObject<List<BookModel>>((j["Data"].ToString()));
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                    }
+                    else
+                    {
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
+
+        /// <summary>
+        /// 借书
+        /// </summary>
+        /// <param name="bookModelsList"></param>
+        /// <returns></returns>
+        public Task<ResponseModel<string>> BorrowBooks(List<BookModel> bookModelsList)
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<string>();
+                try
+                {
+                    var str = JsonConvert.SerializeObject(bookModelsList);
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.BorrowBooks, str);//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Message = j["Message"].ToString();
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                    }
+                    else
+                    {
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
+
+        /// <summary>
+        /// 续借
+        /// </summary>
+        /// <param name="bookModelsList"></param>
+        /// <returns></returns>
+        public Task<ResponseModel<string>> RenewBooks(List<BookModel> bookModelsList)
+        {
+            return Task.Run(() =>
+            {
+                var model = new ResponseModel<string>();
+                try
+                {
+                    var str = JsonConvert.SerializeObject(bookModelsList);
+                    var result = SocketHelper.Instance.GeResponseAsync(RequestKey.RenewBooks, str);//方法key GetUserBookList
+                    if (!string.IsNullOrWhiteSpace(result))
+                    {
+                        var j = (JObject)JsonConvert.DeserializeObject(result);
+                        var isOk = false;
+                        if (bool.TryParse(j["IsSuccess"].ToString(), out isOk) && isOk)
+                        {
+                            model.IsSuccess = true;
+                            model.Message = j["Message"].ToString();
+                        }
+                        else
+                        {
+                            model.Message = j["Message"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        model.Message = "服务器无响应";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    model.Message = ex.Message;
+                    Logger.Error(ex);
+                }
+                finally
+                {
+                    if (!model.IsSuccess)
+                    {
+                        Logger.Info(model.Message);
+                    }
+                    else
+                    {
+                        TipService.TipService.Instance.ShowTip(TipService.TipService.ToolTip, 1000, model.Message);
+                    }
+                }
+                return model;
+            });
+        }
+
+
     }
 }

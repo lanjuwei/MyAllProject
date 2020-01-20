@@ -213,3 +213,12 @@ D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AForge.Vid
 D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\Emgu.CV.World.dll
 D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\OpencvCameraUserControl.g.cs
 D:\MyGit\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\OpencvCameraUserControl.baml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\CommonUserControls.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AudioSwitcher.AudioApi.CoreAudio.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\AudioSwitcher.AudioApi.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\VolumeControllerUserControl.g.cs
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\obj\Debug\VolumeControllerUserControl.baml
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\EPPlus.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\BasicFunction.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\BasicServices.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\CommonUserControls\bin\Debug\EPPlus.xml

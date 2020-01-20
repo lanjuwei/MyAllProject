@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace CommonControls
 {
@@ -16,7 +17,43 @@ namespace CommonControls
     public class AttachBubble
     {
         #region 附加属性
-        
+
+        public static double GetTime(DependencyObject dp)
+        {
+            return (double)dp.GetValue(TimeProperty);
+        }
+
+        public static void SetTime(DependencyObject dp, string value)
+        {
+            dp.SetValue(TimeProperty, value);
+        }
+
+        /// <summary>
+        /// 是否需要计时器
+        /// </summary>
+        public static readonly DependencyProperty TimeProperty =
+         DependencyProperty.RegisterAttached("Time",
+             typeof(double), typeof(AttachBubble),
+             new FrameworkPropertyMetadata(2.0));
+
+        public static bool GetIsNeedTimer(DependencyObject dp)
+        {
+            return (bool)dp.GetValue(IsNeedTimerProperty);
+        }
+
+        public static void SetIsNeedTimer(DependencyObject dp, string value)
+        {
+            dp.SetValue(IsNeedTimerProperty, value);
+        }
+
+        /// <summary>
+        /// 是否需要计时器
+        /// </summary>
+        public static readonly DependencyProperty IsNeedTimerProperty =
+         DependencyProperty.RegisterAttached("IsNeedTimer",
+             typeof(bool), typeof(AttachBubble),
+             new FrameworkPropertyMetadata(false));
+
         public static DataTemplate GetBubbleContent(DependencyObject dp)
         {
             return (DataTemplate)dp.GetValue(BubbleContentProperty);
@@ -141,8 +178,16 @@ namespace CommonControls
                 switch (type)
                 {
                     case ShowBubbleType.Press:
-                        element.MouseDown -= element_MouseDown; //点击要快于总的点击事件
-                        element.MouseDown += element_MouseDown;
+                        if (element is Button button)//按钮不会触发mouseDown
+                        {
+                            button.Click -= Button_Click;
+                            button.Click += Button_Click;
+                        }
+                        else
+                        {
+                            element.MouseDown -= element_MouseDown; //点击要快于总的点击事件
+                            element.MouseDown += element_MouseDown;
+                        }
                         break;
                     case ShowBubbleType.Load:
                         element.Loaded -= C_Loaded;
@@ -161,6 +206,12 @@ namespace CommonControls
             Application.Current.MainWindow.MouseDown += MainWindow_MouseDown;
         }
 
+        private static void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenBubble(sender);
+            e.Handled = true;
+        }
+
         private static void Element_Unloaded(object sender, RoutedEventArgs e)
         {
             if (_popup?.IsOpen == true)
@@ -173,14 +224,6 @@ namespace CommonControls
         {
             OpenBubble(sender);
         }
-
-        //private static void MainWindow_TouchDown(object sender, TouchEventArgs e)
-        //{
-        //    if (e.OriginalSource != _uiElement && !isOpening && _popup?.IsOpen == true)//触摸有问题 会在PreviewTouchDown前进入TouchDown OriginalSource为最开始的点击源
-        //    {
-        //        _popup.IsOpen = false;
-        //    }
-        //}
 
         private static void MainWindow_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -195,6 +238,8 @@ namespace CommonControls
         private static PlacementMode placementMode= PlacementMode.Bottom;
         private static double verticalOffset;
         private static double horizontalOffset;
+        private static DispatcherTimer dispatcherTimer;
+        private static double _time;
         private static void element_MouseDown(object sender, MouseButtonEventArgs e)
         {
             OpenBubble(sender);
@@ -202,12 +247,6 @@ namespace CommonControls
         }
 
         private static bool isOpening = false;
-        //private static void element_MouseDown(object sender, TouchEventArgs e)
-        //{
-        //    isOpening = true;
-        //    OpenBubble(sender);
-        //    isOpening = false;
-        //}
 
         private static async void OpenBubble(object ui)
         {
@@ -242,9 +281,10 @@ namespace CommonControls
 
             if (_popup.Child is ContentControl contentControl)
             {
-                if (contentControl.ContentTemplate==null)
+                var content= GetBubbleContent(uiElement);
+                if (contentControl.ContentTemplate!= content)
                 {
-                    contentControl.ContentTemplate = GetBubbleContent(uiElement);
+                    contentControl.ContentTemplate = content;
                 }
                 if (uiElement.DataContext!=null&&contentControl.Content!= uiElement.DataContext)
                 {
@@ -252,13 +292,37 @@ namespace CommonControls
                 }
             }           
             await Task.Delay(200);
-
+            StartTimer(uiElement);
             _popup.IsOpen = true;//打开气泡
+
         }
 
-
-
-        
+        private static void StartTimer(FrameworkElement uiElement) 
+        {
+            var isNeed=GetIsNeedTimer(uiElement);
+            if (isNeed)
+            {
+                _time = GetTime(uiElement);
+                if (dispatcherTimer==null)
+                {
+                    dispatcherTimer = new DispatcherTimer();
+                    dispatcherTimer.Tick += (s, e) =>
+                    {
+                        if (_time > 0)
+                        {
+                            _time = _time - 0.5;
+                        }
+                        else
+                        {
+                            _popup.IsOpen = false;
+                            dispatcherTimer.Stop();
+                        }
+                    };
+                }
+                dispatcherTimer.Interval = TimeSpan.FromSeconds(0.5);
+                dispatcherTimer.Start();
+            }
+        }
 
         public enum ShowBubbleType
         {

@@ -18,6 +18,7 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
         <converters:LengthToVisibilityConverter x:Key="LengthToVisibilityConverter"></converters:LengthToVisibilityConverter>
         <converters:BookStatusToColorConverter x:Key="BookStatusToColorConverter"></converters:BookStatusToColorConverter>
+        <converters:ReturnDateToColorConverter x:Key="ReturnDateToColorConverter"></converters:ReturnDateToColorConverter>
         <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
             <StackPanel IsItemsHost="True" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
@@ -54,7 +55,33 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+        <Style TargetType="CheckBox" x:Key="myCheckBoxStyle">
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Width="60" Height="60" Background="Transparent">
+                                <Ellipse x:Name="Ellipse2"  VerticalAlignment="Center" HorizontalAlignment="Center"   Width="32" Height="32" Fill="Transparent" StrokeThickness="1" Stroke="Black" Opacity="0.5"></Ellipse>
+                                <Ellipse x:Name="Ellipse1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="32" Height="32" Fill="#239aff" StrokeThickness="1" Stroke="#239aff" Visibility="Collapsed"></Ellipse>
+                                <Path x:Name="optionMark" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " 
+                                      Fill="White"  Opacity="0" Width="16" Height="16" HorizontalAlignment="Center"
+                                  VerticalAlignment="Center" 
+                                      Stretch="Uniform"/>
+                            </Grid>
+                            <ContentPresenter VerticalAlignment="Center" Content="{TemplateBinding Content}"></ContentPresenter>
+                        </StackPanel>
+                        <ControlTemplate.Triggers >
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Ellipse1" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="Ellipse2" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="optionMark" Property="Opacity" Value="1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <!--ListView样式-->
         <!--<converters:ItemToIndexConverter x:Key="ItemToIndexConverter1"></converters:ItemToIndexConverter>-->
         <DataTemplate x:Key="BlackTextDataTemplate" >
@@ -133,8 +160,9 @@
     </Page.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding LoadCommand}"></command:EventToCommand>
+            <i:InvokeCommandAction Command="{Binding LoadCommand}"></i:InvokeCommandAction>
         </i:EventTrigger>
+        <!--这个EventToCommand有bug啊 有时候触发不了绑定的load事件 鸡巴蛋的-->
         <i:EventTrigger EventName="Unloaded">
             <command:EventToCommand Command="{Binding UnLoadCommand}"></command:EventToCommand>
         </i:EventTrigger>
@@ -144,7 +172,7 @@
             <RowDefinition Height="110*"/>
             <RowDefinition Height="970*"/>
         </Grid.RowDefinitions>
-        <commonusercontrols:TopBarUserControl GoBackButtonVisibility="Visible" CloseCommand="{Binding CloseCommand}" Title="{Binding Title}" GoBackCommand="{Binding GoBackCommand}"/>
+        <commonusercontrols:TopBarUserControl GoBackButtonVisibility="Collapsed" CloseCommand="{Binding CloseCommand}" Title="{Binding Title}" GoBackCommand="{Binding GoBackCommand}"/>
         <Border Grid.Row="1" Background="#f2f2f2"></Border>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -184,6 +212,20 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
+                                    <GridViewColumn Header="勾选"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
+                                                Width="{Binding BookColumn.SelectedColumnWidth}"  >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <CheckBox  x:Name="CheckBox1"
+                                                               Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Page},Path=DataContext.SelectItemCommand}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource  Mode=Self},Path=IsChecked}"
+                                                               IsChecked="{Binding IsSlelected,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                               Style="{StaticResource myCheckBoxStyle}"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                     <GridViewColumn Header="条码号"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
                                                 Width="{Binding BookColumn.BarcodeColumnWidth}"  >
                                         <GridViewColumn.CellTemplate>
@@ -206,7 +248,27 @@
                                                     </TextBlock>
                                                     <TextBlock TextDecorations="Underline" Margin="0,0,0,0"  VerticalAlignment="Center"  FontSize="24" Foreground="#23C0FF" 
                                                                commoncontrols:AttachBubble.ShowBubbleType="Press"
-                                                               Text="详细信息" Visibility="{Binding Title,Converter={StaticResource LengthToVisibilityConverter},ConverterParameter=Visibility}"
+                                                               commoncontrols:AttachBubble.IsNeedTimer="true"
+                                                               commoncontrols:AttachBubble.ShowBubbleLocation="Bottom"
+                                                               Text="详情" Visibility="{Binding Title,Converter={StaticResource LengthToVisibilityConverter},ConverterParameter=Visibility}"
+                                                               commoncontrols:AttachBubble.BubbleContent="{StaticResource BlackTextDataTemplate}">
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="描述"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
+                                            Width="{Binding BookColumn.DescribeColumnWidth}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                                                    <TextBlock Style="{StaticResource BookGridViewTextStyle}" Text="{Binding Describe,Converter={StaticResource LengthToVisibilityConverter},ConverterParameter=Length}" 
+                                                            Foreground="{Binding BookStatus,Converter={StaticResource BookStatusToColorConverter}}"/>
+                                                    <TextBlock TextDecorations="Underline" Margin="0,0,0,0"  VerticalAlignment="Center"  FontSize="24" Foreground="#23C0FF" 
+                                                               commoncontrols:AttachBubble.ShowBubbleType="Press"
+                                                               commoncontrols:AttachBubble.IsNeedTimer="true"
+                                                               commoncontrols:AttachBubble.ShowBubbleLocation="Bottom"
+                                                               Text="详情" Visibility="{Binding Describe,Converter={StaticResource LengthToVisibilityConverter},ConverterParameter=Visibility}"
                                                                commoncontrols:AttachBubble.BubbleContent="{StaticResource BlackTextDataTemplate}">
                                                     </TextBlock>
                                                 </StackPanel>
@@ -224,7 +286,28 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="移出"  HeaderContainerStyle="{StaticResource HorBookWhileHeader}"  
+                                    <GridViewColumn Header="应还日期"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
+                                            Width="{Binding BookColumn.DateColumnWidth}">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <TextBlock Style="{StaticResource BookGridViewTextStyle}" Text="{Binding CurrentData}" 
+                                                               Foreground="{Binding ReturnDate,Converter={StaticResource ReturnDateToColorConverter}}"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="状态"  HeaderContainerStyle="{StaticResource BookWhileHeader}"  
+                                            Width="{Binding BookColumn.ResultColumnWidth}"  >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                                                    <commoncontrols:GifImagePlayerUserControl GifImagePath="{Binding ImagePath}" Width="30" Height="30" ></commoncontrols:GifImagePlayerUserControl>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <!--<GridViewColumn Header="移出"  HeaderContainerStyle="{StaticResource HorBookWhileHeader}"  
                                             Width="{Binding BookColumn.RomoveColumnWidth}">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -238,7 +321,7 @@
                                                 </Grid>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                                    </GridViewColumn>-->
                                     <!--空白行 只为了增加间距-->
                                     <GridViewColumn   HeaderContainerStyle="{StaticResource BookWhileHeader}"  Width="{Binding BookColumn.BlankLineWidth}" >
                                         <GridViewColumn.CellTemplate>
@@ -251,24 +334,53 @@
                             </ListView.View>
                         </ListView>
                         <Rectangle Fill="#ecf6ff" Height="5" Grid.Row="1" ></Rectangle>
-                        <StackPanel Grid.Row="2"   Orientation="Horizontal"  Margin="60,16" VerticalAlignment="Center">
-                            <Rectangle Height="26" Width="4" Fill="#239aff" VerticalAlignment="Center"></Rectangle>
-                            <TextBlock  FontSize="28" Foreground="#239AFF" VerticalAlignment="Top" Margin="12 0 0 0">
+                        <Grid Grid.Row="2"     Margin="60,16" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding IsFirstStep,Converter={StaticResource BoolToVisibilityConverter}}">
+                                <CheckBox  x:Name="CheckBox1" FontSize="24" Opacity="0.8"
+                                                                Command="{Binding SelectAllItem}"
+                                       IsChecked="{Binding IsAllSlelected,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       CommandParameter="{Binding Path=IsChecked,RelativeSource={x:Static RelativeSource.Self}}"
+                                                               Style="{StaticResource myCheckBoxStyle}" Content="全选"/>
+                                <Rectangle Height="28" Width="4" Fill="#239aff" VerticalAlignment="Center" Margin="20,0,0,0"></Rectangle>
+                                <TextBlock  FontSize="28" Foreground="#239AFF" VerticalAlignment="Center" Margin="12 0 0 0">
                                 <Run Text="共检测到 "/>
-                                <Run Text="{Binding BookModelList.Count, Mode=OneWay}"  Foreground="#ff9934" />
+                                <Run Text="{Binding BookModelList.Count,Mode=OneWay}"  Foreground="#ff9934" />
                                 <Run Text=" 本图书"/>
-                            </TextBlock>
-                        </StackPanel>
+                                </TextBlock>
+                                <Rectangle Height="28" Width="4" Fill="#55ca8c" VerticalAlignment="Center" Margin="20,0,0,0"></Rectangle>
+                                <TextBlock FontSize="28" Foreground="#55ca8c" VerticalAlignment="Center" Margin="12 0 0 0">
+                                <Run Text="已选 "></Run>
+                                <Run Text="{Binding SelectCount}" Foreground="#ff9934"></Run>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding IsFirstStep,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=false}">
+                                <Rectangle Height="28" Width="4" Fill="#239aff" VerticalAlignment="Center" Margin="0,0,0,0"></Rectangle>
+                                <TextBlock  FontSize="28" Foreground="#239AFF" VerticalAlignment="Center" Margin="12 0 0 0">
+                                <Run Text="成功 "/>
+                                <Run Text="{Binding SuccessCount}"  Foreground="#ff9934" />
+                                <Run Text=" 本图书"/>
+                                </TextBlock>
+                                <Rectangle Height="28" Width="4" Fill="#55ca8c" VerticalAlignment="Center" Margin="20,0,0,0"></Rectangle>
+                                <TextBlock  FontSize="28" Foreground="#55ca8c" VerticalAlignment="Center" Margin="12 0 0 0">
+                                <Run Text="失败 "/>
+                                <Run Text="{Binding FailCount}"  Foreground="Red" />
+                                <Run Text=" 本图书"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </Border>
             </Grid>
-            <commoncontrols:CommonButton Grid.Row="2"  Width="360" Height="80" Foreground="White" FontSize="30" CornerRadius="40" Margin="0,16">
+            <commoncontrols:CommonButton Grid.Row="2" IsEnabled="{Binding IsSureButtonEnabled}"  
+                                         Width="360" Height="80" Foreground="White" FontSize="30" CornerRadius="40" Margin="0,16"
+                                         Content="{Binding ButtonContent}" Command="{Binding OperateCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self},Path=Content}">
                 <commoncontrols:CommonButton.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#239aff" Offset="1"/>
                         <GradientStop Color="#23c0ff" Offset="0"/>
                     </LinearGradientBrush>
-                </commoncontrols:CommonButton.Background> 确定</commoncontrols:CommonButton>
+                </commoncontrols:CommonButton.Background>
+            </commoncontrols:CommonButton>
         </Grid>
     </Grid>
 </Page>

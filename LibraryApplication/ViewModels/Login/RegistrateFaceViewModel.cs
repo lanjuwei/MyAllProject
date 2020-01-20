@@ -45,11 +45,6 @@ namespace ViewModels.Login
             base.Load();
         }
 
-        protected override void MoveToNextPage(object parameter = null)
-        {
-            NavigateInterface.NavigateTo(PageKey.PersonalCenterPage);
-        }
-
         public ICommand ConfirmUploadCommand => new RelayCommand(() =>
         {
             IsWorkingLock = true;
@@ -63,6 +58,10 @@ namespace ViewModels.Login
                 var result = await SocektInterface.UploadImage(imageData);
                 if (result.IsSuccess)
                 {
+                    if (IndividualNeeds.Instance.CommonVariables.User!=null)
+                    {
+                        IndividualNeeds.Instance.CommonVariables.User.FaceImage = Convert.ToBase64String(imageData);
+                    }
                     NavigateInterface.GoBack();
                 }
                 return result.IsSuccess;

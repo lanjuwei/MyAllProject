@@ -303,10 +303,10 @@ namespace CommonUserControls
                             }                          
                             if (trackRGBUnit.message != "" && _rectX > 0 && _rectY > 0)
                             {
-                                Cv2.PutText(cFrame, trackRGBUnit.message, new OpenCvSharp.Point(_rectX, _rectY - 15), HersheyFonts.Italic, 0.8, trackRGBUnit.message.Contains("Yes") ? Scalar.Green : Scalar.Red);
+                                Cv2.PutText(cFrame, trackRGBUnit.message, new OpenCvSharp.Point(_rectX, _rectY - 15), HersheyFonts.Italic, 0.8, trackRGBUnit.message.Contains("True") ? Scalar.Green : Scalar.Red,2);
                                 if (cIrFrame != null)
                                 {
-                                    Cv2.PutText(cIrFrame, trackIRUnit.message, new OpenCvSharp.Point(_rectX, _rectY - 15), HersheyFonts.Italic, 2.5, trackRGBUnit.message.Contains("Yes") ? Scalar.Green : Scalar.Red);
+                                    Cv2.PutText(cIrFrame, trackIRUnit.message, new OpenCvSharp.Point(_rectX, _rectY - 15), HersheyFonts.Italic, 2.5, trackRGBUnit.message.Contains("True") ? Scalar.Green : Scalar.Red,2);
                                 }
                             }
                         }
@@ -605,7 +605,7 @@ namespace CommonUserControls
                         if (retCode_Liveness == 0 && liveInfo.num > 0)
                         {
                             int isLive = MemoryUtil.PtrToStructure<int>(liveInfo.isLive);
-                            trackIRUnit.message = isLive == 1 ? "Ir Yes" : "Ir No";
+                            trackIRUnit.message = isLive == 1 ? "Ir：True" : "Ir：False";
                             isIrLive = isLive == 1;
                         }
                         MemoryUtil.Free(irImageInfo.imgData);//释放当前指针所指向的内存
@@ -691,14 +691,14 @@ namespace CommonUserControls
                                                                 if (!string.IsNullOrEmpty(result))
                                                                 {
                                                                     //将比对结果放到显示消息中，用于最新显示
-                                                                    trackRGBUnit.message = string.Format(" Socre {0},{1}", similarity, "RGB Yes");
+                                                                    trackRGBUnit.message = string.Format(" Socre {0},{1}", similarity.ToString("0.00"), "RGBLive True");
                                                                     faceResult = FaceResult.Success;
                                                                     loginId = result;
                                                                 }
                                                                 else
                                                                 {
                                                                     faceResult = FaceResult.Fail;
-                                                                    trackRGBUnit.message = "RGB  Yes";
+                                                                    trackRGBUnit.message = "RGBLive  True";
                                                                 }
                                                             }
                                                             catch (Exception)
@@ -714,12 +714,12 @@ namespace CommonUserControls
                                                 }
                                                 else
                                                 {
-                                                    trackRGBUnit.message = "RGB  Yes";
+                                                    trackRGBUnit.message = "RGBLive：True";
                                                 }                                             
                                             }
                                             else
                                             {
-                                                trackRGBUnit.message = "RGB  No";
+                                                trackRGBUnit.message = "RGBLive：False";
                                             }
                                         }
                                         if (imageInfo != null)

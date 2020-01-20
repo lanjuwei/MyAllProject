@@ -4,7 +4,7 @@
 library
 C#
 .cs
-D:\MyGit\MyAllProject\LibraryApplication\Views\obj\Debug\
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\Views\obj\Debug\
 Views
 none
 false
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 8157587607
 
-20231885340
-1241250144442
+17383203018
+1271761096104
 Pages\ChangePasswordPage.xaml;Pages\FaceLoginPage.xaml;Pages\HandwordLoginPage.xaml;Pages\LoginPage.xaml;Pages\MainPage.xaml;Pages\OperateBooksPage.xaml;Pages\PersonalCenterPage.xaml;Pages\RegistrateFacePage.xaml;
 
-True
+False
 

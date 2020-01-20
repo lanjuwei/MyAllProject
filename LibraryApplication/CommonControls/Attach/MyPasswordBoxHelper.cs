@@ -88,8 +88,8 @@ local:PasswordBoxHelper.IsFocus="{Binding ElementName=window, Path=MyFocus}">
             if ((bool)e.NewValue)
             {
                 passwordBox.PasswordChanged += PasswordChanged;
-                var dic = new ResourceDictionary { Source = new Uri("/CommonControls;component/AllCommonControlStyle.xaml", UriKind.RelativeOrAbsolute) };
-                passwordBox.Style = dic["PasswordBoxWithWaterMark"] as Style;               
+                //var dic = new ResourceDictionary { Source = new Uri("/CommonControls;component/AllCommonControlStyle.xaml", UriKind.RelativeOrAbsolute) };
+                //passwordBox.Style = dic["PasswordBoxWithWaterMark"] as Style;               
             }
         }
 

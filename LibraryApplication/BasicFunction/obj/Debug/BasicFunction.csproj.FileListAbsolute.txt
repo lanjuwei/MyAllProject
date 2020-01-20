@@ -63,3 +63,8 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\obj\De
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\obj\Debug\BasicFunction.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\obj\Debug\BasicFunction.pdb
 D:\MyGit\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\Emgu.CV.UI.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\AudioSwitcher.AudioApi.CoreAudio.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\AudioSwitcher.AudioApi.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\BasicFunction.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\EPPlus.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicFunction\bin\Debug\EPPlus.xml

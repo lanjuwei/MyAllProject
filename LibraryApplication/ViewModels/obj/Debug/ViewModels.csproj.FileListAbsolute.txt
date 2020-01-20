@@ -126,3 +126,9 @@ D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\obj\Debug
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\Newtonsoft.Json.dll
 D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\Newtonsoft.Json.xml
 D:\MyGit\MyAllProject\LibraryApplication\ViewModels\bin\Debug\Emgu.CV.World.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\AudioSwitcher.AudioApi.CoreAudio.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\AudioSwitcher.AudioApi.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\EPPlus.dll
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\BasicFunction.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\BasicServices.dll.config
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\ViewModels\bin\Debug\EPPlus.xml

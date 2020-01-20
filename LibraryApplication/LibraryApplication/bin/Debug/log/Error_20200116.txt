@@ -1,0 +1,12 @@
+2020-01-16 09:21:36,588 [1] ERROR errorLogger [(null)] - 无法识别该 URI 前缀。
+System.NotSupportedException: 无法识别该 URI 前缀。
+   在 System.Net.WebRequest.Create(Uri requestUri, Boolean useUriBase)
+   在 System.Net.WebRequest.Create(Uri requestUri)
+   在 MS.Internal.WpfWebRequestHelper.CreateRequest(Uri uri)
+   在 System.IO.Packaging.PackWebRequest.GetRequest(Boolean allowPseudoRequest)
+   在 System.IO.Packaging.PackWebRequest.GetResponse()
+   在 MS.Internal.WpfWebRequestHelper.GetResponse(WebRequest request)
+   在 System.Windows.Navigation.NavigationService.DoNavigate(Uri source, NavigationMode f, Object navState)
+   在 System.Windows.Navigation.NavigateQueueItem.Dispatch(Object obj)
+   在 System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   在 System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)

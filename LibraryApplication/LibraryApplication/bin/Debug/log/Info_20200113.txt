@@ -1,0 +1,10 @@
+2020-01-13 16:48:37,601 [3] INFO  infoLogger [(null)] - ÃÜÂë´íÎó
+2020-01-13 16:48:42,609 [3] INFO  infoLogger [(null)] - ÃÜÂë´íÎó
+2020-01-13 16:48:48,884 [3] INFO  infoLogger [(null)] - ÃÜÂë´íÎó
+2020-01-13 16:49:35,144 [12] INFO  infoLogger [(null)] - 
+2020-01-13 17:05:21,103 [10] INFO  infoLogger [(null)] - ÃÜÂë´íÎó
+2020-01-13 17:05:35,051 [10] INFO  infoLogger [(null)] - ÃÜÂë´íÎó
+2020-01-13 17:30:38,093 [3] INFO  infoLogger [(null)] - ÃÜÂë´íÎó
+2020-01-13 17:30:42,488 [3] INFO  infoLogger [(null)] - ÃÜÂë´íÎó
+2020-01-13 17:32:06,941 [3] INFO  infoLogger [(null)] - 
+2020-01-13 17:32:12,928 [3] INFO  infoLogger [(null)] - ÃÜÂë´íÎó

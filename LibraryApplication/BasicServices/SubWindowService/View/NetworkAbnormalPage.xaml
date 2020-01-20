@@ -1,0 +1,16 @@
+﻿<Page x:Class="BasicServices.SubWindowService.View.NetworkAbnormalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BasicServices.SubWindowService.View"
+      mc:Ignorable="d"       
+      Title="NetworkAbnormalPage">
+    <Grid Width="700" Height="512" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Image Source="/BasicServices;component/Images/popUp_404.png" ></Image>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,180,0,0">
+            <TextBlock  FontSize="40" Foreground="#83898e" HorizontalAlignment="Center">网络异常</TextBlock>
+            <TextBlock Foreground="#1f8dee" FontSize="30" Margin="0,20,0,0">请联系管理员：15914307809</TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

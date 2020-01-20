@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BaseSetting.Needs;
+using BasicFunction.Helper;
+using CommonUserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,19 @@ namespace Views.Pages
         public MainPage()
         {
             InitializeComponent();
+            Loaded += MainPage_Loaded;
+            IndividualNeeds.Instance.CommonVariables.CheckImage = CheckImage;
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            CheckImage(VolumeSizeHelper.Instance.defaultPlaybackDevice.IsMuted);
+        }
+
+        private void CheckImage(bool IsCheck) 
+        {
+            var bitmap = new BitmapImage (IsCheck?new Uri("pack://application:,,,/CommonUserControls;component/Images/yinliangguanbi.png") :new Uri("pack://application:,,,/CommonUserControls;component/Images/yinliangkai.png")) {CacheOption= BitmapCacheOption.None };
+            VolumeBtn.NormalImageSource = bitmap;
         }
     }
 }

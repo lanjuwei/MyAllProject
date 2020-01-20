@@ -4,17 +4,17 @@
 library
 C#
 .cs
-D:\MyGit\MyAllProject\LibraryApplication\BasicServices\obj\Debug\
+D:\新建文件夹\AProject\MyAllProject\LibraryApplication\BasicServices\obj\Debug\
 BasicServices
 none
 false
 DEBUG;TRACE
 
-8-1420544413
+10942084981
 
-21-1810212886
-128-1385318662
-SubWindowService\View\PlaceBookPage.xaml;SubWindowService\View\UpdatePage.xaml;TipService\Views\ToolTipUserControl.xaml;TipService\Views\TopUserControl.xaml;SubWindowService\ViewService\SubWindow.xaml;SubWindowService\View\FaceRecognitionFailurePage.xaml;SubWindowService\View\Page1.xaml;SubWindowService\View\Page2.xaml;
+23-1414313333
+1281108074593
+SubWindowService\View\NetworkAbnormalPage.xaml;SubWindowService\View\PlaceBookPage.xaml;SubWindowService\View\PrintPage.xaml;SubWindowService\View\UpdatePage.xaml;TipService\Views\ToolTipUserControl.xaml;TipService\Views\TopUserControl.xaml;SubWindowService\ViewService\SubWindow.xaml;SubWindowService\View\FaceRecognitionFailurePage.xaml;SubWindowService\View\Page1.xaml;SubWindowService\View\Page2.xaml;
 
 False
 
